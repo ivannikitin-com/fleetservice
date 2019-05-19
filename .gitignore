@@ -1,0 +1,7 @@
+# Files
+/css/main.css
+gulpfile.js
+
+# Node
+/node_modules/
+package-lock.json
