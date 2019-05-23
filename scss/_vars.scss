@@ -1,6 +1,7 @@
-$default-font: "roboto-example", sans-serif;
-$accent: orange;
-$text: #333;
+$default-font: "Open Sans", sans-serif;
+$secondary-font: 'Open Sans Condensed', sans-serif;
+$accent: #14848e;
+//$text: #252525;
 
 // Customization Bootstrap vars from "app/libs/bootstrap/scss/_variables.scss"
 $grid-gutter-width: 30px;
@@ -9,3 +10,15 @@ $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px);
 $container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px);
 
 $gutter: $grid-gutter-width;
+
+
+$white: #ffffff;
+$blue-green: #14848e;
+$light-blue-green: #2eb3bf;
+$light-blue-grey: #cbe8eb;
+$grey: #ecedee;
+$steel-grey: #798c8e;
+$dark: $accent;
+$pale-grey: #f5f8fa;
+$black-two: #363636;
+$black-three: #252525;

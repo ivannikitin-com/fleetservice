@@ -10,15 +10,15 @@
 	background-color: $accent;
 	color: #fff;
 }
-
 body { 
-	font-size: 16px;
+	font-size: 14px;
 	min-width: 320px;
 	position: relative;
-	line-height: 1.65;
+	line-height: 1.7;
 	font-family: $default-font;
 	overflow-x: hidden;
-	color: $text;
+	color: $black-three;
+	margin: 0;
 	input, textarea {
 		border: #666 1px solid;
 		outline: none;
@@ -30,7 +30,17 @@ body {
 		}
 	}
 }
-
+a {
+	color: $blue-green;
+	text-decoration: underline;
+	&:hover {
+		color: $light-blue-green;
+		text-decoration: none;
+	}
+}
+h1, h2, h3, .section-title {
+	font-family: $secondary-font;
+}
 .img-responsive {
 	display: block;
 	max-width: 100%;
@@ -48,6 +58,331 @@ b, strong {
 	font-weight: bold;
 }
 
+a[href^="tel:"], a[href^="mailto:"]{
+	white-space: nowrap;
+}
+a[href^="tel:"] {
+	text-decoration: none;
+}
 
+.bg-dark {
+	background-color: $blue-green;
+}
+
+.site-branding img {
+	max-width: 100%;
+	height: auto;
+}
+
+
+.site-header {
+	a {		
+		text-decoration: none;
+	}
+	.phone {
+		font-size: 16px;
+  		color: $steel-grey;
+		span {
+			font-size: 36px;
+			font-weight: bold;
+			color: $black-three;
+		}
+	}
+	.search-form {
+		flex-basis: 100%;
+    	display: flex;
+		.search-field {
+			border: 0;
+			flex-basis: 100%;
+		}
+	}
+	
+	.wrap-form {
+		display: flex;
+		height: 29px;
+		flex-wrap: nowrap;
+		border-bottom: 1px solid $white;
+    	flex-basis: 21px;
+		&.form-visible {
+			border-bottom: 1px solid $grey;
+			flex-basis: auto;
+			animation: opacity 400ms ease-out;
+			@keyframes opacity {
+				0% { opacity: 0; }
+				100% { opacity: 1; }
+			  }		
+			.search-form {
+				display: flex;
+				margin-left: 10px;				
+			}
+		}
+		.search-form {
+			display: none;
+		}
+	}
+	.site-search-toggle {
+		display: inline-block;
+		background: url(../img/sprite.png) no-repeat -34px -66px;	
+		width: 21px;
+		height: 21px;
+	}
+
+	/* Главное меню */	
+	.navbar-nav {	
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		padding-left: 0;
+		margin-bottom: 0;
+		list-style: none;
+		&>li>a {
+			font-family: $secondary-font;
+			font-weight: bold;
+			font-size: 18px;
+			text-transform: uppercase;
+			white-space: nowrap;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+	.nav-justified .menu-item {
+		-ms-flex-preferred-size: 0;
+		flex-basis: 0;
+		flex-grow: 1;
+		text-align: center;
+	}
+	@media (min-width: 992px) {		
+		.navbar-expand-lg .navbar-nav {
+			-ms-flex-direction: row;
+			flex-direction: row;
+		}
+		.navbar-expand-lg .navbar-nav>li>a {
+			padding-right: 0.5rem;
+			padding-left: 0.5rem;
+		}		
+		.navbar-expand-lg .navbar-nav .sub-menu {
+			position: absolute;
+		  }
+	}
+	.navbar-dark .menu-item>a {
+		color: $white;
+	}
+
+	.menu-item-has-children {
+		position: relative;
+		> a::after {
+			display: inline-block;
+			width: 10px;
+			height: 6px;
+			margin-left: .255em;
+			vertical-align: .255em;
+			content: "";
+			background: url(../img/chevron-down-solid.svg) no-repeat;
+		}
+	}
+
+}
+.block-links {
+	display: flex;
+	flex: wrap;
+	border-bottom: 1px solid $grey;
+	a {
+		display:inline-block;
+		font-size: 12px;
+		color: $steel-grey;
+		white-space: nowrap;
+		text-transform: uppercase;
+		padding: 11px;
+		border-left: 1px solid $grey;
+		border-right: 1px solid $grey;
+		&.minicart {
+			margin-left: auto;
+		}
+		&:not(last-child) {
+			text-align: center;
+		}
+		&:last-child {
+			text-align: right;
+		}
+		@media (min-width: 1200px) {
+			min-width: 146px;
+		}
+	}
+
+}
+.hours span{
+	display: block;
+	font-size: 13px;
+	line-height: normal;
+}
+
+.site-content {
+	ul {
+		margin: 0 0 18px 12px;
+		padding-left: 0;
+		li {
+			padding-left: 10px;
+		
+			&::before {
+				content: '';
+				display: inline-block;
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: #464646;
+				margin-right: 8px;
+				vertical-align: middle;
+				margin-left: -14px;
+			}
+		}
+	}
+}
+
+section {
+	padding: 60px 0 75px;
+}
+.section-title {
+	text-transform: uppercase;
+	margin: 0 0 35px;
+	line-height: 46px;
+}
+.catalog {
+	background: $pale-grey;
+	.title-item {
+		display: inline-block;
+		color: $black-three;
+		font-size: 16px;
+		font-weight: bold;
+		text-transform: uppercase;
+		text-decoration: none;
+		margin: 25px 0 8px;
+	}
+	.descr {
+		font-size: 13px;
+		line-height: 16px;
+		color: $black-two;
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
+	a.more {
+		display: inline-block;
+		font-size: 13px;
+		text-transform: uppercase;
+		margin-top: 9px;
+	}
+	div[class^="col-"] {
+		margin-top: 20px;
+	}
+}
+.brands {
+	background: $white;
+	.brands-list {
+		border-top: 1px solid $grey;
+	}
+}
+.brands-list a {
+	display:inline-block;
+	margin: 15px 15px 15px 0;
+}
+
+a.c_change img{
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%);
+	filter: gray; /* IE 6-9 */
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	margin:0 auto 20px;
+}
+a.c_change img:hover {
+	-webkit-filter: none;
+	-moz-filter: none;
+	-ms-filter: none;
+	-o-filter: none;
+	filter: none;
+	filter: none; /* IE 6-9 */
+}
+
+/*footer*/
+footer {
+	font-size: 13px;	
+	color: $white;
+	background-color: $blue-green;
+	padding: 65px 0 0;
+	margin-top: 100px;
+	line-height: 1.4;
+	.f_title{
+		font-family: $secondary-font;
+		font-size: 24px;
+		font-weight: bold;
+		color: $white;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+		line-height: 1.33;
+	}
+	a {
+		color: $white;
+		text-decoration: none;
+		&:hover{
+			color: $light-blue-grey;
+		}
+	}
+	ul {
+		margin-bottom: 0;
+	}
+	li {
+		margin-bottom: 8px;
+		a {
+			text-transform: uppercase;
+			&:hover {
+				text-decoration: none;
+			}
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.email {
+		margin-top: 25px;
+		& a{
+			font-size: 13px;
+			text-decoration: underline;
+		}
+	}
+	.phone {
+		margin-top: 8px;
+	}
+	.footer_bott {
+		padding: 25px 0;
+		border-top: 1px solid rgba($white, 0.08);
+		background: $white;
+	}
+	.footer_main {
+		padding: 0 0 60px;
+		div[class^="col-"] {
+			display: flex;
+			flex-flow: column wrap;
+			
+			:last-child {
+				margin-top: auto;
+			}
+		}
+	}
+	.socials a {
+		display: inline-block;
+		margin: 0 0 10px 13px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+}
 
 @import "media"; // Always at the end
