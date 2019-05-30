@@ -28,11 +28,18 @@
 
 // ≤576px
 @include media-breakpoint-up(sm) {
-
+	#slider_main .slider-item-descr {
+		font-size: 40px;
+		line-height: 40px;
+	}
 }
 
 // ≤768px
 @include media-breakpoint-up(md) {
+	#slider_main .slider-item-descr {
+		font-size: 60px;
+		line-height: 60px;
+	}
 
 }
 

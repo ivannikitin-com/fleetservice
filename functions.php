@@ -131,6 +131,11 @@ function fleetservice_scripts() {
 
 	wp_enqueue_script( 'common-js', get_template_directory_uri() . '/js/common.js', array( 'jquery' ), time(), true );
 
+	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.carousel.min.css');
+	wp_enqueue_style( 'owl-default', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.theme.default.min.css');
+	
+	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, false );
+
 	//wp_enqueue_script( 'fleetservice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
 	//wp_enqueue_script( 'fleetservice-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );

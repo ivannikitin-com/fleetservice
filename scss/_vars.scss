@@ -11,8 +11,11 @@ $container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1140px);
 
 $gutter: $grid-gutter-width;
 
-
+$font-size-1: 12px;
+$font-size-2: 13px;
+$font-size-3: 16px;
 $white: #ffffff;
+$white-one: rgba(255, 255, 255, 0.35);
 $blue-green: #14848e;
 $light-blue-green: #2eb3bf;
 $light-blue-grey: #cbe8eb;
@@ -20,5 +23,7 @@ $grey: #ecedee;
 $steel-grey: #798c8e;
 $dark: $accent;
 $pale-grey: #f5f8fa;
+$light-grey: #dcdede;
 $black-two: #363636;
 $black-three: #252525;
+$ugly-blue: #27858b;
