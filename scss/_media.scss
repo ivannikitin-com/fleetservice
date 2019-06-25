@@ -32,6 +32,13 @@
 		font-size: 40px;
 		line-height: 40px;
 	}
+	
+	.columns-5 ul.products {
+		display: grid;
+		grid-gap: 30px;
+		grid-template-columns: repeat( 2, 1fr);
+	}
+
 }
 
 // ≤768px
@@ -40,15 +47,22 @@
 		font-size: 60px;
 		line-height: 60px;
 	}
+	.columns-5 ul.products {
+		grid-template-columns: repeat( 3, 1fr);
+	}
 
 }
 
 // ≤992px
 @include media-breakpoint-up(lg) {
-
+	.columns-5 ul.products {
+		grid-template-columns: repeat( 4, 1fr);
+	}
 }
 
 // ≤1200px
 @include media-breakpoint-up(xl) {
-	
+	.columns-5 ul.products {
+		grid-template-columns: repeat( 5, 1fr);
+	}
 }
