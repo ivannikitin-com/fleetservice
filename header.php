@@ -16,9 +16,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap&subset=cyrillic-ext,latin-ext" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700&display=swap&subset=cyrillic-ext,latin-ext" rel="stylesheet">-->
-	<!--<script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>-->
+	
 	<?php wp_head(); ?>
 </head>
 
@@ -26,15 +24,16 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'fleetservice' ); ?></a>
 
-	<header id="masthead" class="site-header">
-		<div class="container">
-			<div class="row">				
-				<div class="site-branding col-sm-2 col-lg-2">
+	<header id="masthead" class="site-header sticky-top">
+		<div class="container wrap_h">
+			<div class="row row_h">				
+				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
+					/* *TODO */
 					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
 						?>
-						<h1 class="site-title"><?php bloginfo( 'name' ); ?></a></h1>
+						<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
 						<?php
 					else :
 						?>
@@ -43,13 +42,16 @@
 					endif; ?>
 				</div><!-- .site-branding -->
 				
-				<div class="col-sm-10 col-lg-10">
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+				<div class="col-9 col-sm-9 col-md-10 col-lg-10 col-xl-9 offset-xl-1 navbar-expand-lg wrap_right">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<nav class="navbar navbar-dark bg-dark nav-main">
+						<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
-						</button>
+						</button>-->
 						
-						<div class="collapse navbar-collapse" id="navbarsExample05">
+						<div class="collapse navbar-collapse" id="navbarmain">
 						<?php
 						wp_nav_menu( array(
 							'theme_location' => 'menu-1',
@@ -59,22 +61,33 @@
 						) );
 						?>
 						</div><!--/.collapse-->
-					</nav><!-- #site-navigation -->
+					</nav><!--/.nav-main-->
 
 					<div class="block-links">
-						<a href="#" class="favorites">Избранное</a>
-						<a href="#" class="compare">Сравнение</a>
-						<a href="#" class="auth">Вход/Регистрация</a>
-						<a href="#" class="minicart">(3) : 1 000 000 Р</a>
-					</div>
+						<div class="row no-gutters flex-nowrap align-items-center">
+							<div class="col-auto col-lg-4 d-flex wrap_wishcompare">
+								<a href="#" class="wishlist"><span class="d-none d-lg-inline">Избранное</span></a>
+								<a href="#" class="compare"><span class="d-none d-lg-inline">Сравнение</span></a>
+							</div>
+							<div class="col-auto col-lg-3 d-flex wrap_auth">
+								<a href="#" class="auth"><span class="d-none d-md-inline">Вход/Регистрация</span></a>
+							</div>
+							<div class="col-auto col-lg-5 ml-auto">
+								<a href="#" class="minicart"><span class="d-none d-sm-inline">(3) : 1 000 000 Р</span></a>
+							</div>
+						</div><!--/.row-->
+					</div><!--/.block-links-->
 
 					<div class="header-bott">
-						<div class="row align-items-md-center">
-							<div class="col-md-4 col-lg-4"><a href="tel:+74957789000" class="phone">+7(495) <span>778-90-00</span></a></div>
-							<div class="hours col-md-3 col-lg-3"><span>Пн. - Пт.: 9.00-21.00</span><span>Сб. - Вс.:10.00-18.00</span></div>
+						<div class="row no-gutters align-items-center">
+							<div class="col-lg-4"><a href="tel:+74957789000" class="phone">+7(495) <span>778-90-00</span></a></div>
+							<div class="col-lg-3 hours d-sm-block d-none">
+								<span><b>Пн. - Пт.:</b> 9.00-21.00</span><span><b>Сб. - Вс.:</b>10.00-18.00</span>
+							</div>
 								
-							<div class="wrap-form col-md-5 col-lg-5 ml-auto">
+							<div class="wrap-form col-md-auto col-lg-auto ml-auto">
 								<a href="#" class="site-search-toggle"></a>
+								<span class="makeweight">(3) : 1 000 000 Р</span>
 								<form role="search" method="get" class="search-form" action="http://fleetservice.local/">
 									<span class="screen-reader-text">Найти:</span>
 									<input type="search" class="search-field" placeholder="" value="" name="s">

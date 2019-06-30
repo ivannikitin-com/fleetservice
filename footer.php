@@ -63,7 +63,7 @@
 <image  x="0px" y="0px" width="21px" height="11px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAALCAQAAAA6wg72AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfjBRQRNxWroQGsAAAA10lEQVQY03WMIUtDcRRHz9uGMDFYTUtiWbAIarLYxDSwCBabDAYm0Wxbs1j3BcTkBxBsGgyDieDag8EYe0EQBsfg3d+nsF8653K4mftsUCHjkRegwzlLzBjSIgcyTqmRUaWPXX/2JWLTz/ADEc+cr4d1RyEnIt6G7YmYh01dQzwKHYl4E7YtttPPXUHEjzhcir1grKTwSubpTjpe+B7U9SnoQX5TvHPxtv6mNScL02eXyylu/gvGDhMPXCmneOislB5b9S1ZbqOc4rr3Ti0sLGyKq76G6fU3PjRbJepriiQAAAAASUVORK5CYII=" />
 </svg></a>
 						</div>
-						<div class="info">Блок с информацией о правообладателях, текстовой областью для информирования о том, что сайт не является публичной офертой. блок с информацией о правообладателях, текстовой областью для информирования о том, что сайт не является публичной офертой. </div>
+						<div class="info mt-4 mt-md-auto">Блок с информацией о правообладателях, текстовой областью для информирования о том, что сайт не является публичной офертой. блок с информацией о правообладателях, текстовой областью для информирования о том, что сайт не является публичной офертой. </div>
 					</div>
 				</div><!--/.row-->
 			</div><!-- footer_main-->
