@@ -51,16 +51,21 @@
 							<span class="navbar-toggler-icon"></span>
 						</button>-->
 						
-						<div class="collapse navbar-collapse" id="navbarmain">
-						<?php
-						wp_nav_menu( array(
-							'theme_location' => 'menu-1',
-							'container'   	=> '',
-							'menu_id'        => 'primary-menu',
-							'menu_class'     => 'navbar-nav',
-						) );
-						?>
-						</div><!--/.collapse-->
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="collapse navbar-collapse" id="navbarmain">
+									<?php
+									wp_nav_menu( array(
+										'theme_location' => 'menu-1',
+										'container'   	=> '',
+										'menu_id'        => 'primary-menu',
+										'menu_class'     => 'navbar-nav',
+									) );
+									?>
+								</div><!--/.collapse-->
+							</div>
+						</div>
 					</nav><!--/.nav-main-->
 
 					<div class="block-links">

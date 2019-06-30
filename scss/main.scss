@@ -223,7 +223,10 @@ a[href^="tel:"] {
 		}
 	}
 
-	/* Главное меню */	
+	/* Главное меню */
+	.nav-main {
+		width: 100vw;
+	}
 	.navbar-nav {
 		display: flex;
 		flex-direction: column;
