@@ -64,7 +64,6 @@
 									) );
 									?>
 								</div><!--/.collapse-->
-							</div>
 						</div>
 					</nav><!--/.nav-main-->
 
