@@ -25,7 +25,7 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'fleetservice' ); ?></a>
 
 	<header id="masthead" class="site-header sticky-top">
-		<div class="container wrap_h">
+		<div class="container">
 			<div class="row row_h">				
 				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
@@ -51,20 +51,17 @@
 							<span class="navbar-toggler-icon"></span>
 						</button>-->
 						
-						<div class="row">
-							<div class="col-md-12">
-
-								<div class="collapse navbar-collapse" id="navbarmain">
-									<?php
-									wp_nav_menu( array(
-										'theme_location' => 'menu-1',
-										'container'   	=> '',
-										'menu_id'        => 'primary-menu',
-										'menu_class'     => 'navbar-nav',
-									) );
-									?>
-								</div><!--/.collapse-->
-						</div>
+						<div class="row no-gutters">
+							<div class="collapse navbar-collapse" id="navbarmain">
+								<?php
+								wp_nav_menu( array(
+									'theme_location' => 'menu-1',
+									'container'   	=> '',
+									'menu_id'        => 'primary-menu',
+									'menu_class'     => 'navbar-nav',
+								) );
+								?>
+							</div><!--/.collapse-->
 					</nav><!--/.nav-main-->
 
 					<div class="block-links">

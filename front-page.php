@@ -47,7 +47,7 @@
 
 <section class="catalog" style="background-color: #f5f8fa;">
 	<div class="container">
-		<h2 class="section-title">Каталог товаров</h2>
+		<h2 class="section-title" style="font-size: 30px; line-height: 33px;">Каталог товаров</h2>
 		<div class="row">
 			<div class="col-sm-6 col-md-4 catalog-item item-1">
 				<a href="#" class="catalog-item-link">
@@ -132,7 +132,7 @@
 
 <section class="brands" style="background-color: #fff;">
 	<div class="container">
-		<h2 class="section-title" style="font-size: 24px; margin-bottom: 0; line-height: 48px;">Бренды</h2>
+		<h2 class="section-title" style="font-size: 24px; margin-bottom: 9px; line-height: normal;">Бренды</h2>
 	</div><!--/.container-->	
 	<div class="brands-list">
 		<div class="container">
@@ -157,12 +157,14 @@
 <!-- ХИТЫ ПРОДАЖ -->
 <section class="bestsellers" style="background: #f5f8fa;">
 	<div class="container">
-		<h2 class="section-title">Хиты продаж</h2>
+		<h2 class="section-title" style="font-size: 30px; margin-bottom: 12px; line-height: normal;">Хиты продаж</h2>
 	</div><!--/.container-->
-	<div class="container">
-		<div class="row">
-			<div class="woocommerce columns-5">
-				<ul class="products">
+
+	<!-- Хиты продаж --->
+	<div class="bestsellers-list">
+		<div class="container">
+			<div class="woocommerce">
+				<ul class="products owl-carousel">
 					<li class="product first instock">
 						<div class="product-inner">
 							<div class="product-top d-flex justify-content-end align-items-end">
@@ -255,15 +257,15 @@
 					</li>
 				</ul>
 			</div><!--/.woocommerce-->
-		</div><!--/.row-->
-	</div><!--/.container-->
+		</div><!--/.container-->
+	</div><!--/.bestsellers-list-->
 </section><!--/.bestsellers-->
 
 <section class="about-us" style="background-color: #fff;">	
 	<div class="container">
 		<div class="row justify-content-between">
 			
-			<div class="col-md-3 col-xl-3 mb-md-0 mb-4"><img src="<?php echo get_template_directory_uri(); ?>/img/A4.jpg" width="265" height="516" class="img-fluid about-us-pic"></div>
+			<div class="col-md-3 col-xl-3 mb-md-0 mb-4"><img src="<?php echo get_template_directory_uri(); ?>/img/A4.jpg" width="265" height="516" class="img-fluid about-us-pic mb-2 mb-md-0"></div>
 			<div class="col-md-9 col-xl-8 mt-lg-2 mt-xl-3">				
 				<h2 class="section-title">блок с краткой информацией о магазине и продукции</h2>
 				<div class="about-us-slogan">
@@ -330,7 +332,7 @@
 <!-- НОВОСТИ -->
 <section class="news" style="background-color: #fff;">	
 	<div class="container">
-		<h2 class="section-title">Новости</h2>
+		<h2 class="section-title" style="font-size: 30px; line-height:33px;">Новости</h2>
 		<div class="grid-md-2">
 				<?php
 				 /**

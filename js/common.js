@@ -4,23 +4,17 @@
 			$( ".wrap-form" ).toggleClass( "form-visible" );
 			$( ".search-field" ).focus()
 		});
-		$(document).ready(function(){
-			$("#slider_main.owl-carousel").owlCarousel({
-				items: 1,
-				dotsEach: true,
-				//dotsContainer: '#carousel-custom-dots',
-			})
-		});
+		$("#slider_main.owl-carousel").owlCarousel({
+			items: 1,
+			dotsEach: true,
+		})
 
 		/*Подключение к отзывам на Главной*/
-		$(document).ready(function(){
 			$(".reviews-list .owl-carousel").owlCarousel ({
 				items: 2,
 				nav: true,
 				margin: 30,
 				navText: false,
-				//center: true,
-				//autoHeight: true,
 				responsive: {
 					0:{
 						items: 1,
@@ -30,7 +24,25 @@
 					}
 				}
 			})
-		});
-
+			$(".bestsellers .owl-carousel").owlCarousel ({
+				nav: true,
+				margin: 30,
+				navText: false,
+				autoHeight:true,
+				responsive: {
+					0:{
+						items: 1
+					},
+					768:{
+						items: 2
+					},				
+					992:{
+						items: 3
+					},
+					1199:{
+						items: 5
+					}
+				}
+			})
 	});
 })(jQuery);

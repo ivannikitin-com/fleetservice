@@ -6,6 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap&subset=cyrillic-ext,latin-ext" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700&display=swap&subset=cyrillic-ext,latin-ext" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="css/main.css">
 	<title>Типографика</title>
@@ -16,10 +19,72 @@
 			<p id="breadcrumbs"><span><span><a href="/">Главная</a> / <span><a href="/">Каталог товаров</a> / <span><a href="/">Пункт</a> / <span class="breadcrumb_last" aria-current="page">Пункт последний</span></span></span></span></span></p>
 		</div><!--container-->
 	</div>
-	<ul>
-		<li>Пункт-1 Длинный пункт Длинный пункт Длинный пункт Длинный пункт Длинный пункт Длинный пунктДлинный пункт</li>
-		<li>Пункт-2</li>
-		<li>Пункт-3</li>
-	</ul>
+
+	<div class="container">
+		<ul>
+			<li>Пункт-1 Длинный пункт Длинный пункт Длинный пункт Длинный пункт Длинный пункт Длинный пунктДлинный пункт</li>
+			<li>Пункт-2</li>
+			<li>Пункт-3</li>
+		</ul>
+
+		<!-- Accordion -->
+		<div class="accordion accordion_white" id="accordionExample">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<div class="accordion__title">
+						<a class="accordion__btn btn-link show" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">Toggle first element</a>
+					</div>
+				</div>		
+				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+					<div class="card-body">
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingTwo">
+					<div class="accordion__title">
+						<a class="accordion__btn btn-link" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="true" aria-controls="collapseTwo">Toggle two element</a>
+					</div>
+				</div>
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+					<div class="card-body">
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</div>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-header" id="headingThree">
+					<div class="accordion__title">
+						<a class="accordion__btn btn-link" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="true" aria-controls="collapseThree">Toggle three element</a>
+					</div>
+				</div>
+				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+					<div class="card-body">
+						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<!-- Buttons -->
+
+	<!--Пагинация-->
+	<div class="wp-pagenavi_wrap">
+		<div class="wp-pagenavi" role="navigation">
+			<a class="first" href="/">1</a><a class="previouspostslink" rel="prev" href="/">&nbsp;</a>
+				<span class="extend">...</span><a class="page smaller" title="Page 2" href="/">2</a>
+				<span aria-current="page" class="current">3</span><a class="page larger" title="Page 4" href="/">4</a>
+				<span class="extend">...</span><a class="nextpostslink" rel="next" href="/">&nbsp;</a>
+			<a class="last" href="/">63 </a>
+		</div>
+	</div><!--wp-pagenavi_wrap-->
+
+	<!-- Заголовки в виджетах -->
+	<aside>
+		<h2 class="widget-title"><span>Каталог</span></h2>
+	</aside>
+	</div><!--container-->
+
 </body>
 </html>
