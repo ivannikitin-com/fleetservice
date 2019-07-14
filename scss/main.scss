@@ -66,6 +66,12 @@ h4 {
 	font-size: 14px;
 	line-height: 17px;
 }
+.font-size-3{
+	font-size: $font-size-3;
+}
+.secondary-font {
+	font-family: $secondary-font;
+}
 .img-responsive {
 	display: block;
 	max-width: 100%;
@@ -74,7 +80,9 @@ h4 {
 		width: 100%;
 	}
 }
-
+p {
+	line-height: 20px;
+}
 .text-center {
 	text-align: center;
 }
@@ -88,6 +96,7 @@ a[href^="tel:"], a[href^="mailto:"] {
 }
 a[href^="tel:"] {
 	text-decoration: none;
+	color: $black-three;
 }
 body:not(.home) .site-content {
 	padding: 45px 0 0;
@@ -245,7 +254,7 @@ body:not(.home) .site-content {
 				text-decoration: none;
 			}
 			@media (min-width: 992px) {
-				font-size: 15px;
+				font-size: 14px;
 			}
 			@media (min-width: 1200px) {
 				font-size: 16px;
@@ -425,9 +434,11 @@ a.more {
 	font-size: 13px;
 	text-align: center;
 	border: 0;
+	min-width: 192px;
 	cursor: pointer;
+	text-decoration: none;
 	text-transform: uppercase;
-    padding: .593rem 4px;
+    padding: .907rem 4px;
     text-decoration: none;
     font-weight: normal;
     text-shadow: none;
@@ -444,6 +455,15 @@ button:focus {
 }
 .button.disabled, .button:disabled {
     opacity: .65;
+}
+.btn_brd_black-three {
+	background-color: transparent;
+	border: 1px solid $black-three;
+	color: $black-three;
+	&:hover {
+		background-color: $black-three;
+		color: $white;
+	}
 }
 
 /*==================*/
@@ -730,10 +750,14 @@ section {
 	}
 	.owl-carousel {
 		position: static;
+		margin-bottom: 25px;
 		.owl-nav {
 			position: absolute;
     		top: -103px;
     		right: 15px;
+		}
+		.owl-stage-outer {
+			padding-bottom: 10px; /*Место для нижней тени товара*/
 		}
 		.owl-stage {
 			display: flex;
@@ -741,6 +765,7 @@ section {
 		.owl-item {
     		display: flex;
 			flex-direction: column;
+			min-height: 100%;
 		}
 		li.product {
 			min-height: 100%;
@@ -846,11 +871,19 @@ section {
 			display: block;
 			font-size: 13px;
 			font-weight: 400;
-			margin: 3px;
-			padding: .593rem 4px;
+			padding: 0 4px;
+			height: 44px;
+    		line-height: 44px;
 			border-radius: 0;
 			@extend %button-blue-green;
 			white-space: nowrap;
+			margin: 3px;
+			
+			&:before {
+				content: '';
+				display: inline-block;
+				height: 21px;
+			}
 		}
 		.quick-view {
 			color: $steel-grey;
@@ -1009,12 +1042,12 @@ section {
 			margin-bottom: 32px;
 		}
 		&-date {
-			display: inline-block;	
+			display: block;	
 			font-size: $font-size-2;
 			color: $steel-grey;
 			text-transform: uppercase;
 		}
-		&-title {
+		.home &-title {
 			margin-top: 9px;
 			line-height: 21px;			
 			a {
@@ -1039,21 +1072,55 @@ section {
 		}
 	}
 }
-
+.archive {
+	.news {
+		.news-item {
+			.a_wrap {
+				display: block;
+				color: inherit;
+				text-decoration: none;
+				&:hover {
+					text-decoration: none;
+					color: $light-blue-green;
+				}
+			}
+			&-title {
+				font-weight: bold;
+				font-size: 24px;
+				line-height: 27px;
+				margin-top: 15px;
+			}
+			&-descr {
+				line-height: 16px;
+				p {
+					line-height: inherit;
+				}
+			}
+			.more-link {
+				margin-top: 30px;
+			}
+		}
+	}
+}
 .accordion {
 	.accordion__title {
 		font-family: $secondary-font;
-		padding: .375rem 1.25rem;
+		padding: .375rem 16px;
 		.accordion__btn {
 			display: flex;
 			font-size: 16px;
 			font-weight: bold;
 			width: 100%;
+			align-items: center;
 			&::after {
-				content: '\f067';
+				font-family: dashicons;
+				content: '\f460';
+				line-height: 1;
 				display: inline-block;
 				margin-left: auto;
-				padding-left: 20px;
+			}
+			&.collapsed::after {
+				content: '\f132';
 			}
 		}
 	}
@@ -1150,9 +1217,21 @@ aside {
 	}
 }
 
+/*Контакты*/
+.contact-block-1 {
+	div {
+		padding: 0 0 4px;
+	}
+}
+.contact-block-2 {
+	margin: 34px 0 0 0;
+}
+h2+.accordion {
+	margin-top: 14px;
+}
 
 /*footer*/
-footer {
+.site-footer {
 	font-size: $font-size-2;	
 	color: $white;
 	background-color: $blue-green;
