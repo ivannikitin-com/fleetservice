@@ -161,6 +161,12 @@
 	  }
 
 	ul.products:not(.owl-carousel) {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+	}
+	
+	ul.product-cats {
+		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 	}
 }

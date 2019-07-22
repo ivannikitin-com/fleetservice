@@ -1,24 +1,16 @@
 <?php 
-
-remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
-add_action( 'woocommerce_before_main_content', 'fleet_woocommerce_breadcrumb', 20, 0 );
-
-function fleet_woocommerce_breadcrumb(){
-	if ( function_exists('yoast_breadcrumb') ) {
-		echo '<div class="breadcrumbs"><div class="container">';
-		yoast_breadcrumb('<p id="breadcrumbs">','</p>');
-		echo '</div></div>';
-	}
-}
-
+add_theme_support( 'woocommerce' );
 /*Product category*/
 remove_action( 'woocommerce_before_shop_loop','woocommerce_result_count',20 );
 remove_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering',30 );
 remove_action( 'woocommerce_after_shop_loop','woocommerce_pagination',10 );
+
+add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper', 9 );
 add_action( 'woocommerce_before_shop_loop','before_ordering_text',20 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering',22 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_result_count',23 );
 add_action( 'woocommerce_before_shop_loop','before_products_per_page_text',24 );
+add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper_close', 31 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_pagination',35 );
 add_filter( 'wppp_ppp_text','fleet_products_per_page',1,2 );
 function fleet_products_per_page($output_str, $value){
@@ -30,8 +22,10 @@ function fleet_products_per_page($output_str, $value){
 function before_products_per_page_text() {
 	echo '<div class="ordering_label">'.__('Показать на странице:','fleetservice').'</div>';
 }
+add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper', 9 );
 add_action( 'woocommerce_after_shop_loop','woocommerce_result_count',10 );
 add_action( 'woocommerce_after_shop_loop','before_products_per_page_text',24 );
+add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper_close', 31 );
 add_action( 'woocommerce_after_shop_loop','woocommerce_pagination',35 );
 function before_ordering_text() {
 	echo '<div class="ordering_label">'.__('Сортировать по:','fleetservice').'</div>';
@@ -61,31 +55,57 @@ function fleet_woocommerce_catalog_orderby( $sortby ) {
 	return $sortby;
 } 
 
+if (function_exists('wp_pagenavi')) {
 remove_action('woocommerce_pagination', 'woocommerce_pagination', 10);
 function woocommerce_pagination() {
 		wp_pagenavi(); 		
 	}
 add_action( 'woocommerce_pagination', 'woocommerce_pagination', 10);
+}
 
-/*add_action ('woocommerce_before_main_content', 'fleet_woocommerce_before_main_content');
-function fleet_woocommerce_before_main_content () {
-	?>
-	<div class="row">
-		<div class="col-md-9">
-<?php }
+function fleet_sorting_wrapper() {
+	echo '<div class="fleet-sorting">';
+}
 
-add_action ('woocommerce_after_main_content', 'fleet_woocommerce_after_main_content');
-function fleet_woocommerce_after_main_content () {
-	?>
-		</div><!--/end col-->
-		<div class="col-md-3">
-<?php }
+function fleet_sorting_wrapper_close() {
+	echo '</div>';
+}
 
-add_action ('woocommerce_sidebar', 'fleet_woocommerce_sidebar');
-function fleet_woocommerce_sidebar () {
-	?>
-		</div><!--/end col-->
-		</div><!--/.row-->
-<?php }
-*/
 
+
+// Отделяем категории от товаров
+function tutsplus_product_subcategories( $args = array() ) {
+
+$parentid = get_queried_object_id();
+
+$args = array(
+'parent' => $parentid
+);
+
+$terms = get_terms( 'product_cat', $args );
+
+if ( $terms ) {
+
+echo '<ul class="product-cats">';
+
+foreach ( $terms as $term ) {
+
+echo '<li class="category product">';
+echo '<a href="' . esc_url( get_term_link( $term ) ) . '" class="' . $term->slug . '">';
+woocommerce_subcategory_thumbnail( $term );
+
+echo '<h3>'.$term->name.'</h3>';
+echo '</a>';
+}
+
+echo '</ul>';
+
+}
+
+}
+add_action( 'woocommerce_before_shop_loop', 'tutsplus_product_subcategories', 50 );
+/*Whishlist*/
+add_filter( 'tinvwl-general-default_title','fleet_default_wishlist_title' );
+function fleet_default_wishlist_title($wishlist_title){
+	return '';
+}

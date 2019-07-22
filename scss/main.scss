@@ -307,8 +307,6 @@ body:not(.home) .site-content {
 	div[class^='col']:last-child {
 		text-align: right;
 	}
-	/*display: flex;
-	flex: wrap;*/
 	border-bottom: 1px solid $grey;
 	border-right: 1px solid $grey;
 	a {
@@ -389,7 +387,7 @@ body:not(.home) .site-content {
 		margin-left: -6px;
 	}
 }
-.content-area {
+.entry {
 	ul {
 		margin: 0 0 18px 12px;
 		padding-left: 0;
@@ -607,7 +605,6 @@ section {
 }
 
 .brands {
-	/*background: $white;*/
 	.brands-list {
 		border-top: 1px solid $grey;
 		padding-top: 1%;
@@ -713,7 +710,7 @@ section {
 		}
 	}
 }
-/*OWL-Carousel*/
+/*OwL-Carousel*/
 .owl-carousel {
 	.owl-nav {
 		button {
@@ -738,6 +735,109 @@ section {
 }
 
 /*Woocommerce*/
+
+.fleet-sorting {
+	color: $warm-grey-two;
+}
+/*Постраничная навигация*/
+.wp-pagenavi {
+	text-align: center;
+	& span, & a {
+		display: inline-block;
+		color: $black-three;
+		height: 30px;
+		line-height: 28px;
+		font-size: 13px;		
+		padding: 0 .2em;
+		min-width: 30px;
+		margin: 0 2px 0 0;
+		background: $white;
+		border: 1px solid $grey;
+		vertical-align: top;
+		text-decoration: none;
+	}
+	a {
+		&:hover {
+			background: $blue-green;
+			color: $white;
+			border-color: $blue-green;
+		}
+		&.current {
+			border-color: $black-three;
+		}
+		&.previouspostslink:hover, &.nextpostslink:hover {
+			background-color: $white;
+			border-color: $black-three;
+			}
+		&.previouspostslink::before, &.nextpostslink::before {
+			content: '';
+			display: block;
+			position: relative;
+			width: 6px;
+			height: 10px;
+			top: 9px;
+			background-image: url(../img/sprite.png);
+			background-repeat: no-repeat;
+			margin: 0 auto;	
+		}
+		&.previouspostslink::before {
+			background-position: 0 -245px;
+		}
+		&.nextpostslink::before {
+			background-position: 0 -273px;
+			&:hover {
+				background-color: $white;
+			}
+		}
+
+	}
+}
+/*Список категорий*/
+ul li.product::before  {
+	display: none;
+}
+.woocommerce {
+	ul.product-cats {
+		list-style: none;
+		grid-gap: 15px 7px;
+		margin: 35px 0 0 0;
+		& + p {
+			margin-bottom: 0;	
+		}
+		li.category {
+			display: flex;
+			flex-direction: column;
+			list-style-type: none;
+			border: 1px solid transparent;
+			/*width: 100%;*/
+			padding: 11px;
+			margin: 0 0 30px;
+			background: $white;
+			box-shadow: 2px 3px 7px 0px rgba(0,0,0,0);
+			text-align: center;	
+			&:hover {
+				border-color: $light-blue-green;		
+				box-shadow: 2px 3px 7px 0px rgba(0,0,0,.35);
+			}
+			a {
+				text-decoration: none;
+				color: $black-three;
+			}
+			h3 {
+				font-family: $default-font;
+				font-size: 14px;
+				font-weight: bold;
+				line-height: 18px; 
+				text-transform: uppercase;
+				margin-bottom: 0;
+			}
+			img {
+				vertical-align: top;
+				margin-bottom: 17px;
+			}
+		}
+	}
+}
 
 /*Список товаров на Главной (карусель)*/
 .bestsellers {
@@ -795,10 +895,7 @@ section {
 		padding: 0;
 		margin: 0;
 		background: $white;
-		box-shadow: 2px 3px 7px 0px rgba(0,0,0,0);
-		&::before {
-			display: none;
-		}
+		box-shadow: 2px 3px 7px 0px rgba(0,0,0,0);		
 		&:hover {
 			border-color: $light-blue-green;		
 			box-shadow: 2px 3px 7px 0px rgba(0,0,0,.35);
@@ -1155,47 +1252,6 @@ section {
 		border-radius: 0;		
 	}
 	
-}
-
-/*Постраничная навигация*/
-.wp-pagenavi {
-	text-align: center;
-	& span, & a {
-		display: inline-block;
-		color: $black-three;
-		height: 30px;
-		line-height: 28px;
-		font-size: 13px;		
-		padding: 0 .2em;
-		min-width: 30px;
-		margin: 0 2px 0 0;
-		background: $white;
-		border: 1px solid $grey;
-		vertical-align: top;
-		text-decoration: none;
-		&.current, &:hover {
-			border-color: $black-three;
-		}
-	}
-	
-	/*& a.last::before, & a.first::before, */& a.previouspostslink::before, & a.nextpostslink::before {
-		content: '';
-		display: block;
-		position: relative;
-		width: 6px;
-		height: 10px;
-		top: 9px;
-		background-image: url(../img/sprite.png);
-		background-repeat: no-repeat;
-		margin: 0 auto;	
-	}
-	/*& a.first::before, */& a.previouspostslink::before {
-		background-position: 0 -245px;
-	}
-	/*a.last::before, */& a.nextpostslink::before {
-		background-position: 0 -273px;
-	}
-
 }
 
 aside {
