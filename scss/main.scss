@@ -492,6 +492,7 @@ section {
 		font-weight: bold;
 		text-transform: uppercase;
 		text-decoration: none;
+		line-height: normal;
 		margin: 25px 0 8px;
 	}
 	.descr {
@@ -528,79 +529,52 @@ section {
 				display: flex;
 				flex-direction: column;
 				min-height: 75px;
+				max-height: 75px;
+				width: auto;
 				justify-content: flex-end;
-				/*background-repeat: no-repeat;*/
-				&::before {
-					content: '';
-					display: inline-block;
-					vertical-align: top;
-					background-repeat: no-repeat;
+				color: $blue-green;
+				svg {
+					stroke: currentColor;
+				}
+				img {
+					max-width: 100%;
 				}
 			}
 		}
-		&.item-1 .icon::before {
-			background-image: url(../img/1.svg);
+		.catalog-item-link:hover .icon {
+			color: $light-blue-green;
+			svg {
+				stroke: currentColor;
+			}
+		}
+		&.item-1 .icon svg {
 			width: 69px;
 			height: 69px;
 		}
-		&.item-1 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/1h.svg);
-		}
-		
-		&.item-2 .icon::before {
-			background-image: url(../img/2.svg);
+		&.item-2 .icon svg {
 			width: 72px;
 			height: 63px;
-		}
-		&.item-2 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/2h.svg);
-		}
-		
-		&.item-3 .icon::before {
-			background-image: url(../img/3.svg);
+		}		
+		&.item-3 .icon svg {
 			width: 75px;
 			height: 75px;
-		}
-		&.item-3 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/3h.svg);
-		}
-		
-		&.item-4 .icon::before {
-			background-image: url(../img/4.svg);
+		}		
+		&.item-4 .icon svg {
 			width: 54px;
 			height: 50px;
 		}
-		&.item-4 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/4h.svg);
-		}
-		
-		&.item-5 .icon::before {
-			background-image: url(../img/5.svg);
+		&.item-5 .icon svg {
 			width: 72px;
 			height: 44px;
 		}
-		&.item-5 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/5h.svg);
-		}
-
-		&.item-6 .icon::before {
-			background-image: url(../img/6.svg);
+		&.item-6 .icon svg {
 			width: 54px;
 			height: 39px;
 		}
-		&.item-6 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/6h.svg);
-		}
-		
-		&.item-7 .icon::before {
-			background-image: url(../img/7.svg);
+		&.item-7 .icon svg {
 			width: 54px;
 			height: 44px;
 		}
-		&.item-7 .catalog-item-link .icon:hover::before {
-			background-image: url(../img/7h.svg);
-		}
-		
 	}
 }
 
@@ -644,9 +618,11 @@ section {
 #slider_main {
 	padding: 0;
 	.slider-item {
+		display: block;
 		height: 534px !important;
 		background-size: cover;
 		background-repeat: no-repeat;
+		text-decoration: none !important;
 		&-caption {
 			font-size: $font-size-3;
 			font-weight: bold;
