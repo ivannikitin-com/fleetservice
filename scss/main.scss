@@ -151,9 +151,11 @@ body:not(.home) .site-content {
 	background-color: $blue-green;
 }
 
-.site-branding img {
-	max-width: 100%;
-	height: auto;
+.site-branding {
+	.logo {
+		max-width: 100%;
+		height: auto;
+	}
 }
 
 .site-header {
@@ -617,6 +619,12 @@ section {
 /*Slider HOME*/
 #slider_main {
 	padding: 0;
+	a.slider-item {
+		display: block;
+		&:hover {
+			text-decoration: none;
+		}
+	}
 	.slider-item {
 		display: block;
 		height: 534px !important;

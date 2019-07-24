@@ -30,7 +30,13 @@
 				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
 					/* *TODO */
-					the_custom_logo();
+					//the_custom_logo();	
+					?>
+					<!--SVG логотипа не будем ставить - оно немного не того размера получается.-->
+						<!--<span class="custom-logo-link" rel="home"><img width="164" height="142" src="//localhost:3010/wp-content/uploads/2019/05/logo.png" class="logo" alt="Fleetservice"></span>-->
+						<a href="//localhost:3010/" class="custom-logo-link" rel="home"><img width="164" height="142" src="//localhost:3010/wp-content/uploads/2019/05/logo.png" class="logo" alt="Fleetservice"></a>
+					<?php 
+					// Удалить это?
 					if ( is_front_page() && is_home() ) :
 						?>
 						<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
@@ -40,6 +46,7 @@
 						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 						<?php
 					endif; ?>
+
 				</div><!-- .site-branding -->
 				
 				<div class="col-9 col-sm-9 col-md-10 col-lg-10 col-xl-9 offset-xl-1 navbar-expand-lg wrap_right">

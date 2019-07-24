@@ -2,6 +2,20 @@
 
 <!--SLIDER-->
 <section id="slider_main" class="owl-carousel owl-theme d-none d-md-block">
+	<!-- Слайд-ссылка -->
+	<a href="/" class="slider-item" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/slider-1.jpg)";>	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="slider-item-content d-flex flex-column">
+						<div class="slider-item-date"><span>2/5</span></div>
+						<div class="slider-item-caption">Акция</div>
+						<div class="slider-item-descr">Сверкающая чистота<br />по сниженной цене</div>
+					</div>
+				</div>
+			</div><!--/.row-->
+		</div><!--/.container-->
+	</a><!--/.slider-item-->
 
 	<div class="slider-item" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/slider-1.jpg)";>	
 		<div class="container">
