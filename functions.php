@@ -142,7 +142,7 @@ function fleetservice_scripts() {
 	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
 	
 	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, false );
-	wp_enqueue_script( 'masonry', get_template_directory_uri() . '/libs/masonry.pkgd.js', array(''), time(), true );
+	wp_enqueue_script( 'masonry', get_template_directory_uri() . '/libs/masonry.pkgd.js', array('jquery'), null, true );
 	
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -180,3 +180,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory() . '/inc/woocommerce-functions.php';
 require get_template_directory() . '/inc/fleetservice-functions.php';
+
+/*Разрешение на загрузку .svg*/
+function my_myme_types($mime_types){
+	$mime_types['svg'] = 'image/svg+xml'; // поддержка SVG
+	return $mime_types;
+ }
+ add_filter('upload_mimes', 'my_myme_types', 1, 1);

@@ -52,9 +52,10 @@
 			<div class="col-sm-6 col-md-4 catalog-item item-1">
 				<a href="#" class="catalog-item-link">
 					<div class="icon"></div>
+					<img src="<?php echo get_template_directory_uri(); ?>/img/1.svg" width="69" height="69">
 					<div class="title-item">Отели</div>
 					<div class="descr">
-						<p>Краткое описание раздела.  Про отели. Краткое описание раздела. Краткое описание раздела. </p>
+						<p>Краткое описание раздела. Про отели. Краткое описание раздела. Краткое описание раздела. </p>
 					</div>
 					<span href="#" class="more">Посмотреть</span>
 				</a>
