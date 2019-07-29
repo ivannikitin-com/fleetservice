@@ -67,30 +67,39 @@
 					<div class="block-links">
 						<div class="row no-gutters flex-nowrap align-items-center">
 							<div class="col-auto col-lg-4 d-flex wrap_wishcompare">
-								<a href="#" class="wishlist"><span class="d-none d-lg-inline">Избранное</span></a>
-								<a href="#" class="compare"><span class="d-none d-lg-inline">Сравнение</span></a>
+								<a href="<?php echo get_theme_mod('wishist_url'); ?>" class="wishlist"><span class="d-none d-lg-inline"><?php _e('Избранное','fleetservice'); ?></span></a>
+								<a href="<?php echo get_theme_mod('compare_url'); ?>" class="compare"><span class="d-none d-lg-inline"><?php _e('Сравнение','fleetservice'); ?></span></a>
 							</div>
 							<div class="col-auto col-lg-3 d-flex wrap_auth">
-								<a href="#" class="auth"><span class="d-none d-md-inline">Вход/Регистрация</span></a>
+								<?php if (is_user_logged_in()) { 
+									$account_anchor = __('Личный кабинет','fleetservice');
+									
+								} else {
+									 $account_anchor = __('Вход/Регистрация','fleetservice');
+								} ?>
+								<a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" class="auth"><span class="d-none d-md-inline"><?php echo $account_anchor; ?></span></a>
 							</div>
 							<div class="col-auto col-lg-5 ml-auto">
-								<a href="#" class="minicart"><span class="d-none d-sm-inline">(3) : 1 000 000 Р</span></a>
+								<?php $cart_contents_count = WC()->cart->get_cart_contents_count(); 
+								$cart_contents_sum = WC()->cart->get_cart_subtotal( );
+								?>
+								<a href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>" class="minicart"><span class="d-none d-sm-inline">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span></a>
 							</div>
 						</div><!--/.row-->
 					</div><!--/.block-links-->
 
 					<div class="header-bott">
 						<div class="row no-gutters align-items-center">
-							<div class="col-lg-4"><a href="tel:+74957789000" class="phone">+7(495) <span>778-90-00</span></a></div>
+							<div class="col-lg-4"><a href="tel:<?php echo phone_clean(get_theme_mod('header_phone')); ?>" class="phone"><?php echo get_theme_mod('header_phone'); ?></a></div>
 							<div class="col-lg-3 hours d-sm-block d-none">
-								<span><b>Пн. - Пт.:</b> 9.00-21.00</span><span><b>Сб. - Вс.:</b>10.00-18.00</span>
+								<?php echo get_theme_mod('working_hours'); ?>
 							</div>
 								
 							<div class="wrap-form col-md-auto col-lg-auto ml-auto">
 								<a href="#" class="site-search-toggle"></a>
-								<span class="makeweight">(3) : 1 000 000 Р</span>
+								<span class="makeweight">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span>
 								<form role="search" method="get" class="search-form" action="http://fleetservice.local/">
-									<span class="screen-reader-text">Найти:</span>
+									<span class="screen-reader-text"><?php _e('Найти:','fleetservice'); ?></span>
 									<input type="search" class="search-field" placeholder="" value="" name="s">
 								</form>
 							</div>

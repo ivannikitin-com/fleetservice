@@ -44,7 +44,7 @@ $args['meta_key'] = '';
 return $args;
 }
 
-add_filter( 'woocommerce_default_catalog_orderby_options', 'custom_woocommerce_catalog_orderby' );
+add_filter( 'woocommerce_default_catalog_orderby_options', 'fleet_woocommerce_catalog_orderby' );
 add_filter( 'woocommerce_catalog_orderby', 'fleet_woocommerce_catalog_orderby' );
 
 function fleet_woocommerce_catalog_orderby( $sortby ) {
@@ -71,7 +71,43 @@ function fleet_sorting_wrapper_close() {
 	echo '</div>';
 }
 
+add_action( 'woocommerce_before_shop_loop_item','fleet_wish_compare_buttons',5 );
+function fleet_wish_compare_buttons(){ ?>
+	<div class="product-top d-flex justify-content-end align-items-end">
+	<?php echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]"); ?>
+	<!--<a href="#" class="compare"></a><a href="#" class="wishlist"></a>-->
+	</div>
+<?php }
 
+/*Замена html-шаблона кнопки wishlist*/
+//add_filter( 'wc_get_template', 'fleet_custom_wc_template', 10, 5 );
+function fleet_custom_wc_template( $located, $template_name, $args, $template_path, $default_path ) {
+if ($template_name = 'ti-addtowishlist') {
+	$custom_template_name = '';
+	$located = trailingslashit( get_stylesheet_directory() ) . 'woocommerce/ti-addtowishlist.php';
+}
+return $located;
+}
+
+add_action( 'woocommerce_before_shop_loop_item','fleet_li_inner_wrap_open',1 );
+function fleet_li_inner_wrap_open() {
+	echo '<div class="product-inner">';
+}
+add_action( 'woocommerce_after_shop_loop_item','fleet_li_inner_wrap_close',99);
+function fleet_li_inner_wrap_close() {
+	echo '</div><!--/.product-inner-->';
+}
+add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_sku' );
+function fleet_loop_sku(){ 
+	global $product;?>
+	<div class="sku-wrapper"><?php _e('SKU','woocommerce'); ?>: <span class="sku"><?php echo ($product->get_sku())? $product->get_sku():''; ?></span></div>
+<?php }
+add_action( 'woocommerce_after_shop_loop_item','fleet_loop_quick_view',9 );
+function fleet_loop_quick_view() { ?>
+	<a href="#" class="quick-view button">Быстрый просмотр</a>
+<?php }
+remove_action( 'woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price',10 );
+add_action( 'woocommerce_after_shop_loop_item','woocommerce_template_loop_price',6 );
 
 // Отделяем категории от товаров
 function tutsplus_product_subcategories( $args = array() ) {

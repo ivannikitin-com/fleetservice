@@ -1,53 +1,37 @@
 <?php get_header(); ?>
+<?php while ( have_posts() ) : the_post(); ?>
 
+<?php if( have_rows('front_page_slider') ): ?>
 <!--SLIDER-->
 <section id="slider_main" class="owl-carousel owl-theme d-none d-md-block">
-	<div class="slider-item" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/slider-1.jpg)";>	
+	<?php while ( have_rows('front_page_slider') ) : the_row();
+		$image = get_sub_field('slide_img');
+		$text1 = get_sub_field('slide_text_1');
+		$text2 = get_sub_field('slide_text_2');
+		$text3 = get_sub_field('slide_text_3'); ?>
+	<div class="slider-item" style="background-image: url(<?php echo $image['url']; ?>)">	
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
 					<div class="slider-item-content d-flex flex-column">
-						<div class="slider-item-date"><span>2/5</span></div>
-						<div class="slider-item-caption">Акция</div>
-						<div class="slider-item-descr">Сверкающая чистота<br />по сниженной цене</div>
+						<div class="slider-item-date"><span><?php echo $text1; ?></span></div>
+						<div class="slider-item-caption"><?php echo $text2; ?></div>
+						<div class="slider-item-descr"><?php echo $text3; ?></div>
 					</div>
 				</div>
 			</div><!--/.row-->
 		</div><!--/.container-->
 	</div><!--/.slider-item-->
-
-	<div class="slider-item" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/slider-1.jpg)";>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10">
-					<div class="slider-item-content d-flex flex-column">
-						<div class="slider-item-date"><span>2/5</span></div>
-						<div class="slider-item-caption">Акция</div>
-						<div class="slider-item-descr">Сверкающая чистота<br />по сниженной цене</div>
-					</div>
-				</div>
-			</div><!--/.row-->
-		</div><!--/.container-->
-	</div><!--/.slider-item-->
-
-	<div class="slider-item" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/slider-1.jpg)";>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10">
-					<div class="slider-item-content d-flex flex-column">
-						<div class="slider-item-date"><span>2/5</span></div>
-						<div class="slider-item-caption">Акция</div>
-						<div class="slider-item-descr">Сверкающая чистота<br />по сниженной цене</div>
-					</div>
-				</div>
-			</div><!--/.row-->
-		</div><!--/.container-->
-	</div><!--/.slider-item-->
+	<?php  endwhile; ?>
 </section><!--/#slider_main-->
+<?php endif; ?>
 
 <section class="catalog" style="background-color: #f5f8fa;">
 	<div class="container">
-		<h2 class="section-title" style="font-size: 30px; line-height: 33px;">Каталог товаров</h2>
+		<?php $catalog_section_title =  get_field ('catalog_section_title');
+		if ($catalog_section_title) { ?>
+		<h2 class="section-title" style="font-size: 30px; line-height: 33px;"><?php echo $catalog_section_title; ?></h2>
+		<?php } ?>
 		<div class="row">
 			<div class="col-sm-6 col-md-4 catalog-item item-1">
 				<a href="#" class="catalog-item-link">
@@ -132,7 +116,10 @@
 
 <section class="brands" style="background-color: #fff;">
 	<div class="container">
-		<h2 class="section-title" style="font-size: 24px; margin-bottom: 9px; line-height: normal;">Бренды</h2>
+		<?php $brand_section_title =  get_field ('brand_section_title');
+		if ($brand_section_title) { ?>
+		<h2 class="section-title" style="font-size: 24px; margin-bottom: 9px; line-height: normal;"><?php echo $brand_section_title; ?></h2>
+		<?php } ?>
 	</div><!--/.container-->	
 	<div class="brands-list">
 		<div class="container">
@@ -157,7 +144,10 @@
 <!-- ХИТЫ ПРОДАЖ -->
 <section class="bestsellers" style="background: #f5f8fa;">
 	<div class="container">
-		<h2 class="section-title" style="font-size: 30px; margin-bottom: 12px; line-height: normal;">Хиты продаж</h2>
+		<?php $products_section_title =  get_field ('products_section_title');
+		if ($products_section_title) { ?>
+		<h2 class="section-title" style="font-size: 30px; margin-bottom: 12px; line-height: normal;"><?php echo $products_section_title; ?></h2>
+		<?php } ?> 
 	</div><!--/.container-->
 
 	<!-- Хиты продаж --->
@@ -261,79 +251,132 @@
 	</div><!--/.bestsellers-list-->
 </section><!--/.bestsellers-->
 
+
+<?php $front_page_products = get_field('front_page_products');
+//print_r($front_page_products);
+if(  $front_page_products ):
+$args=array(
+	'post_type'		=> 'product',
+	'post__in'		=> $front_page_products,
+	'posts_per_page'=> -1
+);
+$products=new WP_query( $args );
+if ( $products->have_posts() ) : ?>
+<section class="bestsellers" style="background: #f5f8fa;">
+	<div class="container">
+		<?php $products_section_title =  get_field ('products_section_title');
+		if ($products_section_title) { ?>
+		<h2 class="section-title" style="font-size: 30px; margin-bottom: 12px; line-height: normal;"><?php echo $products_section_title; ?></h2>
+		<?php } ?> 
+	</div><!--/.container-->
+	<div class="bestsellers-list">
+		<div class="container">
+			<div class="woocommerce">
+				<ul class="products owl-carousel">
+					<?php while ( $products->have_posts() ) : $products->the_post(); ?>
+					<?php wc_get_template_part( 'content', 'product' ); ?>
+					<?php endwhile; // end of the loop. ?>
+					<?php wp_reset_postdata(); ?>
+				</ul>
+			</div><!--/.woocommerce-->
+		</div><!--/.container-->
+	</div><!--/.bestsellers-list-->
+</section><!--/.bestsellers-->
+<?php endif; ?>
+<?php endif; ?>
+
+<?php $short_information_img = get_field('short_information_img'); 
+$short_information_title = get_field('short_information_title');
+$slogun_icon = get_field('slogun_icon');
+$slogun_text = get_field('slogun_text');
+$front_page_content = get_the_content();
+$more_info_lnk = get_field('more_info_lnk');
+if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?> 
 <section class="about-us" style="background-color: #fff;">	
 	<div class="container">
 		<div class="row justify-content-between">
-			
-			<div class="col-md-3 col-xl-3 mb-md-0 mb-4"><img src="<?php echo get_template_directory_uri(); ?>/img/A4.jpg" width="265" height="516" class="img-fluid about-us-pic mb-2 mb-md-0"></div>
-			<div class="col-md-9 col-xl-8 mt-lg-2 mt-xl-3">				
-				<h2 class="section-title">блок с краткой информацией о магазине и продукции</h2>
+			<?php if ($short_information_img) { ?>
+			<div class="col-md-3 col-xl-3 mb-md-0 mb-4"><img src="<?php echo $short_information_img['url']; ?>" width="265" height="516
+			" class="img-fluid about-us-pic mb-2 mb-md-0"></div>
+			<?php } ?>
+			<div class="col-md-9 col-xl-8 mt-lg-2 mt-xl-3">	
+				<?php if ($short_information_title) { ?>			
+				<h2 class="section-title"><?php echo $short_information_title; ?></h2>
+				<?php } ?>
+				<?php if (isset($slogun_icon) || $slogun_text) { ?>
 				<div class="about-us-slogan">
-					<img src="<?php echo get_template_directory_uri(); ?>/img/10 Years.png" width="130" height="179" class="img-fluid">
+					<?php if ($slogun_icon) { ?>
+					<img src="<?php echo $slogun_icon['url']; ?>" width="130" height="179" class="img-fluid">
+					<?php } ?>
+					<?php if ($slogun_text) { ?>
 					<div class="about-us-slogan-txt">
-						<p>Мы точно знаем,<br /> что Вам нужно.<br /></p>
-						<p>Доверьтесь нам!</p>
+					<?php echo $slogun_text; ?>
 					</div>
-				</div>
+					<?php } ?>
+				</div><!--/.about-us-slogan-->
+				<?php } ?>
+				<?php if ($front_page_content) { ?>
 				<div class="about-us-main_txt">				
-					<p>Блок с краткой информацией <a href="#">о магазине и продукции</a>. Блок с краткой информацией о магазине и продукции. Блок с краткой информацией о магазине и продукции. Блок с краткой информацией о магазине и продукции.</p>
-					<p>Блок с краткой информацией о магазине и продукции. Блок с краткой информацией о магазине и продукции.</p>
+				<?php echo the_content(); ?>
 				</div>
-				<a href="#" class="more">узнать больше</a>
+				<?php if ($more_info_lnk) { ?>
+				<a href="<?php echo $more_info_lnk; ?>" class="more"><?php _e('Узнать больше','fleetservice'); ?></a>
+				<?php } ?>
+				<?php } ?>
 			</div>
 		</div><!--/.row-->
 	</div><!--/.container-->
 </section><!--/.about-us-->
+<?php endif; ?>
 
+<?php if( have_rows('front_page_testimonials') ): ?>
 <!--ОТЗЫВЫ -->
 <section class="reviews" style="background-color: #f5f8fa;">
 	<div class="container">
-		<h2 class="section-title">Отзывы о нас</h2>
+		<?php $testimonials_section_title =  get_field ('testimonials_section_title');
+		if ($testimonials_section_title) { ?>
+		<h2 class="section-title"><?php echo $testimonials_section_title; ?></h2>
+		<?php } ?>
 	</div><!--/.container-->
 	<div class="reviews-list">
 		<div class="container">
 			<div class="owl-carousel">
+				<?php while ( have_rows('front_page_testimonials') ) : the_row();
+				$testimonial_name = get_sub_field('testimonial_name');
+				$testimonial_post = get_sub_field('testimonial_post');
+				$testimonial_text = get_sub_field('testimonial_text'); ?>
 				<a href="#" class="reviews-list-item">
-					<div class="author"><span class="fio">ФИО</span> / Должность</div>
-					<div class="descr"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-	exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-	dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></div>
+					<?php if ($testimonial_name || $testimonial_post) { ?>
+					<div class="author"><?php if ($testimonial_name) {?><span class="fio"><?php echo $testimonial_name; ?></span><?php }?><?php if ($testimonial_post) {?><?php echo ' / '.$testimonial_post; }?></div>
+					<?php } ?>
+					<div class="descr"><?php if ($testimonial_text) { echo $testimonial_text; } ?></div>
 				</a>
-
-				<a href="#" class="reviews-list-item">
-					<div class="author"><span class="fio">ФИО</span> / Должность</div>
-					<div class="descr"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-	exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-	dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></div>
-				</a>
-
-				<a href="#" class="reviews-list-item">
-					<div class="author"><span class="fio">ФИО</span> / Должность</div>
-					<div class="descr"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-	exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-	dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></div>
-				</a>
-				
-				<a href="#" class="reviews-list-item">
-					<div class="author"><span class="fio">ФИО</span> / Должность</div>
-					<div class="descr"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-	exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-	dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></div>
-				</a>
+				<?php  endwhile; ?>
 			</div><!--/.owl-carousel-->
 		</div><!--/.container-->
 	</div><!--/.reviews-list-->
 </section><!--/.reviews-->
+<?php endif; ?>
 
+<?php $args = array(
+	'posts_per_page' 		=> 6,
+	'orderby'				=> 'DATE',
+	'order'					=> 'DESC',
+	'category_name' 		=> 'news',
+	);
+$news_posts = new WP_Query( $args );
+if ($news_posts): ?> 
 <!-- НОВОСТИ -->
 <section class="news" style="background-color: #fff;">	
 	<div class="container">
-		<h2 class="section-title" style="font-size: 30px; line-height:33px;">Новости</h2>
+		<?php $news_section_title = get_field('news_section_title');
+		if ($news_section_title) { ?>
+		<h2 class="section-title" style="font-size: 30px; line-height:33px;"><?php echo $news_section_title; ?></h2>
+		<?php } ?>
 		<div class="grid-md-2">
+			<?php $last_news_flag = true;
+			$post_cntr = 1;
+			while ( $news_posts->have_posts() ) : $news_posts->the_post(); ?>
 				<?php
 				 /**
 				  * TODO:
@@ -341,59 +384,34 @@
 				  * то добавляем сюда ее изображение(кол-во постов с картинкой - 4, без картинки - 6)
 				  * Example: <img src="<?php echo get_template_directory_uri(); ?>/img/news.jpg" class="img-fluid">
 				  */
-				  
+				  /*По просьбе заказчика картинка выводится только для самой свежей новости.*/
 				  ?>
-				<img src="<?php echo get_template_directory_uri(); ?>/img/news.jpg" class="img-fluid mb-md-0 mb-4">	
+				 <?php if ($last_news_flag) { 
+				 $post_thumb_url = get_the_post_thumbnail_url(get_the_ID(),'full'); 
+				 if ($post_thumb_url) { ?>
+				<img src="<?php echo $post_thumb_url; ?>" class="img-fluid mb-md-0 mb-4">	
+				<?php } ?>
+				<?php $last_news_flag = false; } ?>
 				<article class="news-item mb-md-0 mb-3">
-				<time pubdate datetime="2018-08-19" class="news-item-date mt-md-0 mt-3">19 августа 2018</time>
-					<div class="news-item-title"><a href="#">HPG Australia announces winning design team on<br />One Sydney Park</a></div>
+				<time pubdate datetime="<?php echo get_the_date('Y-m-d');?>" class="news-item-date mt-md-0 mt-3"><?php echo wp_maybe_decline_date(get_the_date()); ?></time>
+					<div class="news-item-title"><a href="<?php echo the_permalink(); ?>"><?php the_title(); ?></a></div>
 					<div class="news-item-descr">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariaturdolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur 
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+						<?php the_excerpt(); ?>
 					</div>
 				</article>
-				<article class="news-item mb-md-0 mb-3">
-				<time pubdate datetime="2018-08-19" class="news-item-date mt-md-0 mt-3">19 августа 2018</time>
-					<div class="news-item-title"><a href="#">HPG Australia announces winning design team on<br />One Sydney Park</a></div>
-					<div class="news-item-descr">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.</p>
-					</div>
-				</article>
-				
-				<article class="news-item mb-md-0 mb-3">
-				<time pubdate datetime="2018-08-19" class="news-item-date mt-md-0 mt-3">19 августа 2018</time>
-					<div class="news-item-title"><a href="#">HPG Australia announces winning design team on<br />One Sydney Park</a></div>
-					<div class="news-item-descr">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-					</div>
-				</article>
-				
-				<article class="news-item mb-md-0 mb-3">
-				<time pubdate datetime="2018-08-19" class="news-item-date mt-md-0 mt-3">19 августа 2018</time>
-					<div class="news-item-title"><a href="#">HPG Australia announces winning design team on<br />One Sydney Park</a></div>
-					<div class="news-item-descr">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-					</div>
-				</article>
-			
-		
+				<?php $post_cntr++;
+				if ($post_thumb_url && $post_cntr == 5) { break; } ?>
+		<?php endwhile; ?>
+		<?php wp_reset_postdata();?>		
 		</div><!--/.row-->
-		<div class="col-12 all_news"><a href="#">Читать все новости</a></div>
+		<?php 
+		$news_lnk_label = get_field('news_lnk_label');
+		if (!$news_lnk_label ) {
+			$news_lnk_label = _e('All news','fleetservice');
+		} ?>
+		<div class="col-12 all_news"><a href="/category/news/"><?php echo $news_lnk_label; ?></a></div>
 	</div><!--/.container-->
 </section>
-
-
-<?php while ( have_posts() ) : the_post(); ?>
-<div class="container">
-	<?php the_content(); ?>
-</div><!--/.container-->
+<?php endif; ?>
 <?php endwhile; ?>
-		
-
 <?php get_footer();
