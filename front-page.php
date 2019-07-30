@@ -8,8 +8,9 @@
 		$image = get_sub_field('slide_img');
 		$text1 = get_sub_field('slide_text_1');
 		$text2 = get_sub_field('slide_text_2');
-		$text3 = get_sub_field('slide_text_3'); ?>
-	<div class="slider-item" style="background-image: url(<?php echo $image['url']; ?>)">	
+		$text3 = get_sub_field('slide_text_3'); 
+		$slide_lnk_url = get_sub_field('slide_lnk_url');?>
+	<<?php echo ($slide_lnk_url)?'a href="'.$slide_lnk_url.'"':'div'; ?> class="slider-item" style="background-image: url(<?php echo $image['url']; ?>)">	
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
@@ -21,7 +22,7 @@
 				</div>
 			</div><!--/.row-->
 		</div><!--/.container-->
-	</div><!--/.slider-item-->
+	</<?php echo ($slide_lnk_url)?'a':'div'; ?>><!--/.slider-item-->
 	<?php  endwhile; ?>
 </section><!--/#slider_main-->
 <?php endif; ?>
