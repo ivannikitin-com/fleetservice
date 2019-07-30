@@ -33,85 +33,33 @@
 		if ($catalog_section_title) { ?>
 		<h2 class="section-title" style="font-size: 30px; line-height: 33px;"><?php echo $catalog_section_title; ?></h2>
 		<?php } ?>
+		<?php if (have_rows('business_trend')): ?>
 		<div class="row">
+			<?php while ( have_rows('business_trend') ) : the_row();
+			$trend_icon = get_sub_field('trend_icon');
+			$trend_title = get_sub_field('trend_title');
+			$trend_text = get_sub_field('trend_text');
+			$trend_link_text = get_sub_field('trend_link_text'); 
+			$trend_link_url = get_sub_field('trend_link_url');?>
 			<div class="col-sm-6 col-md-4 catalog-item item-1">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Отели</div>
+				<a href="<?php echo ($trend_link_url)?$trend_link_url:'#'?>" class="catalog-item-link">
+					<div class="icon"><?php echo (isset($trend_icon['url']))?file_get_contents($trend_icon['url']):''; ?></div>
+					<?php if ($trend_title) { ?>
+					<div class="title-item"><?php echo $trend_title; ?></div>
+					<?php } ?>
+					<?php if ($trend_text) { ?>
 					<div class="descr">
-						<p>Краткое описание раздела.  Про отели. Краткое описание раздела. Краткое описание раздела. </p>
+						<?php echo $trend_text; ?>
 					</div>
-					<span href="#" class="more">Посмотреть</span>
+					<?php } ?>
+					<?php if ($trend_link_text) { ?>
+					<span href="#" class="more"><?php echo $trend_link_text; ?></span>
+					<?php } ?>
 				</a>
 			</div><!--/.col-->
-
-			<div class="col-sm-6 col-md-4 catalog-item item-2">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Недвижимость и клининг</div>
-					<div class="descr">
-						<p>Краткое описание раздела.  Про отели. Краткое описание раздела. Краткое описание раздела. </p>
-					</div>
-					<span href="#" class="more">Посмотреть</span>
-				</a>
-			</div><!--/.col-->
-
-			<div class="col-sm-6 col-md-4 catalog-item item-3">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Производство</div>
-					<div class="descr">
-						<p>Краткое описание раздела.  Про отели. Краткое описание раздела. Краткое описание раздела. </p>
-					</div>
-					<span href="#" class="more">Посмотреть</span>
-				</a>
-			</div><!--/.col-->
-
-			<div class="col-sm-6 col-md-4 catalog-item item-4">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Ресторан/кухня</div>
-					<div class="descr">
-						<p>Краткое описание раздела.  Про отели. Краткое описание раздела. Краткое описание раздела. </p>
-					</div>
-					<span href="#" class="more">Посмотреть</span>
-				</a>
-			</div><!--/.col-->
-
-			<div class="col-sm-6 col-md-4 catalog-item item-5">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Автопром</div>
-					<div class="descr">
-						<p>Краткое описание раздела.  Про автопром. Краткое описание раздела. Краткое описание раздела. </p>
-					</div>
-					<span href="#" class="more">Посмотреть</span>
-				</a>
-			</div><!--/.col-->
-
-			<div class="col-sm-6 col-md-4 catalog-item item-6">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Медицина</div>
-					<div class="descr">
-						<p>Краткое описание раздела.</p>
-					</div>
-					<span href="#" class="more">Посмотреть</span>
-				</a>
-			</div><!--/.col-->
-
-			<div class="col-sm-6 col-md-4 catalog-item item-7">
-				<a href="#" class="catalog-item-link">
-					<div class="icon"></div>
-					<div class="title-item">Спорт и фитнесс</div>
-					<div class="descr">
-						<p>Краткое описание раздела.  Про отели. Краткое описание раздела. Краткое описание раздела. Краткое описание раздела. Краткое описание раздела.</p>
-					</div>
-					<span href="#" class="more">Посмотреть</span>
-				</a>
-			</div><!--/.col-->
-
+		<?php endwhile; ?>
 		</div><!--/.row-->
+		<?php endif; ?>
 	</div><!--/.container-->
 </section><!--/.catalog-->
 
@@ -124,22 +72,10 @@
 	</div><!--/.container-->	
 	<div class="brands-list">
 		<div class="container">
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/allegrini.png" width="87" height="40"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/archdale.png" width="120" height="40"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/bxg.png" width="116" height="47"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/nova.png" width="146" height="42"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/notrax.png" width="140" height="40"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/diversey.png" width="115" height="60"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/i-team.png" width="153" height="40"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/pro servise.png" width="202" height="40"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/tork.png" width="117" height="57"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/nolfisk.png" width="146" height="32"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/chicopee.png" width="196" height="32"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/frepro.png" width="177" height="36"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/grass.png" width="90" height="40"></a>
-			<a href="" class="c_change"><img src="<?php echo get_template_directory_uri(); ?>/img/pro servise.png" width="202" height="40"></a>
+	<?php echo do_shortcode('[pwb-carousel items="featured" items_to_show="5" items_to_scroll="1" image_size="full" autoplay="true" arrows="true" hide_empty="false"]'); ?>
 		</div><!--/.container-->		
-	</div><!--.brands-list-->
+	</div><!--.brands-list-->	
+	
 </section><!--/.brands-->
 
 <!-- ХИТЫ ПРОДАЖ -->
