@@ -16,7 +16,6 @@ body {
 	background: $white;
 	font-size: 13px;
 	position: relative;
-	line-height: normal;
 	line-height: 1.7;
 	font-family: $default-font;
 	overflow-x: hidden;
@@ -153,7 +152,7 @@ body:not(.home) .site-content {
 
 .site-branding {
 	.logo {
-		max-width: 100%;
+		max-width: 164px;
 		height: auto;
 	}
 }
@@ -620,17 +619,16 @@ section {
 #slider_main {
 	padding: 0;
 	a.slider-item {
-		display: block;
+		text-decoration: none;
 		&:hover {
 			text-decoration: none;
 		}
 	}
 	.slider-item {
 		display: block;
-		height: 534px !important;
+		height: 534px;
 		background-size: cover;
 		background-repeat: no-repeat;
-		text-decoration: none !important;
 		&-caption {
 			font-size: $font-size-3;
 			font-weight: bold;
@@ -679,15 +677,18 @@ section {
 		right: 16.667%;
 		top: 50%;
 		margin-top: 0;
-		zoom: 1;
-		.owl-dot span {
-			display: block;
-			width: 10px;
-    		height: 10px;
-			border-radius: 100%;
-			background: $white-one;
-			margin: 9px;
-			transition: opacity .2s ease;
+		.owl-dot {
+			zoom: 1;
+			display: inline-block	
+			span {
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-radius: 100%;
+				background: $white-one;
+				margin: 9px;
+				transition: opacity .2s ease;
+			}
 		}
 		& .owl-dot.active span, & .owl-dot:hover span {
 			background: $white;
