@@ -29,14 +29,20 @@
 			<div class="row row_h">				
 				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
-					/* *TODO */
-					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
+						$logo_img = '';
+						if( $custom_logo_id = get_theme_mod('custom_logo') ){
+							$logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array(
+								'class'    => 'custom-logo',
+								'itemprop' => 'logo',
+							) );
+							echo $logo_img;
+						}
 						?>
 						<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
 						<?php
 					else :
-						?>
+						the_custom_logo();?>
 						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 						<?php
 					endif; ?>
