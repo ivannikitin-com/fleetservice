@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <!--SLIDER-->
-<section id="slider_main" class="owl-carousel owl-theme d-none d-md-block">
+<section id="slider_main" class="owl-carousel d-none d-md-block">
 	<!-- Слайд-ссылка -->
 	<a href="/" class="slider-item" style="background-image: url(<?php echo get_template_directory_uri(); ?>/img/slider-1.jpg)";>	
 		<div class="container">

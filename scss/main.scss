@@ -153,7 +153,8 @@ body:not(.home) .site-content {
 
 .site-branding {
 	.logo {
-		max-width: 100%;
+		max-width: 164px;
+		width: 100%;
 		height: auto;
 	}
 }
@@ -621,16 +622,16 @@ section {
 	padding: 0;
 	a.slider-item {
 		display: block;
+		text-decoration: none;
 		&:hover {
 			text-decoration: none;
 		}
 	}
 	.slider-item {
 		display: block;
-		height: 534px !important;
+		height: 534px;
 		background-size: cover;
 		background-repeat: no-repeat;
-		text-decoration: none !important;
 		&-caption {
 			font-size: $font-size-3;
 			font-weight: bold;
@@ -680,15 +681,21 @@ section {
 		top: 50%;
 		margin-top: 0;
 		zoom: 1;
-		.owl-dot span {
-			display: block;
-			width: 10px;
-    		height: 10px;
-			border-radius: 100%;
-			background: $white-one;
-			margin: 9px;
-			transition: opacity .2s ease;
-		}
+		.owl-dot {
+			.owl-dot {
+				display: inline-block;
+				zoom: 1;
+			}
+			span {
+				display: block;
+				width: 10px;
+				height: 10px;
+				border-radius: 100%;
+				background: $white-one;
+				margin: 9px;
+				transition: opacity .2s ease;
+			}
+		} 
 		& .owl-dot.active span, & .owl-dot:hover span {
 			background: $white;
 		}
@@ -785,6 +792,7 @@ ul li.product::before  {
 		list-style: none;
 		grid-gap: 15px 7px;
 		margin: 35px 0 0 0;
+		padding: 0;
 		& + p {
 			margin-bottom: 0;	
 		}
@@ -858,7 +866,6 @@ ul li.product::before  {
 	
 }
 .woocommerce {
-	margin: 0 auto;
 	.woocommerce-products-header__title {
 		text-transform: uppercase;
 		margin-bottom: 45px;

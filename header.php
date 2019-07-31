@@ -30,11 +30,11 @@
 				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
 					/* *TODO */
-					//the_custom_logo();	
+					the_custom_logo();	
 					?>
 					<!--SVG логотипа не будем ставить - оно немного не того размера получается.-->
 						<!--<span class="custom-logo-link" rel="home"><img width="164" height="142" src="//localhost:3010/wp-content/uploads/2019/05/logo.png" class="logo" alt="Fleetservice"></span>-->
-						<a href="//localhost:3010/" class="custom-logo-link" rel="home"><img width="164" height="142" src="//localhost:3010/wp-content/uploads/2019/05/logo.png" class="logo" alt="Fleetservice"></a>
+						<!--<a href="//localhost:3010/" class="custom-logo-link" rel="home"><img width="164" height="142" src="//localhost:3010/wp-content/uploads/2019/05/logo.png" class="logo" alt="Fleetservice"></a>-->
 					<?php 
 					// Удалить это?
 					if ( is_front_page() && is_home() ) :
