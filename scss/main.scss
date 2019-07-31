@@ -720,7 +720,9 @@ section {
 }
 
 /*Woocommerce*/
-
+.grid {
+	display: grid;
+}
 .fleet-sorting {
 	color: $warm-grey-two;
 }
@@ -864,12 +866,19 @@ ul li.product::before  {
 		text-transform: uppercase;
 		margin-bottom: 45px;
 	}
-	ul.products:not(.owl-carousel) {
+		ul.products {
+			margin-left: 0;
+			grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
+			grid-gap: 30px;
+		}
+	}
+	
+	/*ul.products:not(.owl-carousel) {
 		margin-left: 0;
 		&::before, &::after {
 			display: none;
 		}
-	}
+	}*/
 	ul.products li.product {
 		display: flex;
 		flex-direction: column;
