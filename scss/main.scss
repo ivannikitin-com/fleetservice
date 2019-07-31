@@ -786,8 +786,10 @@ ul li.product::before  {
 .woocommerce {
 	ul.product-cats {
 		list-style: none;
-		grid-gap: 15px 7px;
+		grid-column-gap: 7px;
+		grid-row-gap: 15px;
 		margin: 35px 0 0 0;
+		padding: 0;
 		& + p {
 			margin-bottom: 0;	
 		}
@@ -861,27 +863,33 @@ ul li.product::before  {
 	
 }
 .woocommerce {
-	margin: 0 auto;
 	.woocommerce-products-header__title {
 		text-transform: uppercase;
 		margin-bottom: 45px;
 	}
-		ul.products {
-			margin-left: 0;
-			grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
-			grid-gap: 30px;
-		}
-	}
-	
-	/*ul.products:not(.owl-carousel) {
+
+	ul.products.grid[class*=columns-] {
 		margin-left: 0;
-		&::before, &::after {
+		grid-column-gap: 30px;
+		grid-row-gap: 30px;
+		& li.product::after, & li.product::before {
 			display: none;
 		}
-	}*/
+
+		&::after, &::before {
+			display: none;
+		}
+
+		li.product {			
+			width: 100%;
+			margin: 0;
+		}
+	}
+
 	ul.products li.product {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		font-family: $default-font;
 		list-style-type: none;
 		border: 1px solid $grey;
@@ -889,11 +897,13 @@ ul li.product::before  {
 		padding: 0;
 		margin: 0;
 		background: $white;
-		box-shadow: 2px 3px 7px 0px rgba(0,0,0,0);		
+		box-shadow: 2px 3px 7px 0px rgba(0,0,0,0);
+
 		&:hover {
 			border-color: $light-blue-green;		
 			box-shadow: 2px 3px 7px 0px rgba(0,0,0,.35);
 		}
+
 		.product-top {
 			margin: 9px 11px;
 			line-height: 1;
@@ -902,56 +912,68 @@ ul li.product::before  {
 				margin-right: 15px;
 			}	
 		}
+
 		.product-inner {
 			display: flex;
+			flex: 1 1 100%;
 			flex-direction: column;
 			justify-content: space-between;
 			height: 100%;
+			width: 100%;
 		}
+
 		a {
 			text-decoration: none;
 		}
+
 		.woocommerce-LoopProduct-link {
 			display: flex;
 			flex-direction: column;
 			color: $black-three;
 		}
+
 		.woocommerce-loop-product__title {
 			font-family: $default-font;
 			font-size: 16px;
 			color: $black-three;
 			font-weight: normal;
 			text-align: left;
-			line-height: normal;
+			line-height: 20px;
 			margin: auto 11px 16px;
+			padding: 0;
 		}
+
 		img {
 			display: block;
 			margin: 0 auto 25px;
 			width: 100%;
 		}
+
 		.sku-wrapper {
-				font-size: 14px;
-				text-align: left;
-				color: $steel-grey;
-				margin: auto 11px 10px;
+			font-size: 14px;
+			text-align: left;
+			color: $steel-grey;
+			margin: auto 11px 10px;
 		}
+
 		.price {
 			display: flex;
+			justify-content: center;
 			align-items: center;
 			font-family: $secondary-font;
 			font-size: 18px;
 			color: $black-three;
 			font-weight: bold;
 			line-height: normal;
-			justify-content: center;
 			margin: auto 11px 8px;
+
 			del {
 				font-size: 14px;
 				color: $steel-grey;
 				white-space: nowrap;
 				opacity: 1;
 			}
+
 			ins {
 				background: none;
 				margin-left: auto;
