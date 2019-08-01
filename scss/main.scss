@@ -435,6 +435,7 @@ body:not(.home) .site-content {
 }
 
 .entry {
+
 	ul {
 		margin: 0 0 18px 12px;
 		padding-left: 0;
@@ -474,6 +475,7 @@ a.more {
 	border: 1px solid $blue-green;
 	&:hover {
 		background: $light-blue-green;
+		border-color: $light-blue-green;
 	}
 }
 .button {
@@ -513,6 +515,13 @@ button:focus {
 		background-color: $black-three;
 		color: $white;
 	}
+}
+
+.woocommerce button.button.alt {
+	@extend %button-blue-green;
+	border-radius: 0;
+	font-weight: 400;
+
 }
 
 
@@ -1087,6 +1096,10 @@ ul li.product::before  {
 		}
 	}
 }
+
+/*Карточка товара*/
+	
+
 
 /*О нас на Главной*/
 .about-us {
