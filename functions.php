@@ -188,3 +188,4 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory() . '/inc/woocommerce-functions.php';
 require get_template_directory() . '/inc/fleetservice-functions.php';
+require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
