@@ -279,6 +279,7 @@ body:not(.home) .site-content {
 		flex-direction: column;
 		padding-left: 0;
 		margin-bottom: 0;
+		margin-left: 0;
 		list-style: none;
 		&>li>a {
 			font-family: $secondary-font;
@@ -521,7 +522,7 @@ button:focus {
 	@extend %button-blue-green;
 	border-radius: 0;
 	font-weight: 400;
-
+	height: 44px;
 }
 
 
@@ -850,15 +851,16 @@ ul li.product::before  {
 		grid-row-gap: 15px;
 		margin: 35px 0 0 0;
 		padding: 0;
+
 		& + p {
 			margin-bottom: 0;	
 		}
+
 		li.category {
 			display: flex;
 			flex-direction: column;
 			list-style-type: none;
 			border: 1px solid transparent;
-			/*width: 100%;*/
 			padding: 11px;
 			margin: 0 0 30px;
 			background: $white;
@@ -923,6 +925,10 @@ ul li.product::before  {
 	
 }
 .woocommerce {
+	.sku-wrapper {
+		font-size: 14px;
+		color: $steel-grey;
+	}
 	ul.products {
 		margin: 27px 0 0 0;
 	}
@@ -1015,9 +1021,6 @@ ul li.product::before  {
 		}
 
 		.sku-wrapper {
-			font-size: 14px;
-			text-align: left;
-			color: $steel-grey;
 			margin: auto 11px 10px;
 		}
 
@@ -1068,10 +1071,12 @@ ul li.product::before  {
 			background: $white;
 			border: 1px solid $grey;
 			margin-bottom: 0;
+
 			&:hover {
 				background: $pale-grey;
 				color: $blue-green;
 			}
+
 			&:before {
 				content: '';
 				display: inline-block;
@@ -1081,6 +1086,7 @@ ul li.product::before  {
 				vertical-align: middle;
 				margin-right: 9px;
 			}
+
 			&:hover::before {
 				background-position: -34px -193px;
 			}
@@ -1092,13 +1098,64 @@ ul li.product::before  {
 			height: 21px;
 			background: url(../img/sprite.png) no-repeat 0 -205px;
 			vertical-align: middle;
-			margin-right: 9px;
+			margin: -3px 9px 0 0;
 		}
 	}
 }
 
 /*Карточка товара*/
-	
+%style-text-1 {
+	font-size: 14px;
+	line-height: 24px;
+}
+.woocommerce.single-product {
+		color: $black-two;
+
+		.product_title {
+			font-size: 24px;
+			line-height: 29px;
+		}
+
+		.woocommerce-Tabs-panel {
+			&--description {
+				@extend %style-text-1;
+			}
+
+			p {				
+				line-height: 24px;
+			}
+		}
+
+		.woocommerce-product-details__short-description {
+			@extend %style-text-1;
+		}
+
+		.summary {
+				
+			.price {
+				font-family: $secondary-font;
+
+				
+				ins {	
+					margin-left: 12px;
+				}
+
+				.woocommerce-Price-amount {	
+					font-weight: bold;					
+					font-size: 24px;
+					color: $black-three;
+				}
+				
+				del {					
+					opacity: 1 !important;
+					.woocommerce-Price-amount {
+						font-size: 18px;
+						color: $steel-grey;
+					}
+				} 
+			}
+		}
+	}
 
 
 /*О нас на Главной*/
