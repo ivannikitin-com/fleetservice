@@ -79,13 +79,6 @@
 </section><!--/.brands-->
 
 <!-- ХИТЫ ПРОДАЖ -->
-<section class="bestsellers" style="background: #f5f8fa;">
-	<div class="container">
-		<?php $products_section_title =  get_field ('products_section_title');
-		if ($products_section_title) { ?>
-		<h2 class="section-title" style="font-size: 30px; margin-bottom: 12px; line-height: normal;"><?php echo $products_section_title; ?></h2>
-		<?php } ?> 
-	</div><!--/.container-->
 
 <?php $front_page_products = get_field('front_page_products');
 //print_r($front_page_products);

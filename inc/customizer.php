@@ -112,7 +112,60 @@ function fleetservice_customize_register( $wp_customize ) {
 				'type' => 'textarea',
 			)
 		);	
-
+		$wp_customize->add_setting('footer_twitter_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_twitter_lnk', array(
+				'label' => 'Ссылка на профиль в Twitter',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
+		);
+		$wp_customize->add_setting('footer_instagram_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_instagram_lnk', array(
+				'label' => 'Ссылка на профиль в Instagram',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
+		);
+		$wp_customize->add_setting('footer_facebook_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_facebook_lnk', array(
+				'label' => 'Ссылка на профиль в Facebook',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
+		);
+		$wp_customize->add_setting('footer_OK_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_OK_lnk', array(
+				'label' => 'Ссылка на профиль в Одноклассники',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
+		);	
+		$wp_customize->add_setting('footer_VK_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_VK_lnk', array(
+				'label' => 'Ссылка на профиль ВКонтакте',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
+		);
+		$wp_customize->add_setting('footer_text_block', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_text_block', array(
+				'label' => 'Текстовый блок в правой колонке',
+				'section' => 'section_footer',
+				'type' => 'textarea',
+			)
+		);								
 }
 add_action( 'customize_register', 'fleetservice_customize_register' );
 
