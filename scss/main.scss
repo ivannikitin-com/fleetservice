@@ -869,7 +869,7 @@ ul li.product::before  {
 	}
 
 	ul.products.grid[class*=columns-] {
-		margin-left: 0;
+		margin: 27px 0 0 0;
 		grid-column-gap: 30px;
 		grid-row-gap: 30px;
 		& li.product::after, & li.product::before {
@@ -1301,6 +1301,53 @@ aside {
 h2+.accordion {
 	margin-top: 14px;
 }
+
+/*Tabs*/
+ul.tabs {
+	padding: 0 !important;
+	.woocommerce div.product .woocommerce-tabs &::before {
+		border-bottom: 1px solid $grey;
+	}
+}
+
+ul.tabs li {
+	.woocommerce div.product .woocommerce-tabs & {
+		border: 1px solid $grey;
+		border-radius: 0;
+		background-color: $white;
+		margin: 2px 0 0 0;
+		z-index: 1;
+		&::before {
+			display: none;
+		}
+	}
+
+	.woocommerce div.product .woocommerce-tabs & a {
+		font-family: $secondary-font;
+		color: $warm-grey-two;
+		font-size: 16px;
+		padding: 6px 0 5px;
+	}
+
+	.woocommerce div.product .woocommerce-tabs &.active,
+	.woocommerce div.product .woocommerce-tabs &:hover {
+		border: 1px solid $black-three;
+		border-bottom-color: $black-three;
+	}
+
+	.woocommerce div.product .woocommerce-tabs &.active a,
+	.woocommerce div.product .woocommerce-tabs &:hover a {
+		color: $black-three;
+	}
+
+	.woocommerce div.product .woocommerce-tabs &.active::before, 
+	.woocommerce div.product .woocommerce-tabs &::after {
+		display: none;
+
+	}
+}
+
+
 
 /*footer*/
 .site-footer {
