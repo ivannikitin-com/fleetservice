@@ -832,7 +832,7 @@ ul li.product::before  {
 .bestsellers {
 	&-list {
 		border-top: 1px solid $grey;
-		padding-top: 74px;
+		padding-top:47px;
 	}
 	.container {
 		position: relative;
@@ -863,6 +863,9 @@ ul li.product::before  {
 	
 }
 .woocommerce {
+	ul.products {
+		margin: 27px 0 0 0;
+	}
 	.woocommerce-products-header__title {
 		text-transform: uppercase;
 		margin-bottom: 45px;
