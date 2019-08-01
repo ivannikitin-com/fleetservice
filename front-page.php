@@ -87,108 +87,6 @@
 		<?php } ?> 
 	</div><!--/.container-->
 
-	<!-- Хиты продаж --->
-	<div class="bestsellers-list">
-		<div class="container">
-			<div class="woocommerce">
-				<ul class="products owl-carousel">
-					<li class="product first instock">
-						<div class="product-inner">
-							<div class="product-top d-flex justify-content-end align-items-end">
-								<a href="#" class="compare"></a><a href="#" class="wishlist"></a>
-							</div>
-							<a href="/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-								<img width="279" height="279" src="<?php echo get_template_directory_uri(); ?>/img/img-1.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
-								<div class="sku-wrapper">Артикул: <span class="sku">7523359</span></div>							
-								<h2 class="woocommerce-loop-product__title">Коврик для ног махровый Lilium и третья строка</h2>									
-							</a>
-							<span class="price">
-								<span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span>
-							</span>
-							<a href="#" class="quick-view button">Быстрый просмотр</a>
-							<a rel="nofollow" href="/" class="button product_type_simple add_to_cart_button">Добавить в корзину</a>
-						</div><!--/.product-inner-->
-					</li>
-
-					<li class="product instock">
-						<div class="product-inner">
-							<div class="product-top d-flex justify-content-end align-items-end">
-								<a href="#" class="compare"></a><a href="#" class="wishlist"></a>
-							</div>
-							<a href="/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-								<img width="279" height="279" src="<?php echo get_template_directory_uri(); ?>/img/img-1.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
-								<div class="sku-wrapper">Артикул: <span class="sku">7523359</span></div>							
-								<h2 class="woocommerce-loop-product__title">Коврик для ног махровый Lilium</h2>
-							</a>
-							<span class="price">
-								<del><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></del>
-								<ins><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></ins>
-							</span>
-							<a href="#" class="quick-view button">Быстрый просмотр</a>
-							<a rel="nofollow" href="/" class="button product_type_simple add_to_cart_button">Добавить в корзину</a>
-						</div><!--/.product-inner-->
-					</li>
-					<li class="product instock">
-						<div class="product-inner">
-							<div class="product-top d-flex justify-content-end align-items-end">
-								<a href="#" class="compare"></a><a href="#" class="wishlist"></a>
-							</div>
-							<a href="/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-								<img width="279" height="279" src="<?php echo get_template_directory_uri(); ?>/img/img-1.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
-								<div class="sku-wrapper">Артикул: <span class="sku">7523359</span></div>							
-								<h2 class="woocommerce-loop-product__title">Коврик для ног махровый Lilium</h2>
-							</a>
-							<span class="price">
-								<del><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></del>
-								<ins><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></ins>
-							</span>
-							<a href="#" class="quick-view button">Быстрый просмотр</a>
-							<a rel="nofollow" href="/" class="button product_type_variable add_to_cart_button">Выбрать</a>
-						</div><!--/.product-inner-->
-					</li>
-					<li class="product instock">
-						<div class="product-inner">
-							<div class="product-top d-flex justify-content-end align-items-end">
-								<a href="#" class="compare"></a><a href="#" class="wishlist"></a>
-							</div>
-							<a href="/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-								<img width="279" height="279" src="<?php echo get_template_directory_uri(); ?>/img/img-1.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
-								<div class="sku-wrapper">Артикул: <span class="sku">7523359</span></div>							
-								<h2 class="woocommerce-loop-product__title">Коврик для ног</h2>
-							</a>
-							<span class="price">
-								<del><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></del>
-								<ins><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></ins>
-							</span>
-							<a href="#" class="quick-view button">Быстрый просмотр</a>
-							<a rel="nofollow" href="/" class="button product_type_variable add_to_cart_button">Выбрать</a>
-						</div><!--/.product-inner-->
-					</li>
-					<li class="product inwishlist incompare">
-						<div class="product-inner">
-							<div class="product-top d-flex justify-content-end align-items-end">
-								<a href="#" class="compare"></a><a href="#" class="wishlist"></a>
-							</div>
-							<a href="/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-								<img width="279" height="279" src="<?php echo get_template_directory_uri(); ?>/img/img-1.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
-								<div class="sku-wrapper">Артикул: <span class="sku">7523359</span></div>							
-								<h2 class="woocommerce-loop-product__title">Коврик для ног махровый Lilium</h2>
-							</a>
-							<span class="price">
-								<del><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></del>
-								<ins><span class="woocommerce-Price-amount amount">17 000&nbsp;<span class="woocommerce-Price-currencySymbol">руб.</span></span></ins>
-							</span>
-							<a href="#" class="quick-view button">Быстрый просмотр</a>
-							<a rel="nofollow" href="/" class="button product_type_simple">Посмотреть подробно</a>
-						</div><!--/.product-inner-->
-					</li>
-				</ul>
-			</div><!--/.woocommerce-->
-		</div><!--/.container-->
-	</div><!--/.bestsellers-list-->
-</section><!--/.bestsellers-->
-
-
 <?php $front_page_products = get_field('front_page_products');
 //print_r($front_page_products);
 if(  $front_page_products ):
@@ -257,7 +155,7 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 				<?php echo the_content(); ?>
 				</div>
 				<?php if ($more_info_lnk) { ?>
-				<a href="<?php echo $more_info_lnk; ?>" class="more"><?php _e('Узнать больше','fleetservice'); ?></a>
+				<a href="<?php echo $more_info_lnk; ?>" class="more"><?php _e('More','fleetservice'); ?></a>
 				<?php } ?>
 				<?php } ?>
 			</div>

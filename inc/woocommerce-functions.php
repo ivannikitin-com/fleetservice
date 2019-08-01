@@ -141,7 +141,7 @@ echo '</ul>';
 }
 add_action( 'woocommerce_before_shop_loop', 'tutsplus_product_subcategories', 50 );
 /*Whishlist*/
-add_filter( 'tinvwl-general-default_title','fleet_default_wishlist_title' );
+add_filter( 'tinvwl_default_wishlist_title','fleet_default_wishlist_title' );
 function fleet_default_wishlist_title($wishlist_title){
 	return '';
 }

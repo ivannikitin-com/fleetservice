@@ -68,7 +68,50 @@ function fleetservice_customize_register( $wp_customize ) {
 				'section' => 'section_header',
 				'type' => 'text',
 			)
-		);		
+		);	
+	$wp_customize->add_section(
+			'section_footer', array(
+				'title' => 'Футер',
+				'description' => '',
+				'priority' => 4,
+			)
+		);
+		$wp_customize->add_setting('footer_address', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_address', array(
+				'label' => 'Адрес',
+				'section' => 'section_footer',
+				'type' => 'textarea',
+			)
+		);	
+		$wp_customize->add_setting('footer_email', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_email', array(
+				'label' => 'E-mail',
+				'section' => 'section_footer',
+				'type' => 'textarea',
+			)
+		);			
+		$wp_customize->add_setting('footer_phone', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_phone', array(
+				'label' => 'Телефон',
+				'section' => 'section_footer',
+				'type' => 'textarea',
+			)
+		);	
+		$wp_customize->add_setting('footer_copyright', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_copyright', array(
+				'label' => 'Copyright',
+				'section' => 'section_footer',
+				'type' => 'textarea',
+			)
+		);	
 
 }
 add_action( 'customize_register', 'fleetservice_customize_register' );

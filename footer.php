@@ -18,28 +18,25 @@
 			<div class=" footer_main">
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
-						<div class="f_title">Контакты</div>
-						<div>121433, Москва, ул. Шарикоподшипниковская, д.14</div>
-						<div class="email"><a href="mailto:hello@site.ru">hello@site.ru</a></div>
-						<div class="phone"><a href="tel:+79169123573">+7(916) 912-35-7</a></div>
-						<div class="copyright">© 2018  All Rights Reserved</div>
+						<div class="f_title"><?php _e('Contacts','fleetservice'); ?></div>
+						<div><?php echo get_option( 'footer_address' ); ?></div>
+						<div class="email"><a href="mailto:hello@site.ru"><?php echo get_option( 'footer_email' ); ?></a></div>
+						<div class="phone"><a href="tel:<?php echo phone_clean(get_option( 'footer_phone' )); ?>"><?php echo get_option( 'footer_phone' ); ?></a></div>
+						<div class="copyright">© <?php echo date('Y'); ?>  <?php echo get_option( 'footer_copyright' ); ?></div>
 					</div>
 					<div class="col-sm-6 col-md-4 mt-sm-0 mt-4">
-						<div class="f_title">Ссылки</div>
-						<nav>
-							<ul class="list-unstyled">						
-								<li class="menu-item"><a href="">О компании</a></li>
-								<li class="menu-item"><a href="">Информация</a></li>
-								<li class="menu-item"><a href="">Каталоги</a></li>
-								<li class="menu-item"><a href="">Прайс-лист</a></li>
-								<li class="menu-item"><a href="">Оплата и доставка</a></li>
-								<li class="menu-item"><a href="">Каталог товаров</a></li>
-								<li class="menu-item"><a href="">Контакты</a></li>
-							</ul>
-					</nav>       
+						<div class="f_title"><?php _e('Links','fleetservice'); ?></div>
+								<?php
+								wp_nav_menu( array(
+									'theme_location' => 'menu-2',
+									'container'   	=> 'nav',
+									'menu_id'        => '',
+									'items_wrap'     => '<ul id="%1$s" class="list-unstyled">%3$s</ul>'
+								) );
+								?>							     
 					</div>	
 					<div class="col-sm-12 col-md-4 mt-4 mt-md-0">
-						<div class="f_title">Мы в соцсетях</div>
+						<div class="f_title"><?php _e('We in social networks','fleetservice'); ?></div>
 						<div class="socials">
 							<a rel="nofollow" target="_blank" href="https://twitter.com/"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
  width="17px" height="14px">
