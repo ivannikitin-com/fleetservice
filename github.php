@@ -10,7 +10,6 @@
 	 */
 	// The commands
 	$commands = array(
-		'echo $PWD',
 		'git pull',
     'git status'
 	);
