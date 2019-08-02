@@ -479,6 +479,18 @@ a.more {
 		border-color: $light-blue-green;
 	}
 }
+
+%button-grey {
+	background: $white;
+	color: $black-three;
+	border: 1px solid $grey;
+	&:hover {
+		background: $blue-green;
+		border-color: $blue-green;
+		color: $white;
+	}	
+}
+
 .button {
 	display: inline-block;
 	font-size: 13px;
@@ -525,7 +537,13 @@ button:focus {
 	height: 44px;
 }
 
-
+.prdctfltr_woocommerce_filter_submit {
+	&::before {
+		display: inline-block;
+		content: "\f463";
+	}
+	
+}
 
 /*==================*/
 
@@ -925,9 +943,10 @@ ul li.product::before  {
 	
 }
 .woocommerce {
-	.sku-wrapper {
+	.sku_wrapper {
 		font-size: 14px;
 		color: $steel-grey;
+		margin: auto 11px 9px;
 	}
 	ul.products {
 		margin: 27px 0 0 0;
@@ -1018,10 +1037,6 @@ ul li.product::before  {
 			display: block;
 			margin: 0 auto 25px;
 			width: 100%;
-		}
-
-		.sku-wrapper {
-			margin: auto 11px 10px;
 		}
 
 		.price {
@@ -1154,6 +1169,26 @@ ul li.product::before  {
 					}
 				} 
 			}
+		}
+
+		.woocommerce-Tabs-panel {
+			color: $black-two;
+			font-size: 16px;
+		}
+
+		&.woocommerce table.shop_attributes {
+			p {
+				padding: 0;
+			}
+
+			th, td {			
+				font-style: normal;
+				font-weight: normal;
+				background: none;
+				border: 1px solid $grey;
+				padding: 9px 24px;
+			}
+
 		}
 	}
 
@@ -1432,14 +1467,15 @@ h2+.accordion {
 /*Tabs*/
 ul.tabs {
 	padding: 0 !important;
+	margin-bottom: 26px !important;
 	.woocommerce div.product .woocommerce-tabs &::before {
-		border-bottom: 1px solid $grey;
+		border-bottom: 1px solid $silver;
 	}
 }
 
 ul.tabs li {
 	.woocommerce div.product .woocommerce-tabs & {
-		border: 1px solid $grey;
+		border: 1px solid $silver;
 		border-radius: 0;
 		background-color: $white;
 		margin: 2px 0 0 0;

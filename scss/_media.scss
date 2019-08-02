@@ -180,9 +180,18 @@
 	.nav-main {
 		width: 100vw;
 	}
+
 	.woocommerce {
 		ul.products.grid[class*=columns-] {
 			grid-template-columns: repeat(4, minmax(0%, 1fr));
 		}
 	}
+	.woocommerce-product-attributes.shop_attributes {
+		max-width: 655px;
+
+		th.woocommerce-product-attributes-item__label{
+			width: 42.5%;
+		}
+	}
+
 }

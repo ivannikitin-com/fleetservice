@@ -100,7 +100,7 @@ function fleet_li_inner_wrap_close() {
 add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_sku' );
 function fleet_loop_sku(){ 
 	global $product;?>
-	<div class="sku-wrapper"><?php _e('SKU','woocommerce'); ?>: <span class="sku"><?php echo ($product->get_sku())? $product->get_sku():''; ?></span></div>
+	<div class="sku_wrapper"><?php _e('SKU','woocommerce'); ?>: <span class="sku"><?php echo ($product->get_sku())? $product->get_sku():''; ?></span></div>
 <?php }
 add_action( 'woocommerce_after_shop_loop_item','fleet_loop_quick_view',9 );
 function fleet_loop_quick_view() { ?>
