@@ -18,14 +18,14 @@
 			<div class=" footer_main">
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
-						<div class="f_title"><?php _e('Contacts','fleetservice'); ?></div>
+						<div class="f_title"><?php _e('Контакты','fleetservice'); ?></div>
 						<div><?php echo get_theme_mod( 'footer_address' ); ?></div>
 						<div class="email"><a href="mailto:<?php echo get_theme_mod( 'footer_email' ); ?>"><?php echo get_theme_mod( 'footer_email' ); ?></a></div>
 						<div class="phone"><a href="tel:<?php echo phone_clean(get_theme_mod( 'footer_phone' )); ?>"><?php echo get_theme_mod( 'footer_phone' ); ?></a></div>
 						<div class="copyright">© <?php echo date('Y'); ?>  <?php echo get_theme_mod( 'footer_copyright' ); ?></div>
 					</div>
 					<div class="col-sm-6 col-md-4 mt-sm-0 mt-4">
-						<div class="f_title"><?php _e('Links','fleetservice'); ?></div>
+						<div class="f_title"><?php _e('Ссылки','fleetservice'); ?></div>
 								<?php
 								wp_nav_menu( array(
 									'theme_location' => 'menu-2',
@@ -36,7 +36,7 @@
 								?>							     
 					</div>	
 					<div class="col-sm-12 col-md-4 mt-4 mt-md-0">
-						<div class="f_title"><?php _e('We in social networks','fleetservice'); ?></div>
+						<div class="f_title"><?php _e('Мы в соцсетях','fleetservice'); ?></div>
 						<div class="socials">
 							<?php if (get_theme_mod( 'footer_twitter_lnk' )) { ?>
 							<a rel="nofollow" target="_blank" href="<?php echo get_theme_mod( 'footer_twitter_lnk' ); ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

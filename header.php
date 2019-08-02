@@ -99,15 +99,11 @@
 							<div class="col-lg-4"><a href="tel:<?php echo phone_clean(get_theme_mod('header_phone')); ?>" class="phone"><?php echo get_theme_mod('header_phone'); ?></a></div>
 							<div class="col-lg-3 hours d-sm-block d-none">
 								<?php echo get_theme_mod('working_hours'); ?>
-							</div>
-								
+							</div>		
 							<div class="wrap-form col-md-auto col-lg-auto ml-auto">
 								<a href="#" class="site-search-toggle"></a>
 								<span class="makeweight">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span>
-								<form role="search" method="get" class="search-form" action="http://fleetservice.local/">
-									<span class="screen-reader-text"><?php _e('Найти:','fleetservice'); ?></span>
-									<input type="search" class="search-field" placeholder="" value="" name="s">
-								</form>
+								<?php get_search_form(); ?>
 							</div>
 						</div><!--/.row-->
 					</div><!--/.header-bott-->
