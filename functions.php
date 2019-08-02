@@ -7,6 +7,8 @@
  * @package fleetservice
  */
 
+add_theme_support( 'woocommerce' );
+
 if ( ! function_exists( 'fleetservice_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -45,6 +47,7 @@ if ( ! function_exists( 'fleetservice_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'fleetservice' ),
+			'menu-2' => esc_html__( 'Secondary', 'fleetservice' ),
 		) );
 
 		/*
@@ -122,17 +125,38 @@ add_action( 'widgets_init', 'fleetservice_widgets_init' );
 function fleetservice_scripts() {
 	wp_enqueue_style( 'fleetservice-style', get_stylesheet_uri() );
 
+	if (!is_admin()) {
+		wp_register_style('google-opensans', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap&subset=cyrillic-ext,latin-ext', array(), null, 'all');
+		wp_enqueue_style('google-opensans');
+		wp_register_style('google-opensanscondensed', 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700&display=swap&subset=cyrillic-ext,latin-ext', array(), null, 'all');
+		wp_enqueue_style('google-opensanscondensed');		
+	}
+		
+	//wp_enqueue_script( 'jquery', '//code.jquery.com/jquery-3.3.1.slim.min.js', array(), true );
+	wp_enqueue_script( 'popper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array(), true );
+	wp_enqueue_script( 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), true );
+
+	wp_enqueue_script( 'common-js', get_template_directory_uri() . '/js/common.js', array( 'jquery' ), time(), true );
+
+	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.carousel.min.css');
+	wp_enqueue_style( 'owl-default', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.theme.default.min.css');
 	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
-
-	wp_enqueue_script( 'fleetservice-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-
-	wp_enqueue_script( 'fleetservice-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	
+	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, true );
+	wp_enqueue_script( 'masonry', get_template_directory_uri() . '/libs/masonry.pkgd.js', array(''), time(), true );
+	
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fleetservice_scripts' );
+
+function my_myme_types($mime_types){
+    $mime_types['svg'] = 'image/svg+xml'; // поддержка SVG
+    return $mime_types;
+}
+add_filter('upload_mimes', 'my_myme_types', 1, 1);
 
 /**
  * Implement the Custom Header feature.
@@ -161,3 +185,5 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+require get_template_directory() . '/inc/woocommerce-functions.php';
+require get_template_directory() . '/inc/fleetservice-functions.php';
