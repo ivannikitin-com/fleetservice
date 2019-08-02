@@ -25,12 +25,16 @@ body {
 	color: $black-three;
 	margin: 0;
 	min-width: 320px;
+
 	input, textarea {
-		border: #666 1px solid;
+		border: $silver 1px solid;
 		outline: none;
+		border-radius: 0;
+
 		&:focus:required:invalid {
 			border-color: red;
 		}
+
 		&:required:valid {
 			border-color: green;
 		}
@@ -526,7 +530,7 @@ button:focus {
 	color: $black-three;
 	&:hover {
 		background-color: $black-three;
-		color: $white;
+		color: $white !important;
 	}
 }
 
@@ -543,6 +547,26 @@ button:focus {
 		content: "\f463";
 	}
 	
+}
+#commentform label {
+	font-size: 14px;
+	color: $black-two;
+	margin-bottom: 3px;
+}
+.required {
+	color: #9e0b0f;
+}
+.woocommerce #respond input#submit {
+	@extend %button-blue-green;
+	border-radius: 0;
+	height: 38px;
+	width: 263px;
+	font-size: 13px;
+	font-weight: normal;
+	text-transform: uppercase;
+	&:hover {
+		color: $white;
+	}
 }
 
 /*==================*/
@@ -1123,6 +1147,7 @@ ul li.product::before  {
 	font-size: 14px;
 	line-height: 24px;
 }
+
 .woocommerce.single-product {
 		color: $black-two;
 
