@@ -35,3 +35,7 @@ function fleetservice_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'fleetservice_pingback_header' );
+function phone_clean($phone){
+	$phone= str_replace([' ', '(', ')', '-'], '', $phone);
+	return $phone;
+}

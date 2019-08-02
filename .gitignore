@@ -1,6 +1,11 @@
 # Files
-/css/main.css
 gulpfile.js
+gulpfile-simple.js
+Open_Sans.zip
+Open_Sans_Condensed.zip
+package.json
+phpcs.xml.dist
+/.vscode/
 
 # Node
 /node_modules/
