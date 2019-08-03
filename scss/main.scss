@@ -25,20 +25,6 @@ body {
 	color: $black-three;
 	margin: 0;
 	min-width: 320px;
-
-	input, textarea {
-		border: $silver 1px solid;
-		outline: none;
-		border-radius: 0;
-
-		&:focus:required:invalid {
-			border-color: red;
-		}
-
-		&:required:valid {
-			border-color: green;
-		}
-	}
 }
 
 a {
@@ -48,6 +34,10 @@ a {
 	&:hover {
 		color: $light-blue-green;
 		text-decoration: none;
+		outline: 0;
+	}
+	&:active {
+		outline: 0;		
 	}
 }
 
@@ -80,7 +70,7 @@ h4 {
 	line-height: 17px;
 }
 
-.font-size-3{
+.font-size-3 {
 	font-size: $font-size-3;
 }
 
@@ -474,36 +464,52 @@ a.more {
 }
 
 /*FORMS and BUTTONS*/
+
 %button-blue-green {
 	background: $blue-green;
 	color: $pale-grey;
 	border: 1px solid $blue-green;
+
 	&:hover {
 		background: $light-blue-green;
 		border-color: $light-blue-green;
 	}
+	
+	&:disabled {
+		color: $warm-grey-two;
+		background-color: $pale-grey;
+		border: 1px solid $grey;
+	}
+}
+
+.button-blue-green {
+	@extend %button-blue-green;
 }
 
 %button-grey {
 	background: $white;
 	color: $black-three;
 	border: 1px solid $grey;
+	
 	&:hover {
 		background: $blue-green;
-		border-color: $blue-green;
+		border: 1px solid $blue-green;
 		color: $white;
 	}	
 }
 
-.button {
+.button,
+.woocommerce a.button, 
+.woocommerce button.button, 
+.woocommerce input.button {
 	display: inline-block;
 	font-size: 13px;
 	text-align: center;
-	border: 0;
 	cursor: pointer;
 	text-decoration: none;
 	text-transform: uppercase;
-    padding: .907rem 4px;
+	padding: 13px 4px;
+	line-height: 1;
     text-decoration: none;
     font-weight: normal;
     text-shadow: none;
@@ -511,23 +517,20 @@ a.more {
     -webkit-appearance: none;
     border-radius: 0;
 	user-select: none;
-	background-color: transparent;
+	/*background-color: transparent;*/
 	border: 1px solid transparent;
 	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-button:focus {
+button:focus, .button:focus {
 	outline: 0;
-}
-
-.button.disabled, .button:disabled {
-    opacity: .65;
 }
 
 .btn_brd_black-three {
 	background-color: transparent;
 	border: 1px solid $black-three;
 	color: $black-three;
+
 	&:hover {
 		background-color: $black-three;
 		color: $white !important;
@@ -539,23 +542,17 @@ button:focus {
 	border-radius: 0;
 	font-weight: 400;
 	height: 44px;
+	line-height: 44px;
+	padding: 0 4px;
 }
 
 .prdctfltr_woocommerce_filter_submit {
 	&::before {
 		display: inline-block;
 		content: "\f463";
-	}
-	
+	}	
 }
-#commentform label {
-	font-size: 14px;
-	color: $black-two;
-	margin-bottom: 3px;
-}
-.required {
-	color: #9e0b0f;
-}
+
 .woocommerce #respond input#submit {
 	@extend %button-blue-green;
 	border-radius: 0;
@@ -564,10 +561,50 @@ button:focus {
 	font-size: 13px;
 	font-weight: normal;
 	text-transform: uppercase;
+
 	&:hover {
 		color: $white;
 	}
+
 }
+
+form {
+	input, textarea, .form-control {
+		border: $silver 1px solid;
+		outline: none;
+		border-radius: 0;
+
+		&:focus:required:invalid {
+			border-color: red;
+		}
+
+		&:required:valid {
+			border-color: green;
+		}
+	}
+
+	label {
+		font-size: 14px;
+		color: $black-two;
+		margin-bottom: 3px;
+	}
+
+	.span.wpcf7-list-item {
+		margin: 0;
+	}
+	
+}
+
+.required {
+	color: $red;
+}
+
+/*Заказ в 1 клик*/
+.form_one_click .wpcf7-submit {
+	padding: 12px 4px 11px;
+	width: 263px;
+}
+
 
 /*==================*/
 
@@ -970,7 +1007,6 @@ ul li.product::before  {
 	.sku_wrapper {
 		font-size: 14px;
 		color: $steel-grey;
-		margin: auto 11px 9px;
 	}
 	ul.products {
 		margin: 27px 0 0 0;
@@ -1086,6 +1122,10 @@ ul li.product::before  {
 				margin-left: auto;
 				white-space: nowrap;
 			}
+			.sku_wrapper {
+				margin: auto 11px 9px;
+			}	
+		
 		}
 		.button {
 			display: block;
@@ -1114,6 +1154,7 @@ ul li.product::before  {
 			&:hover {
 				background: $pale-grey;
 				color: $blue-green;
+				border-color: $grey;
 			}
 
 			&:before {
@@ -1194,6 +1235,10 @@ ul li.product::before  {
 					}
 				} 
 			}
+			
+			.sku_wrapper {
+				margin: 0 0 9px;
+			}	
 		}
 
 		.woocommerce-Tabs-panel {
@@ -1329,6 +1374,7 @@ ul li.product::before  {
 	.all_news {		
 		text-align: center;
 		margin-top: 55px;
+
 		& > a {
 			font-size: $font-size-2;
 			color: $ugly-blue;
@@ -1337,9 +1383,11 @@ ul li.product::before  {
 	}
 	.news-item {
 		line-height: 1;
+
 		img {
 			margin-bottom: 32px;
 		}
+
 		&-date {
 			display: block;	
 			font-size: $font-size-2;
@@ -1348,7 +1396,8 @@ ul li.product::before  {
 		}
 		.home &-title {
 			margin-top: 9px;
-			line-height: 21px;			
+			line-height: 21px;
+
 			a {
 				font-size: $font-size-3;
 				font-weight: bold;
@@ -1360,6 +1409,7 @@ ul li.product::before  {
 				}				
 			}
 		}
+
 		&-descr {
 			font-size: $font-size-2;
 			color: $black-two;
@@ -1383,18 +1433,21 @@ ul li.product::before  {
 					color: $light-blue-green;
 				}
 			}
+
 			&-title {
 				font-weight: bold;
 				font-size: 24px;
 				line-height: 27px;
 				margin-top: 15px;
 			}
+
 			&-descr {
 				line-height: 16px;
 				p {
 					line-height: inherit;
 				}
 			}
+
 			.more-link {
 				margin-top: 30px;				
 				min-width: 192px;
@@ -1424,11 +1477,13 @@ ul li.product::before  {
 			}
 		}
 	}
+
 	&_white {
 		.card-header {
 			background-color: $white;
 			padding: 0;
 		}
+
 		.accordion__btn {
 			color: $warm-grey-two;
 			text-decoration: none;
@@ -1437,6 +1492,7 @@ ul li.product::before  {
 				text-decoration: none;
 			}
 		}
+
 		.card-header {
 			border: 1px solid $grey;
 			&:hover {
@@ -1444,6 +1500,7 @@ ul li.product::before  {
 			}
 		}
 	}
+
 	.card {
 		border-radius: 0;
 		border: 0;
@@ -1451,6 +1508,7 @@ ul li.product::before  {
 			margin-top: 6px;
 		}
 	}
+
 	.card-header {
 		border-radius: 0;		
 	}
@@ -1465,10 +1523,12 @@ aside {
 		font-weight: bold;
 		padding-bottom: 9px;
 		border-bottom: 1px solid $silver;
+
 		span {			
 			padding: 0 0 9px;
 			border-bottom: 1px solid $blue-green;
 		}
+
 		& span::after {
 			content: '\003A';
 			padding-right: 4px;
@@ -1482,9 +1542,11 @@ aside {
 		padding: 0 0 4px;
 	}
 }
+
 .contact-block-2 {
 	margin: 34px 0 0 0;
 }
+
 h2+.accordion {
 	margin-top: 14px;
 }
