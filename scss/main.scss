@@ -434,6 +434,7 @@ body:not(.home) .site-content {
 	ul {
 		margin: 0 0 18px 12px;
 		padding-left: 0;
+		list-style: none;
 
 		li {
 			padding-left: 10px;
@@ -445,9 +446,10 @@ body:not(.home) .site-content {
 				height: 6px;
 				border-radius: 50%;
 				background: #464646;
-				margin-right: 8px;
+				margin-right: 9px;
 				vertical-align: middle;
 				margin-left: -14px;
+				margin-top: -6px;
 			}
 		}
 	}
@@ -1211,11 +1213,9 @@ ul li.product::before  {
 			@extend %style-text-1;
 		}
 
-		.summary {
-				
+		.summary {				
 			.price {
 				font-family: $secondary-font;
-
 				
 				ins {	
 					margin-left: 12px;
@@ -1241,25 +1241,26 @@ ul li.product::before  {
 			}	
 		}
 
+
 		.woocommerce-Tabs-panel {
 			color: $black-two;
-			font-size: 16px;
+		}		
+	}
+	
+	.woocommerce .woocommerce-product-attributes.shop_attributes {
+		font-size: 16px;
+		p {
+			padding: 0;
 		}
 
-		&.woocommerce table.shop_attributes {
-			p {
-				padding: 0;
-			}
-
-			th, td {			
-				font-style: normal;
-				font-weight: normal;
-				background: none;
-				border: 1px solid $grey;
-				padding: 9px 24px;
-			}
-
+		tr th, tr td {			
+			font-style: normal;
+			font-weight: normal;
+			background: none !important;
+			border: 1px solid $grey;
+			padding: 9px 23px;
 		}
+
 	}
 
 
@@ -1369,7 +1370,32 @@ ul li.product::before  {
 	}
 }
 
-/*News*/
+/*Комментарии*/
+#reviews.woocommerce-Reviews {
+	#comments {		
+		.comment-text {
+			border-radius: 0 !important;
+			.description p {
+				line-height: 21px;
+			}
+			.woocommerce-review {
+					&__author {
+					color: $black-three;
+					font-size: 16px;
+				}
+				&__published-date {
+					color: $steel-grey;
+				}
+			}
+			p.meta {
+				margin: 0 0 5px!important;
+			}
+		}
+
+	}
+}
+
+/*Новости*/
 .news {
 	.all_news {		
 		text-align: center;
@@ -1576,6 +1602,7 @@ ul.tabs li {
 		font-family: $secondary-font;
 		color: $warm-grey-two;
 		font-size: 16px;
+		text-decoration: none;
 		padding: 6px 0 5px;
 	}
 
