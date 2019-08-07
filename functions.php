@@ -47,6 +47,7 @@ if ( ! function_exists( 'fleetservice_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'fleetservice' ),
+			'menu-2' => esc_html__( 'Secondary', 'fleetservice' ),
 		) );
 
 		/*
@@ -131,7 +132,7 @@ function fleetservice_scripts() {
 		wp_enqueue_style('google-opensanscondensed');		
 	}
 		
-	wp_enqueue_script( 'jquery', '//code.jquery.com/jquery-3.3.1.slim.min.js', array(), true );
+	//wp_enqueue_script( 'jquery', '//code.jquery.com/jquery-3.3.1.slim.min.js', array(), true );
 	wp_enqueue_script( 'popper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array(), true );
 	wp_enqueue_script( 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), true );
 
@@ -140,10 +141,12 @@ function fleetservice_scripts() {
 	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.carousel.min.css');
 	wp_enqueue_style( 'owl-default', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.theme.default.min.css');
 	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
+	wp_enqueue_style( 'fleetservice-cataloge-menu', get_template_directory_uri() . '/css/cataloge-menu.css' );
 	
-	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, false );
+	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, true );
+	if (is_category()) {
 	wp_enqueue_script( 'masonry', get_template_directory_uri() . '/libs/masonry.pkgd.js', array(''), time(), true );
-	
+	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -186,3 +189,6 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory() . '/inc/woocommerce-functions.php';
 require get_template_directory() . '/inc/fleetservice-functions.php';
+//require get_template_directory() . '/inc/wp-bootstrap-navwalker-toggle-hover.php';
+//require get_template_directory() . '/inc/wp-bootstrap-navwalker-dropdown-click.php';
+require get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';

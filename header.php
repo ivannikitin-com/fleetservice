@@ -29,14 +29,20 @@
 			<div class="row row_h">				
 				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
-					/* *TODO */
-					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
+						$logo_img = '';
+						if( $custom_logo_id = get_theme_mod('custom_logo') ){
+							$logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array(
+								'class'    => 'custom-logo',
+								'itemprop' => 'logo',
+							) );
+							echo $logo_img;
+						}
 						?>
 						<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
 						<?php
 					else :
-						?>
+						the_custom_logo();?>
 						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 						<?php
 					endif; ?>
@@ -93,15 +99,11 @@
 							<div class="col-lg-4"><a href="tel:<?php echo phone_clean(get_theme_mod('header_phone')); ?>" class="phone"><?php echo get_theme_mod('header_phone'); ?></a></div>
 							<div class="col-lg-3 hours d-sm-block d-none">
 								<?php echo get_theme_mod('working_hours'); ?>
-							</div>
-								
+							</div>		
 							<div class="wrap-form col-md-auto col-lg-auto ml-auto">
 								<a href="#" class="site-search-toggle"></a>
 								<span class="makeweight">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span>
-								<form role="search" method="get" class="search-form" action="http://fleetservice.local/">
-									<span class="screen-reader-text"><?php _e('Найти:','fleetservice'); ?></span>
-									<input type="search" class="search-field" placeholder="" value="" name="s">
-								</form>
+								<?php get_search_form(); ?>
 							</div>
 						</div><!--/.row-->
 					</div><!--/.header-bott-->

@@ -1,5 +1,12 @@
 <?php 
-add_theme_support( 'woocommerce' );
+add_action( 'after_setup_theme', 'artabr_theme_setup' );
+function artabr_theme_setup() {
+	add_theme_support( 'woocommerce' );
+	//add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	//add_theme_support( 'wc-product-gallery-slider' );
+}
+
 remove_action( 'woocommerce_before_main_content','woocommerce_output_content_wrapper', 10 );
 add_action( 'woocommerce_before_main_content','fleet_woocommerce_output_content_wrapper', 10 );
 function fleet_woocommerce_output_content_wrapper() { ?>
@@ -165,6 +172,10 @@ function fleet_default_wishlist_title($wishlist_title){
 /*******************
 *Single product page
 *******************/
+add_filter( 'woocommerce_product_thumbnails_columns','fleet_single_product_thumbnails_columns');
+function fleet_single_product_thumbnails_columns($columns){
+	return 3;
+}
 add_action( 'pwb_before_single_product_brands','fleet_single_product_brands_label');
 function fleet_single_product_brands_label(){
 	echo '<div class="single-product-brand-label">'._e('Производитель:','fleetservice').'</div>';
@@ -175,3 +186,5 @@ function fleet_single_wishlist_lnk(){
 }
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
 add_action('woocommerce_single_product_summary','fleet_loop_sku',9 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 35 );

@@ -18,5 +18,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+$grid = (is_shop() || is_archive())?'grid':'';
 ?>
-<ul class="grid products columns-<?php echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?>">
+<ul class="<?php echo $grid; ?> products columns-<?php echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?>">
