@@ -1,5 +1,12 @@
 <?php 
-add_theme_support( 'woocommerce' );
+add_action( 'after_setup_theme', 'artabr_theme_setup' );
+function artabr_theme_setup() {
+	add_theme_support( 'woocommerce' );
+	//add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	//add_theme_support( 'wc-product-gallery-slider' );
+}
+
 remove_action( 'woocommerce_before_main_content','woocommerce_output_content_wrapper', 10 );
 add_action( 'woocommerce_before_main_content','fleet_woocommerce_output_content_wrapper', 10 );
 function fleet_woocommerce_output_content_wrapper() { ?>
@@ -19,7 +26,9 @@ function fleet_woocommerce_all_content_wrapper_end() { ?>
 </div><!--/.row-->
 </div><!--/.container-->
 <?php }
-/*Product category*/
+/*******************
+*Product category
+*******************/
 remove_action( 'woocommerce_before_shop_loop','woocommerce_result_count', 20 );
 remove_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering', 30 );
 remove_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 10 );
@@ -160,3 +169,22 @@ add_filter( 'tinvwl_default_wishlist_title','fleet_default_wishlist_title' );
 function fleet_default_wishlist_title($wishlist_title){
 	return '';
 }
+/*******************
+*Single product page
+*******************/
+add_filter( 'woocommerce_product_thumbnails_columns','fleet_single_product_thumbnails_columns');
+function fleet_single_product_thumbnails_columns($columns){
+	return 3;
+}
+add_action( 'pwb_before_single_product_brands','fleet_single_product_brands_label');
+function fleet_single_product_brands_label(){
+	echo '<div class="single-product-brand-label">'._e('Производитель:','fleetservice').'</div>';
+}
+add_action('woocommerce_single_product_summary','fleet_single_wishlist_lnk',8);
+function fleet_single_wishlist_lnk(){
+	echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]");
+}
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
+add_action('woocommerce_single_product_summary','fleet_loop_sku',9 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 35 );

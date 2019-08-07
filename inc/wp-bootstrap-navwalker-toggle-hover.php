@@ -3,7 +3,7 @@
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- * Description: A custom WordPress nav walker class to implement the Bootstrap 3 navigation style in a custom theme using the WordPress built in menu manager.
+ * Description: A custom WordPress nav walker class to implement the Bootstrap 4 navigation style in a custom theme using the WordPress built in menu manager. Toggle by hover.
  * Version: 2.0.4
  * Author: Edward McIntyre - @twittem
  * License: GPL-2.0+
@@ -21,7 +21,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = array() ) {
 		$indent = str_repeat( "\t", $depth );
-		$output .= "\n$indent<div role=\"menu\" class=\" dropdown-menu\">\n";
+		$output .= "\n$indent<div role=\"menu\" class=\" collapse\">\n";
 	}
 
 	/**
@@ -114,12 +114,13 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				$classes[] = 'nav-item-' . $item->ID;
 				$atts['class']			= 'nav-link';
 				if ( $args->has_children ){
-					$classes[] = ' dropdown';
-					$atts['href']   		= '#';
-					$atts['data-toggle']	= 'dropdown';
-					$atts['class']			= 'dropdown-toggle nav-link';
+					$classes[] = '';
+					$atts['href']   		= '#'.$item->ID.'_'.$depth;
+					$atts['data-toggle']	= 'collapse';
+					$atts['class']			= 'nav-link';
 					$atts['role']	= 'button';
-					$atts['aria-haspopup']	= 'true';
+					$atts['aria-haspopup']	= 'false';
+					//add_filter( 'nav_menu_submenu_css_class',  'add_toggle_id' );
 				}
 				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 				$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
@@ -127,7 +128,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 				$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 				$output .= $indent . '<li' . $id . $value . $class_names .'>';
 			}else{
-				$classes[] = 'dropdown-item';
+				$classes[] = 'collapse';
 				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 				$atts['class'] = $class_names;
 				$atts['id'] = $id;
@@ -163,6 +164,9 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}
+	}
+	private function add_toggle_id($classes, $depth){
+		
 	}
 
 	/**

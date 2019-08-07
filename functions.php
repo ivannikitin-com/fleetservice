@@ -141,6 +141,7 @@ function fleetservice_scripts() {
 	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.carousel.min.css');
 	wp_enqueue_style( 'owl-default', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.theme.default.min.css');
 	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
+	wp_enqueue_style( 'fleetservice-cataloge-menu', get_template_directory_uri() . '/css/cataloge-menu.css' );
 	
 	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, true );
 	if (is_category()) {
@@ -188,4 +189,6 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory() . '/inc/woocommerce-functions.php';
 require get_template_directory() . '/inc/fleetservice-functions.php';
-require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
+//require get_template_directory() . '/inc/wp-bootstrap-navwalker-toggle-hover.php';
+//require get_template_directory() . '/inc/wp-bootstrap-navwalker-dropdown-click.php';
+require get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';

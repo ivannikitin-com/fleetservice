@@ -18,20 +18,19 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 } ?>
-<nav class="aside_menu clearfix" role="navigation">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<!--<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="sr-only">Меню</span>
-						<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
-					</button>-->
-					<div class="aside_title"><?php echo _e('Cataloge','fleetservice'); ?></div>
+			<div class="aside_title"><?php echo _e('Cataloge','fleetservice'); ?></div>
+			<nav class="aside_menu  navbar navbar-expand-lg" role="navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 					<?php wp_nav_menu( array(
 						'menu'				=> 'Catalog Menu',
-						'depth'				=> 3, // 1 = with dropdowns, 0 = no dropdowns.
+						'depth'				=> 4, // 1 = with dropdowns, 0 = no dropdowns
 						'container'			=> 'div',
-						'container_class'	=> '',
+						'container_class'	=> 'collapse navbar-collapse',
 						'container_id'		=> 'sidebar-menu',
-						'menu_class'		=> 'nav nav-stacked',
+						'menu_class'		=> 'nav nav-stacked flex-column',
+						'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
 						'fallback_cb'		=> 'WP_Bootstrap_Navwalker::fallback',
 						'walker'			=> new WP_Bootstrap_Navwalker()
 					) );?>
