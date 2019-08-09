@@ -118,7 +118,7 @@ $short_information_title = get_field('short_information_title');
 $slogun_icon = get_field('slogun_icon');
 $slogun_text = get_field('slogun_text');
 $front_page_content = get_the_content();
-$more_info_lnk = get_field('more_info_lnk');
+$more_info_link = get_field('more_info_link');
 if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?> 
 <section class="about-us" style="background-color: #fff;">	
 	<div class="container">
@@ -147,8 +147,8 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 				<div class="about-us-main_txt">				
 				<?php echo the_content(); ?>
 				</div>
-				<?php if ($more_info_lnk) { ?>
-				<a href="<?php echo $more_info_lnk; ?>" class="more"><?php _e('More','fleetservice'); ?></a>
+				<?php if ($more_info_link) { ?>
+				<a href="<?php echo $more_info_link; ?>" class="more"><?php _e('Узнать больше','fleetservice'); ?></a>
 				<?php } ?>
 				<?php } ?>
 			</div>

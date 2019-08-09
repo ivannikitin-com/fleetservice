@@ -209,7 +209,41 @@ function fleet_single_wishlist_lnk(){
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
 add_action('woocommerce_single_product_summary','fleet_loop_sku',9 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+add_action( 'woocommerce_single_product_summary', 'fleet_buy_in_1_click', 31 );
+function fleet_buy_in_1_click(){ ?>
+	<a href="#modalOneClick" class="button btn_brd_light-blue-green oneclickbuy" data-toggle="modal"><?php _e('Купить в 1 клик','fleetservice'); ?></a>
+	<div id="modalOneClick" class="modal hide fade" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header"><div class="form_title"><?php _e('Купить в 1 клик','fleetservice');?></div><button class="close" type="button" data-dismiss="modal">&times;</button></div><!--/.modal-header-->
+				<div class="modal-body">
+					<?php echo do_shortcode('[contact-form-7 id="6810" title="Купить в 1 клик" html_id="oneclickform"]'); ?>
+				</div><!--/.modal-body-->
+			</div><!--/.modal-content-->
+		</div><!--/.modal-dialog-->
+	</div><!--/#modalOneClick-->
+<?php }
+
+//Определяем ключ для хранения данных
+define( 'CF7_COUNTER', 'cf7-counter' );
+     
+//Создаем шорткод, который устанавливает значение для поля Dynamic Text Extension
+function cf7dtx_counter(){
+	$val = get_option( CF7_COUNTER, 0) + 1;  //Увеличиваем текущее значение на 1;
+	return $val;
+}
+add_shortcode('CF7_counter', 'cf7dtx_counter');
+     
+//Включаем счетчик в работу если письмо было действительно отправлено
+function cf7dtx_increment_mail_counter(){
+	$val = get_option( CF7_COUNTER, 0) + 1; //Увеличиваем текущее значение на 1
+		update_option(CF7_COUNTER, $val); //Обновляем параметры в базе данных
+			return true;
+}
+add_action('wpcf7_mail_sent', 'cf7dtx_increment_mail_counter');
+
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 35 );
+
 add_filter( 'woocommerce_output_related_products_args', 'fleet_related_products_args' );
  function fleet_related_products_args( $args ) {
  
@@ -219,3 +253,23 @@ $args['posts_per_page'] = 10; // количество "Похожих товар
 add_filter( 'woocommerce_product_description_heading',function(){ return ''; } );
 add_filter( 'woocommerce_product_additional_information_heading',function(){ return ''; } );
 add_filter( 'woocommerce_reviews_title', function(){ return ''; } );
+add_filter('comment_form_fields', 'fleet_reorder_comment_fields' );
+function fleet_reorder_comment_fields( $fields ){
+	//die(print_r( $fields )); // посмотрим какие поля есть
+
+	$new_fields = array(); // сюда соберем поля в новом порядке
+
+	$myorder = array('author','email','comment'); // нужный порядок
+
+	foreach( $myorder as $key ){
+		$new_fields[ $key ] = $fields[ $key ];
+		unset( $fields[ $key ] );
+	}
+
+	// если остались еще какие-то поля добавим их в конец
+	if( $fields )
+		foreach( $fields as $key => $val )
+			$new_fields[ $key ] = $val;
+
+	return $new_fields;
+}
