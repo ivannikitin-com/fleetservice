@@ -68,6 +68,7 @@
 								) );
 								?>
 							</div><!--/.collapse-->
+						</div><!--/.row-->
 					</nav><!--/.nav-main-->
 
 					<div class="block-links">
@@ -111,7 +112,13 @@
 			</div><!--/.row-->
 		</div><!--/.container-->
 	</header><!-- #masthead -->
-
+	<div class="breadcrumbs">
+		<div class="container">
+		<?php if ( function_exists('yoast_breadcrumb') ) {
+		  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+		} ?>
+		</div><!--/.container-->
+	</div><!--/.breadcrumbs-->
 	<div id="content" class="site-content">
 		
 

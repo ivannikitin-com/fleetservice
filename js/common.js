@@ -44,6 +44,26 @@
 				}
 			}
 		})
+		$(".related.products .owl-carousel, .up-sells.products .owl-carousel").owlCarousel ({
+			nav: true,
+			margin: 30,
+			navText: false,
+			autoHeight:true,
+			responsive: {
+				0:{
+					items: 1
+				},
+				768:{
+					items: 2
+				},				
+				992:{
+					items: 3
+				},
+				1199:{
+					items: 4
+				}
+			}
+		})		
 		$('#menu-catalog-menu .menu-item.current-menu-ancestor > .collapse-menu.collapse').addClass('show');
 		/*function toggleDropdownon (e) {
 		  const _d = $(this),

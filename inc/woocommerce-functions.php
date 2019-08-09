@@ -1,6 +1,9 @@
 <?php 
-add_action( 'after_setup_theme', 'artabr_theme_setup' );
-function artabr_theme_setup() {
+/*******************
+*Common Settings
+*******************/
+add_action( 'after_setup_theme', 'fleet_theme_setup' );
+function fleet_theme_setup (){
 	add_theme_support( 'woocommerce' );
 	//add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
@@ -18,7 +21,7 @@ remove_action( 'woocommerce_after_main_content','woocommerce_output_content_wrap
 add_action( 'woocommerce_after_main_content','fleet_woocommerce_main_content_wrapper_end' ,10 );
 function fleet_woocommerce_main_content_wrapper_end() { ?>
 	</div><!--/end col primary-->
-<div class="col-md-3 order-1">
+	<div class="col-md-3 order-1">
 <?php }
 add_action( 'woocommerce_sidebar','fleet_woocommerce_all_content_wrapper_end', 99 );
 function fleet_woocommerce_all_content_wrapper_end() { ?>
@@ -26,6 +29,7 @@ function fleet_woocommerce_all_content_wrapper_end() { ?>
 </div><!--/.row-->
 </div><!--/.container-->
 <?php }
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
 /*******************
 *Product category
 *******************/
@@ -101,7 +105,7 @@ function fleet_sorting_wrapper() {
 }
 
 function fleet_sorting_wrapper_close() {
-	echo '</div>';
+	echo '</div><!--/.fleet-sorting-->';
 }
 
 add_action( 'woocommerce_before_shop_loop_item','fleet_wish_compare_buttons',5 );
@@ -148,7 +152,12 @@ function fleet_product_subcategories( $args = array() ) {
 	$args = array(
 	'parent' => $parentid
 	);
-	$terms = get_terms( 'product_cat', $args );
+	$taxonomy= get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+	if ($taxonomy) {
+		$terms = get_terms( $taxonomy->taxonomy, $args );
+	} else {
+		$terms = get_terms( 'product_cat', $args );
+	}
 	if ( $terms ) {
 	echo '<ul class="product-cats">';
 		foreach ( $terms as $term ) {
@@ -159,26 +168,39 @@ function fleet_product_subcategories( $args = array() ) {
 
 		echo '<h3>'.$term->name.'</h3>';
 		echo '</a>';
+		echo '</li>';
 		}
 	echo '</ul>';
 	}
 }
-add_action( 'woocommerce_before_shop_loop', 'fleet_product_subcategories', 50 );
-/*Whishlist*/
+add_action( 'woocommerce_before_shop_loop', 'fleet_product_subcategories', 1 );
+
+/*******************
+*Whishlist page
+*******************/
 add_filter( 'tinvwl_default_wishlist_title','fleet_default_wishlist_title' );
 function fleet_default_wishlist_title($wishlist_title){
 	return '';
 }
+
 /*******************
 *Single product page
 *******************/
+add_filter( 'prdctfltr_show_filter', 'fleet_hide_filter_on_category_function_jkbg4iu3b' );
+
+function fleet_hide_filter_on_category_function_jkbg4iu3b() {
+ if ( is_singular( 'product' ) ) {
+  return false;
+ }
+ return true;
+}
 add_filter( 'woocommerce_product_thumbnails_columns','fleet_single_product_thumbnails_columns');
 function fleet_single_product_thumbnails_columns($columns){
 	return 3;
 }
 add_action( 'pwb_before_single_product_brands','fleet_single_product_brands_label');
 function fleet_single_product_brands_label(){
-	echo '<div class="single-product-brand-label">'._e('Производитель:','fleetservice').'</div>';
+	echo '<div class="single-product-brand-label">'.__('Производитель:','fleetservice').'</div>';
 }
 add_action('woocommerce_single_product_summary','fleet_single_wishlist_lnk',8);
 function fleet_single_wishlist_lnk(){
@@ -188,3 +210,12 @@ remove_action('woocommerce_single_product_summary','woocommerce_template_single_
 add_action('woocommerce_single_product_summary','fleet_loop_sku',9 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 35 );
+add_filter( 'woocommerce_output_related_products_args', 'fleet_related_products_args' );
+ function fleet_related_products_args( $args ) {
+ 
+$args['posts_per_page'] = 10; // количество "Похожих товаров"
+ return $args;
+}
+add_filter( 'woocommerce_product_description_heading',function(){ return ''; } );
+add_filter( 'woocommerce_product_additional_information_heading',function(){ return ''; } );
+add_filter( 'woocommerce_reviews_title', function(){ return ''; } );

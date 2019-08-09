@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'walker'			=> new WP_Bootstrap_Navwalker()
 					) );?>
 			</nav>
-			<div class="aside_title"><?php echo _e('Filter','fleetservice'); ?><div>
+			<div class="aside_title"><?php echo _e('Filter','fleetservice'); ?></div>
 <?php   get_sidebar( 'shop' );
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
