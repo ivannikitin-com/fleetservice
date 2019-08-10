@@ -61,6 +61,11 @@
 		}
 	}
 
+	.woocommerce table.shop_table_responsive tr:nth-child(2n) td,
+	.woocommerce-page table.shop_table_responsive tr:nth-child(2n) td {
+		background-color: $grey;
+	}
+
 }
 
 // ≥576px

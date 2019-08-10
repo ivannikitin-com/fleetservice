@@ -569,8 +569,8 @@ a.more {
 
 .button,
 .woocommerce a.button, 
-.woocommerce button.button, 
-.woocommerce input.button, .oneclickbuy,
+.woocommerce button.button,
+.woocommerce input.button, .oneclickbuy, 
 .woocommerce-cart .wc-proceed-to-checkout a.checkout-button {
 	display: inline-block;
 	font-size: 13px;
@@ -1878,7 +1878,7 @@ ul.tabs li {
 }
 
 
-/*Корзина*/
+/*Корзина и оформление*/
 .woocommerce {
 	/*.wrap_title_cart {
 		padding-bottom: 8px;
@@ -1914,6 +1914,17 @@ ul.tabs li {
 					color: $white !important;
 				}
 			}
+			
+			&.product-price, &.product-subtotal {
+				font-family: $secondary-font;
+				font-weight: bold;
+				font-size: 16px;
+			}
+		}
+		&.cart {
+			tbody td {
+				padding: 30px 14px;
+			}
 		}
 	}
 
@@ -1938,7 +1949,7 @@ ul.tabs li {
 
 					tr {
 						th, td {
-							padding: 9px 14px 4px;
+							padding: 4px 14px;
 							line-height: 1.3em;
 
 						}
@@ -1960,13 +1971,28 @@ ul.tabs li {
 				}
 			}
 		}
+	}
+	table.cart td.product-quantity .qib-button {
+		background: $white;
+		color: $black-three;
+		border-color: $silver;
 
+		&:hover {
+			background: $black-three;
+			color: $white;
+		}
 	}
 }
 
-.woocommerce-cart .wc-proceed-to-checkout a.checkout-button {
-	width: 100%;
-	max-width: 235px;
+.woocommerce-cart {
+	.wc-proceed-to-checkout a.checkout-button {
+		width: 100%;
+		max-width: 235px;
+	}
+	table.cart img {
+		width: 100px;
+	}
+
 }
 
 
