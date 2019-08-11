@@ -111,6 +111,7 @@
 		grid-template-columns: 1fr 1fr;
 		grid-column-gap: $grid-gutter-width;
 		grid-row-gap: $grid-gutter-width;
+
 		.news & {
 			grid-template-rows: 1fr 1fr 1fr;
 		}
@@ -125,6 +126,11 @@
 	#slider_main .slider-item-descr {
 		font-size: 60px;
 		line-height: 60px;
+	}
+
+	.woocommerce table.shop_table.cart tbody td {
+		padding-top: 30px;
+		padding-bottom: 30px;
 	}
 
 }
@@ -178,9 +184,12 @@
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}
-	.wrap_table {		
-		padding: 55px 0 50px;
+
+	.woocommerce .row .cart-collaterals .cart_totals .wrap_table {		
+		padding-top: 55px;
+		padding-bottom: 50px;
 	}
+
 }
 
 // ≤1200px
@@ -200,6 +209,10 @@
 		th.woocommerce-product-attributes-item__label{
 			width: 42.5%;
 		}
+	}
+	
+	.coupon {
+		max-width: 91.66667%;
 	}
 
 }
