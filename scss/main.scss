@@ -579,6 +579,7 @@ a.more {
 	text-transform: uppercase;
 	padding: 13px 4px;
 	line-height: 1;
+	white-space: nowrap;
     font-weight: normal;
     text-shadow: none;
     outline: 0;
@@ -605,7 +606,8 @@ button:focus, .button:focus {
 	}
 }
 
-.btn_brd_light-blue-green {
+.btn_brd_light-blue-green,
+.return-to-shop .button.wc-backward {
 	background-color: transparent;
 	border: 1px solid $light-blue-green;
 	color: $light-blue-green;
@@ -647,6 +649,10 @@ button:focus, .button:focus {
 		color: $white;
 	}
 
+}
+
+.return-to-shop .button.wc-backward {
+	width: 205px;
 }
 
 form {
@@ -1916,7 +1922,7 @@ ul.tabs li {
 				}
 			}
 			
-			&.product-price, &.product-subtotal {
+			&.product-price span, &.product-subtotal {
 				font-family: $secondary-font;
 				font-weight: bold;
 				font-size: 16px;
@@ -1924,9 +1930,13 @@ ul.tabs li {
 		}
 
 		&.cart {
-			tbody td {
+			th {
+				text-transform: uppercase;
+				text-align: center;
+			}
+			tbody tr.cart_item td {
 				padding-left: 15px;
-				padding-right: 15px;
+				padding-right: 15px;				
 			}
 
 			.product-thumbnail {
@@ -1948,11 +1958,14 @@ ul.tabs li {
 				width: 100px;
 			}
 			
-			td.actions {							
+			td.actions {
+				padding: 35px 0 0 0;
+				background: none;
+
 				.coupon {
 					width: 100%;
 					background: $pale-grey;
-					padding: 30px;
+					padding: 30px !important;
 						
 					input#coupon_code.input-text {
 						border: 1px solid $silver;
@@ -1961,6 +1974,7 @@ ul.tabs li {
 						width: 60.5%;
 						margin: 0;
 					}
+
 					button.button {
 						width: 38.5%;
 					}
