@@ -1886,99 +1886,141 @@ ul.tabs li {
 
 
 /*Корзина*/
-.woocommerce-cart {	
-	.wc-proceed-to-checkout a.checkout-button {
-		width: 100%;
-		max-width: 235px;
-	}
+.woocommerce-cart {
+	#content {
 
-	table.shop_table {
-		border-radius: 0;
-		border: 0;
-		line-height: 1.3em;
-
-		th {
-			font-size: 13px;
-			font-weight: 400;
-			text-transform: uppercase;
-			line-height: 1.3em;
-		}		
-
-		td {
-			&.product-name {
-				font-size: 16px;
-				line-height: 1.3em;
-					
-				a {
-					color: $black-three;
-				}
-			}
-			a.remove {
-				color: $blue-green !important;
-
-				&:hover {
-					background: $light-blue-green;
-					color: $white !important;
-				}
-			}
-			
-			&.product-price span, &.product-subtotal {
-				font-family: $secondary-font;
-				font-weight: bold;
-				font-size: 16px;
-			}
+		.wc-proceed-to-checkout a.checkout-button {
+			width: 100%;
+			max-width: 235px;
 		}
 
-		&.cart {
+		table.shop_table {
+			border-radius: 0;
+			border: 0;
+			line-height: 1.3em;
+
 			th {
+				font-size: 13px;
+				font-weight: 400;
 				text-transform: uppercase;
-				text-align: center;
-			}
-			tbody tr.cart_item td {
-				padding-left: 15px;
-				padding-right: 15px;				
-			}
+				line-height: 1.3em;
+			}		
 
-			.product-thumbnail {
-				min-width: 100px;
-			}
+			td {
+				&.product-name {
+					font-size: 16px;
+					line-height: 1.3em;
+						
+					a {
+						color: $black-three;
+					}
+				}
+				a.remove {
+					color: $blue-green !important;
 
-			td.product-quantity .qib-button {
-				background: $white;
-				color: $black-three;
-				border-color: $silver;
-		
-				&:hover {
-					background: $black-three;
-					color: $white;
+					&:hover {
+						background: $light-blue-green;
+						color: $white !important;
+					}
+				}
+				
+				&.product-price span, &.product-subtotal {
+					font-family: $secondary-font;
+					font-weight: bold;
+					font-size: 16px;				
 				}
 			}
 
-			img {
-				width: 100px;
-			}
+			&.cart {
+				.woocommerce-Price-currencySymbol {
+					display: none;
+				}
+
+				th {
+					text-transform: uppercase;
+					text-align: center;
+				}
+
+				tbody tr.cart_item td {
+					padding-left: 15px;
+					padding-right: 15px;				
+				}
+
+				.product-thumbnail {
+					min-width: 100px;
+				}
+
+				td.product-quantity .qib-button {
+					background: $white;
+					color: $black-three;
+					border-color: $silver;
 			
-			td.actions {
-				padding: 35px 0 0 0;
-				background: none;
-
-				.coupon {
-					width: 100%;
-					background: $pale-grey;
-					padding: 30px !important;
-						
-					input#coupon_code.input-text {
-						border: 1px solid $silver;
-						height: 38px;
-						background: $white;
-						width: 60.5%;
-						margin: 0;
+					&:hover {
+						background: $black-three;
+						color: $white;
 					}
+				}
 
-					button.button {
-						width: 38.5%;
+				img {
+					width: 100px;
+				}
+				
+				td.actions {
+					padding: 35px 0 0 0;
+					background: none;
+
+					.coupon {
+						width: 100%;
+						background: $pale-grey;
+						padding: 30px;
+
+						.coupon_title {
+							text-transform: uppercase;
+							text-align: left;
+							margin: 12px 0 28px;
+						}
+
+						label {
+							display: block !important;
+							font-size: 16px;
+							text-align: left;
+							margin-bottom: 12px;
+						}
+							
+						input#coupon_code.input-text {
+							border: 1px solid $silver;
+							height: 38px;
+							background: $white;
+							width: 60.5%;
+							margin: 0;
+
+							&::placeholder {
+								opacity: 0;
+							}
+
+							&::-webkit-input-placeholder {							
+								opacity: 0;
+							}
+
+							&::-moz-placeholder {							
+								opacity: 0;
+							}
+
+							&:-ms-input-placeholder {							
+								opacity: 0;
+							}
+
+							&::-ms-input-placeholder {							
+								opacity: 0;
+							}
+
+						}
+
+						button.button {
+							width: 38.5%;
+						}
+
 					}
-
 				}
 			}
 		}
@@ -2034,6 +2076,9 @@ ul.tabs li {
 				}
 			}
 		}
+	}
+	.wc-proceed-to-checkout {
+		padding-top: 30px;
 	}
 }
 
