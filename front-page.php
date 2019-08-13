@@ -27,7 +27,7 @@
 </section><!--/#slider_main-->
 <?php endif; ?>
 
-<section class="catalog" style="background-color: #f5f8fa;">
+<section class="catalog">
 	<div class="container">
 		<?php $catalog_section_title =  get_field ('catalog_section_title');
 		if ($catalog_section_title) { ?>
@@ -63,7 +63,7 @@
 	</div><!--/.container-->
 </section><!--/.catalog-->
 
-<section class="brands" style="background-color: #fff;">
+<section class="brands">
 	<div class="container">
 		<?php $brand_section_title =  get_field ('brand_section_title');
 		if ($brand_section_title) { ?>
@@ -90,7 +90,7 @@ $args=array(
 );
 $products=new WP_query( $args );
 if ( $products->have_posts() ) : ?>
-<section class="bestsellers" style="background: #f5f8fa;">
+<section class="bestsellers">
 	<div class="container">
 		<?php $products_section_title =  get_field ('products_section_title');
 		if ($products_section_title) { ?>
@@ -120,7 +120,7 @@ $slogun_text = get_field('slogun_text');
 $front_page_content = get_the_content();
 $more_info_lnk = get_field('more_info_lnk');
 if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?> 
-<section class="about-us" style="background-color: #fff;">	
+<section class="about-us">	
 	<div class="container">
 		<div class="row justify-content-between">
 			<?php if ($short_information_img) { ?>
@@ -159,7 +159,7 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 
 <?php if( have_rows('front_page_testimonials') ): ?>
 <!--ОТЗЫВЫ -->
-<section class="reviews" style="background-color: #f5f8fa;">
+<section class="reviews">
 	<div class="container">
 		<?php $testimonials_section_title =  get_field ('testimonials_section_title');
 		if ($testimonials_section_title) { ?>
@@ -195,7 +195,7 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 $news_posts = new WP_Query( $args );
 if ($news_posts): ?> 
 <!-- НОВОСТИ -->
-<section class="news" style="background-color: #fff;">	
+<section class="news">	
 	<div class="container">
 		<?php $news_section_title = get_field('news_section_title');
 		if ($news_section_title) { ?>
