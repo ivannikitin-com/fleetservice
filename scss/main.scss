@@ -714,8 +714,11 @@ section {
 	background: $pale-grey;
 
 	.section-title {
+		font-size: 30px;
+		line-height: 33px;
 		margin-bottom: 0;
 	}
+
 	.title-item {
 		display: inline-block;
 		color: $black-three;
@@ -778,36 +781,45 @@ section {
 				}
 			}
 		}
+
 		.catalog-item-link:hover .icon {
 			color: $light-blue-green;
+
 			svg {
 				stroke: currentColor;
 			}
 		}
+
 		&.item-1 .icon svg {
 			width: 69px;
 			height: 69px;
 		}
+
 		&.item-2 .icon svg {
 			width: 72px;
 			height: 63px;
-		}		
+		}
+
 		&.item-3 .icon svg {
 			width: 75px;
 			height: 75px;
-		}		
+		}
+
 		&.item-4 .icon svg {
 			width: 54px;
 			height: 50px;
 		}
+
 		&.item-5 .icon svg {
 			width: 72px;
 			height: 44px;
 		}
+
 		&.item-6 .icon svg {
 			width: 54px;
 			height: 39px;
 		}
+
 		&.item-7 .icon svg {
 			width: 54px;
 			height: 44px;
@@ -817,6 +829,12 @@ section {
 
 .brands {
 	background: $white;
+
+	.section-title {
+		font-size: 24px;
+		line-height: normal;
+		margin-bottom: 9px;
+	}
 
 	.brands-list {
 		border-top: 1px solid $grey;
@@ -867,12 +885,14 @@ section {
 /*Slider HOME*/
 #slider_main {
 	padding: 0;
+
 	a.slider-item {
 
 		&:hover {
 			text-decoration: none;
 		}
 	}
+
 	.slider-item {
 		display: block;
 		height: 534px;
@@ -885,6 +905,7 @@ section {
 			text-transform: uppercase;
 			color: $white;
 		}
+
 		&-descr {
 			font-family: $secondary-font;
 			color: $white;
@@ -892,6 +913,7 @@ section {
 			line-height: 30px;
 			margin-top: auto; /* Размещает текст снизу слайдера */
 		}
+
 		&-date {
 			display: inline-block;
 			font-family: $secondary-font;
@@ -905,6 +927,7 @@ section {
 				padding-top: 10px;
 			}
 		}
+
 		.container {
 			height: 100%;
 			padding-top: 100px;
@@ -913,12 +936,14 @@ section {
 				height: 100%;
 			}
 		}
+
 		&-content {
 			display: flex;
 			flex-direction: column;
 			height: 100%;
 		}
 	}
+
 	.owl-dots { 
 		position: absolute;
 		display: flex;
@@ -926,9 +951,11 @@ section {
 		right: 16.667%;
 		top: 50%;
 		margin-top: 0;
+
 		.owl-dot {
 			zoom: 1;
-			display: inline-block	
+			display: inline-block;
+
 			span {
 				display: block;
 				width: 10px;
@@ -939,6 +966,7 @@ section {
 				transition: opacity .2s ease;
 			}
 		}
+
 		& .owl-dot.active span, & .owl-dot:hover span {
 			background: $white;
 		}
@@ -951,15 +979,19 @@ section {
 			display: inline-block;
 			width: 10px;
 			height: 18px;
+
 			&.owl-prev {
 				background: url(../img/sprite.png) no-repeat 0 -139px;
+
 				&.disabled {
 					background-position: 0 -171px;
 				}
 			}
+
 			&.owl-next {
 				background: url(../img/sprite.png) no-repeat -90px -139px;
 				margin-left: 10px;
+
 				&.disabled {
 					background-position: -90px -171px;
 				}
@@ -1093,6 +1125,12 @@ ul li.product::before  {
 /*Список товаров на Главной (карусель)*/
 .bestsellers {
 	background: $pale-grey;
+
+	.section-title {
+		font-size: 30px;
+		line-height: normal;
+		margin-bottom: 12px;
+	}
 
 	&-list {
 		border-top: 1px solid $grey;
@@ -1669,6 +1707,11 @@ ul li.product::before  {
 
 /*Новости*/
 .news {
+
+	.section-title {
+		font-size: 30px;
+		line-height:33px;
+	}
 
 	.home & {
 		background: $white;
