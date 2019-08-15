@@ -137,7 +137,9 @@ function fleet_li_inner_wrap_close() {
 add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_sku' );
 function fleet_loop_sku(){ 
 	global $product;?>
-	<div class="sku_wrapper"><?php _e('SKU','woocommerce'); ?>: <span class="sku"><?php echo ($product->get_sku())? $product->get_sku():''; ?></span></div>
+	<?php if ( wc_product_sku_enabled() && ( $product->get_sku() || $product->is_type( 'variable' ) ) ) : ?>
+		<span class="sku_wrapper"><?php esc_html_e( 'SKU:', 'woocommerce' ); ?> <span class="sku"><?php echo ( $sku = $product->get_sku() ) ? $sku : ''; ?></span></span>
+	<?php endif; ?>
 <?php }
 add_action( 'woocommerce_after_shop_loop_item','fleet_loop_quick_view',9 );
 function fleet_loop_quick_view() { ?>
@@ -209,10 +211,18 @@ function fleet_single_wishlist_lnk(){
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
 add_action('woocommerce_single_product_summary','fleet_loop_sku',9 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-add_action( 'woocommerce_single_product_summary', 'fleet_buy_in_1_click', 31 );
+add_action( 'woocommerce_before_add_to_cart_quantity', 'fleet_buy_buttons_wrap_open', 99 );
+function fleet_buy_buttons_wrap_open(){ ?>
+	<div class="buy_block">
+<?php }
+add_action( 'woocommerce_after_add_to_cart_button', 'fleet_buy_in_1_click', 1 );
 function fleet_buy_in_1_click(){ ?>
 	<a href="#modalOneClick" class="button btn_brd_light-blue-green oneclickbuy" data-toggle="modal"><?php _e('Купить в 1 клик','fleetservice'); ?></a>
-	<div id="modalOneClick" class="modal hide fade" aria-labelledby="myModalLabel" aria-hidden="true">
+	</div><!--/.buy_block-->
+<?php }
+add_action( 'woocommerce_after_single_product', 'fleet_form_one_click_html', 99 );
+function fleet_form_one_click_html(){ ?>
+		<div id="modalOneClick" class="modal hide fade" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header"><div class="form_title"><?php _e('Купить в 1 клик','fleetservice');?></div><button class="close" type="button" data-dismiss="modal">&times;</button></div><!--/.modal-header-->
@@ -255,8 +265,10 @@ add_filter( 'woocommerce_product_additional_information_heading',function(){ ret
 add_filter( 'woocommerce_reviews_title', function(){ return ''; } );
 add_filter('comment_form_fields', 'fleet_reorder_comment_fields' );
 function fleet_reorder_comment_fields( $fields ){
-	//die(print_r( $fields )); // посмотрим какие поля есть
-
+	$fields['comment'] = '<div class="row"><div class="col-lg-12">'.$fields['comment'].'</div><!--/.col-lg-12--></div><!--/.row-->';
+	$fields['author'] = '<div class="row"><div class="col-lg-6">'.$fields['author'].'</div><!--/.col-lg-6-->';
+	$fields['email'] = '<div class="col-lg-6">'.$fields['email'].'</div><!--/.col-lg-6--></div><!--/.row-->';
+	unset( $fields['cookies']);
 	$new_fields = array(); // сюда соберем поля в новом порядке
 
 	$myorder = array('author','email','comment'); // нужный порядок
@@ -273,3 +285,4 @@ function fleet_reorder_comment_fields( $fields ){
 
 	return $new_fields;
 }
+add_filter( 'woocommerce_reset_variations_link', function(){ return ''; } );
