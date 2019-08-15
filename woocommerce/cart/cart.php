@@ -33,9 +33,9 @@ defined( 'ABSPATH' ) || exit;
 						<th class="product-remove">&nbsp;</th>
 						<th class="product-thumbnail">&nbsp;</th>
 						<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-						<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+						<th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?><?php echo '</br>(руб.)'; ?></th>
 						<th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
-						<th class="product-subtotal"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
+						<th class="product-subtotal"><?php esc_html_e( 'Total', 'woocommerce' ); ?><?php echo '</br>(руб.)'; ?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,8 +138,8 @@ defined( 'ABSPATH' ) || exit;
 
 							<?php if ( wc_coupons_enabled() ) { ?>
 								<div class="coupon">
-									<h2 class="coupon_title">Персональная скидка</h2>
-									<label for="coupon_code"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'woocommerce' ); ?>" /> <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
+									<h2 class="coupon_title"><?php _e('Персональная скидка','fleetservice'); ?></h2>
+									<label for="coupon_code"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="" /> <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
 									<?php do_action( 'woocommerce_cart_coupon' ); ?>
 								</div>
 							<?php } ?>
@@ -157,6 +157,10 @@ defined( 'ABSPATH' ) || exit;
 			</table>
 			<?php do_action( 'woocommerce_after_cart_table' ); ?>
 		</form>
+
+		<p class="return-to-shop">
+			<a class="button wc-backward" href="http://fleetserviceru.local/shop/"><?php _e('Вернуться в магазин','woocommerce');?></a>
+		</p>
 
 		</div><!--/.end col-->
 
