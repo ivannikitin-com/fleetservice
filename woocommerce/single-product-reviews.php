@@ -63,7 +63,7 @@ if ( ! comments_open() ) {
 
 				$comment_form = array(
 					/* translators: %s is product title */
-					'title_reply'         => have_comments() ? __( 'Add a review', 'woocommerce' ) : sprintf( __( 'Be the first to review &ldquo;%s&rdquo;', 'woocommerce' ), get_the_title() ),
+					'title_reply'         => __( 'Add a review', 'woocommerce' ),
 					/* translators: %s is product title */
 					'title_reply_to'      => __( 'Leave a Reply to %s', 'woocommerce' ),
 					'title_reply_before'  => '<span id="reply-title" class="comment-reply-title">',

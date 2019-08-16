@@ -152,7 +152,7 @@ function fleetservice_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-	if (is_product()) {
+	if (is_woocommerce()) {
 		wp_enqueue_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array('jquery'), null, true );
 		wp_enqueue_style( 'select2', plugins_url() . '/woocommerce/assets/css/select2.css',  null, true );
 	}		

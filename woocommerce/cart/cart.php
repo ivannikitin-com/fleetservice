@@ -136,7 +136,7 @@ defined( 'ABSPATH' ) || exit;
 					<tr>
 						<td colspan="6" class="actions">
 
-							<?php if ( wc_coupons_enabled() ) { ?>>
+							<?php if ( wc_coupons_enabled() ) { ?>
 								<div class="coupon">
 									<h2 class="coupon_title"><?php _e('Персональная скидка','fleetservice'); ?></h2>
 									<label for="coupon_code"><?php esc_html_e( 'Coupon:', 'woocommerce' ); ?></label> <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="" /> <button type="submit" class="button" name="apply_coupon" value="<?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?>"><?php esc_attr_e( 'Apply coupon', 'woocommerce' ); ?></button>
@@ -158,7 +158,9 @@ defined( 'ABSPATH' ) || exit;
 			<?php do_action( 'woocommerce_after_cart_table' ); ?>
 		</form>
 
-		<a href="/shop/" class="button btn_brd_light-blue-green "><?php echo __('Вернуться в магазин','fleetservice'); ?></a>
+		<p class="return-to-shop">
+			<a class="button wc-backward" href="http://fleetserviceru.local/shop/"><?php _e('Вернуться в магазин','woocommerce');?></a>
+		</p>
 
 		</div><!--/.end col-->
 

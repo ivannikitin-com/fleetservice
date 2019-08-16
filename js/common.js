@@ -89,12 +89,27 @@
 		$('body')
 		  .on('mouseenter','a.collapse',toggleDropdownon)
 		  .on('mouseleave','a.collapse',toggleDropdownoff);*/
+/*$('.collapse-menu a[data-toggle="collapse"').on('hover', function(e) {
+	  if (!$(this).next().hasClass('show')) {
+		$(this).parents('.collapse-menu').first().find('.show').removeClass("show");
+	  }*/
+	  /*var $subMenu = $(this).next(".collapse-menu");
+	  $subMenu.toggleClass('show');*/
+
+	  /*$(this).parents('li.dropdown.nav-item.show').on('hidden.bs.dropdown', function(e) {
+		$('.dropdown-submenu .show').removeClass("show");
+	  });
+
+	  return false;
+	});	*/	
+		$('li.menu-item.active').parents('collapse-menu').show();
 		$('a.collapse').mouseenter(function()
 			 {
-			 _n = $(this).next('.collapse-menu');	
-			 _n.css("display")!="block"?
-			 _n.show():
-			 _n.hide()
+			 console.log('menu a.collapse hover event');
+			 _next = $(this).next('.collapse-menu');	
+			 _next.addClass('show');
+			 _others=_next.parents('li.menu-item').first().siblings().children('.collapse-menu');
+			 /*_others.removeClass('show');*/
 			});
 		$('.oneclickbuy').click(function(){
 			var variation_id = $('form#oneclickform.variations_form input[name=variation_id]').val();
