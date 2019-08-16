@@ -111,7 +111,15 @@
 			</div><!--/.row-->
 		</div><!--/.container-->
 	</header><!-- #masthead -->
-
+	<?php if (!is_front_page()) { ?>
+	<div class="breadcrumbs">
+		<div class="container">
+		<?php if ( function_exists('yoast_breadcrumb') ) {
+		  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+		} ?>
+		</div><!--/.container-->
+	</div>
+	<?php } ?>
 	<div id="content" class="site-content">
 		
 

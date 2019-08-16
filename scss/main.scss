@@ -511,6 +511,7 @@ body:not(.home) .site-content {
 			background: $steel-grey;
 			width: 12px;
 			height: 22px;
+			top: 30px;
 		}
 
 		.irs-grid-text {
@@ -523,11 +524,131 @@ body:not(.home) .site-content {
 
 	}
 
-	.prdctfltr_filter label {
-		font-size: 14px;
+}
+
+aside .prdctfltr-widget .prdctfltr_wc .prdctfltr_woocommerce_ordering .prdctfltr_filter {
+	padding-bottom: 30px;
+
+	&[data-filter="rng_price"] {
+		padding-bottom: 0;
 	}
 }
-	
+
+.woocommerce {
+	.prdctfltr_filter {
+		border-bottom: 1px solid $grey;
+		
+		label {
+			font-size: 14px;
+			color: $zambezi;
+			line-height: normal;
+		}
+
+	}
+
+	.prdctfltr_wc.prdctfltr_checkbox .prdctfltr_filter label>span {
+		display: flex;
+		align-items: flex-start;		
+		line-height: normal;
+
+		&::before {
+			flex: 0 0 20px;
+			width: 20px;
+			height: 20px;
+			border: 1px solid $whisper;
+			margin: 0 12px 6px 0;
+		}
+
+	}
+
+	.prdctfltr_wc.prdctfltr_checkbox .prdctfltr_filter label.prdctfltr_active>span:after {
+		top: 2px;
+		left: 5px;
+	}
+
+	.prdctfltr_checkboxes .pf_more {
+		opacity: 1;
+		color: $blue-green;
+		font-size: 13px!important;
+		text-transform: uppercase;
+		margin-top: 12px;
+
+		span {			
+			text-decoration: underline;
+
+			&::before {
+				display: none;
+			}
+		}
+
+		&:hover span {
+			text-decoration: none;
+
+		}
+	}
+}
+
+.prdctfltr_wc.prdctfltr_wc_widget .prdctfltr_woocommerce_filter_submit {
+	@extend %btn_brd_whisper;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 263px;
+	width: 100%;
+	height: 38px;	
+	margin-right: 0 !important;
+
+	&::before {
+		content: '';
+		display: inline-block;		
+		flex: 0 0 13px;
+		width: 13px;
+		height: 14px;
+		background: url(../img/sprite.png) no-repeat -38px -250px;
+		vertical-align: middle;
+		margin: 1px 8px 0 0;
+	}
+
+	&:hover::before {
+		background-position: -38px -226px;
+	}
+}
+
+.prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons span.prdctfltr_reset {
+	@extend %btn_brd_whisper;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 263px;
+	width: 100%;
+	height: 38px;
+	margin-right: 0 !important;	
+	transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+
+	label {
+		font-size: 13px;
+		color: $dark-grayish;
+		text-transform: uppercase;
+		width: 100%;
+
+		span {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&::before {
+				flex: 0 0 auto;
+				font-size: 18px;
+				margin-top: 1px;
+			}
+		}
+	}
+
+	&:hover label {
+		color: $white;
+	}
+
+}
 
 .entry,
 .woocommerce-product-details__short-description,
@@ -667,6 +788,18 @@ button:focus, .button:focus {
 	}
 }
 
+.btn_brd_whisper, %btn_brd_whisper {
+	background-color: transparent;
+	border: 1px solid $whisper;
+	color: $dark-grayish;
+
+	&:hover {
+		background-color: $blue-green;
+		color: $white !important;
+	}
+}
+
+
 .btn_brd_light-blue-green,
 .woocommerce .button.btn_brd_light-blue-green,
 .return-to-shop .button.wc-backward {
@@ -688,13 +821,6 @@ button:focus, .button:focus {
 	height: 44px;
 	line-height: 44px;
 	padding: 0 4px;
-}
-
-.prdctfltr_woocommerce_filter_submit {
-	&::before {
-		display: inline-block;
-		content: "\f463";
-	}	
 }
 
 .woocommerce #respond input#submit,
@@ -2078,29 +2204,53 @@ ul li.product::before  {
 	
 }
 
-aside {
-	.widget-title {
+.widget-title, .aside_title {
+	font-family: $secondary-font;
+	font-size: 16px;
+	text-transform: uppercase;
+	line-height: normal;
+	font-weight: bold;
+	padding-bottom: 9px;
+	border-bottom: 1px solid $silver;
+
+	span {			
+		padding: 0 0 9px;
+		border-bottom: 1px solid $blue-green;
+	}
+
+	& span::after {
+		content: '\003A';
+		padding-right: 4px;
+	}
+}
+
+.pf-help-title .widget-title {
+	border-bottom: 0;
+	text-transform: none;
+	font-family: $default-font;
+	font-weight: 400;
+	font-size: 14px;
+	color: $zambezi;
+
+	span {
+		border-bottom: 0;
+	}
+}
+
+.aside_menu {
+	li a {
+		font-size: 14px;
+		color: $black-three;
+	}
+
+	ul > li a {
 		font-size: 16px;
-		text-transform: uppercase;
-		line-height: normal;
-		font-weight: bold;
-		padding-bottom: 9px;
-		border-bottom: 1px solid $silver;
-
-		span {			
-			padding: 0 0 9px;
-			border-bottom: 1px solid $blue-green;
-		}
-
-		& span::after {
-			content: '\003A';
-			padding-right: 4px;
-		}
 	}
 }
 
 /*Контакты*/
 .contact-block-1 {
+
 	div {
 		padding: 0 0 4px;
 	}

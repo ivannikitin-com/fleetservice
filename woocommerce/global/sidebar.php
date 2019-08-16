@@ -18,9 +18,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 } ?>
-			<div class="aside_title"><?php echo _e('Cataloge','fleetservice'); ?></div>
+			<div class="aside_title"><span><?php echo _e('Cataloge','fleetservice'); ?></span></div>
 			<nav class="aside_menu  navbar navbar-expand-lg" role="navigation">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar-menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 					<?php wp_nav_menu( array(
@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					) );?>
 			</nav>
 			<?php if (is_shop() || is_tax('product_cat')) { ?>
-			<div class="aside_title"><?php echo _e('Filter','fleetservice'); ?></div>
+			<div class="aside_title"><span><?php echo _e('Filter','fleetservice'); ?></span></div>
 			<?php } ?>
 <?php   get_sidebar( 'shop' );
 

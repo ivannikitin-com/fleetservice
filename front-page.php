@@ -27,11 +27,11 @@
 </section><!--/#slider_main-->
 <?php endif; ?>
 
-<section class="catalog">
+<section class="catalog" style="background-color: #f5f8fa;">
 	<div class="container">
 		<?php $catalog_section_title =  get_field ('catalog_section_title');
 		if ($catalog_section_title) { ?>
-		<h2 class="section-title"><?php echo $catalog_section_title; ?></h2>
+		<h2 class="section-title" style="font-size: 30px; line-height: 33px;"><?php echo $catalog_section_title; ?></h2>
 		<?php } ?>
 		<?php if (have_rows('business_trend')): ?>
 		<div class="row">
@@ -63,11 +63,11 @@
 	</div><!--/.container-->
 </section><!--/.catalog-->
 
-<section class="brands">
+<section class="brands" style="background-color: #fff;">
 	<div class="container">
 		<?php $brand_section_title =  get_field ('brand_section_title');
 		if ($brand_section_title) { ?>
-		<h2 class="section-title"><?php echo $brand_section_title; ?></h2>
+		<h2 class="section-title" style="font-size: 24px; margin-bottom: 9px; line-height: normal;"><?php echo $brand_section_title; ?></h2>
 		<?php } ?>
 	</div><!--/.container-->	
 	<div class="brands-list">
@@ -90,11 +90,11 @@ $args=array(
 );
 $products=new WP_query( $args );
 if ( $products->have_posts() ) : ?>
-<section class="bestsellers">
+<section class="bestsellers" style="background: #f5f8fa;">
 	<div class="container">
 		<?php $products_section_title =  get_field ('products_section_title');
 		if ($products_section_title) { ?>
-		<h2 class="section-title"><?php echo $products_section_title; ?></h2>
+		<h2 class="section-title" style="font-size: 30px; margin-bottom: 12px; line-height: normal;"><?php echo $products_section_title; ?></h2>
 		<?php } ?> 
 	</div><!--/.container-->
 	<div class="bestsellers-list">
@@ -118,9 +118,9 @@ $short_information_title = get_field('short_information_title');
 $slogun_icon = get_field('slogun_icon');
 $slogun_text = get_field('slogun_text');
 $front_page_content = get_the_content();
-$more_info_lnk = get_field('more_info_lnk');
+$more_info_link = get_field('more_info_link');
 if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?> 
-<section class="about-us">	
+<section class="about-us" style="background-color: #fff;">	
 	<div class="container">
 		<div class="row justify-content-between">
 			<?php if ($short_information_img) { ?>
@@ -147,8 +147,8 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 				<div class="about-us-main_txt">				
 				<?php echo the_content(); ?>
 				</div>
-				<?php if ($more_info_lnk) { ?>
-				<a href="<?php echo $more_info_lnk; ?>" class="more"><?php _e('More','fleetservice'); ?></a>
+				<?php if ($more_info_link) { ?>
+				<a href="<?php echo $more_info_link; ?>" class="more"><?php _e('Узнать больше','fleetservice'); ?></a>
 				<?php } ?>
 				<?php } ?>
 			</div>
@@ -159,7 +159,7 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 
 <?php if( have_rows('front_page_testimonials') ): ?>
 <!--ОТЗЫВЫ -->
-<section class="reviews">
+<section class="reviews" style="background-color: #f5f8fa;">
 	<div class="container">
 		<?php $testimonials_section_title =  get_field ('testimonials_section_title');
 		if ($testimonials_section_title) { ?>
@@ -195,11 +195,11 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 $news_posts = new WP_Query( $args );
 if ($news_posts): ?> 
 <!-- НОВОСТИ -->
-<section class="news">	
+<section class="news" style="background-color: #fff;">	
 	<div class="container">
 		<?php $news_section_title = get_field('news_section_title');
 		if ($news_section_title) { ?>
-		<h2 class="section-title"><?php echo $news_section_title; ?></h2>
+		<h2 class="section-title" style="font-size: 30px; line-height:33px;"><?php echo $news_section_title; ?></h2>
 		<?php } ?>
 		<div class="grid-md-2">
 			<?php $last_news_flag = true;
