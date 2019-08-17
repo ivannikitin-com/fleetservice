@@ -197,12 +197,15 @@ body:not(.home) .site-content {
 .site-header {
 	background: $white;
 	border-bottom: 1px solid $grey;
+
 	a:hover {		
 		text-decoration: none;
 	}
+
 	.phone {
 		font-size: $font-size-3;
 		  color: $steel-grey;
+
 		span {
 			font-size: 20px;
 			font-weight: bold;
@@ -215,7 +218,8 @@ body:not(.home) .site-content {
 
 	.search-form {
 		flex-basis: 100%;
-    	display: flex;
+		display: flex;
+		
 		.search-field {
 			font-size: 14px;
 			font-style: italic;
@@ -512,6 +516,10 @@ body:not(.home) .site-content {
 			width: 12px;
 			height: 22px;
 			top: 30px;
+
+			&:hover {
+				background: $black-three;				
+			}
 		}
 
 		.irs-grid-text {
@@ -528,9 +536,22 @@ body:not(.home) .site-content {
 
 aside .prdctfltr-widget .prdctfltr_wc .prdctfltr_woocommerce_ordering .prdctfltr_filter {
 	padding-bottom: 30px;
+	margin-bottom: 22px;
 
 	&[data-filter="rng_price"] {
 		padding-bottom: 0;
+
+		.pf-help-title {
+			margin-bottom: -12px;
+
+			.widget-title {
+
+				span {
+					padding: 0;
+				}
+			}
+		}
+		
 	}
 }
 
@@ -560,10 +581,30 @@ aside .prdctfltr-widget .prdctfltr_wc .prdctfltr_woocommerce_ordering .prdctfltr
 		}
 
 	}
+	.prdctfltr_wc_widget .prdctfltr_collector {
+		&.prdctfltr_collector_flat {
+			margin: 0 0 12px;
+		}
 
-	.prdctfltr_wc.prdctfltr_checkbox .prdctfltr_filter label.prdctfltr_active>span:after {
-		top: 2px;
-		left: 5px;
+		&>span {
+			border-radius: 0;
+			background: $grey;
+		}
+
+		.prdctfltr-check::before {
+			color: $blue-green;
+		}
+	}
+
+	.prdctfltr_wc.prdctfltr_checkbox .prdctfltr_filter label.prdctfltr_active>span {
+		font-weight: normal;
+
+		&::after {
+			top: 2px;
+			left: 5px;
+			color: $black-three;
+		}
+
 	}
 
 	.prdctfltr_checkboxes .pf_more {
@@ -891,7 +932,12 @@ section {
 	&:last-of-type {
 		padding-bottom: 0;
 	}
+
+	&.widget {
+		padding: 0;
+	}
 }
+
 .section-title {
 	text-transform: uppercase;
 	margin: 0 0 35px;
@@ -1886,7 +1932,8 @@ ul li.product::before  {
 
 		& + .more {
 			display: block;
-			margin: 25px 0 0 0;
+			margin: 27px 0 0 0;
+			text-decoration: underline;
 		}
 	}
 	
@@ -2210,10 +2257,10 @@ ul li.product::before  {
 	text-transform: uppercase;
 	line-height: normal;
 	font-weight: bold;
-	padding-bottom: 9px;
 	border-bottom: 1px solid $silver;
 
-	span {			
+	span {
+		display: inline-block;	
 		padding: 0 0 9px;
 		border-bottom: 1px solid $blue-green;
 	}
@@ -2224,13 +2271,21 @@ ul li.product::before  {
 	}
 }
 
+.aside_title {
+	margin: 40px 0 25px;
+
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
 .pf-help-title .widget-title {
 	border-bottom: 0;
 	text-transform: none;
 	font-family: $default-font;
-	font-weight: 400;
 	font-size: 14px;
 	color: $zambezi;
+	margin: 0;
 
 	span {
 		border-bottom: 0;
@@ -2241,6 +2296,7 @@ ul li.product::before  {
 	li a {
 		font-size: 14px;
 		color: $black-three;
+		white-space: normal;
 	}
 
 	ul > li a {
