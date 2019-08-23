@@ -43,7 +43,7 @@ add_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering', 21 );
 add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 22 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_result_count', 23 );
 add_action( 'woocommerce_before_shop_loop','before_products_per_page_text', 24 );
-//add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 31 );
+//add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 33 );
 add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper_close', 34 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_pagination', 35 );
 add_filter( 'wppp_ppp_text','fleet_products_per_page',1,2 );
@@ -54,6 +54,7 @@ function fleet_products_per_page($output_str, $value){
 	return $value;
 }
 function before_products_per_page_text() {
+	//echo '<div class="products_per_page_wrap">';
 	echo '<div class="ordering_label">'.__('Показать на странице:','fleetservice').'</div>';
 }
 add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper', 9 );

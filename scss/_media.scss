@@ -54,6 +54,7 @@
 
 // ≥768px
 @include media-breakpoint-down(sm) {
+
 	.site-branding {
 		padding-right: 0;
 	}
@@ -66,6 +67,14 @@
 		.hours {
 			text-align: right;
 		}
+	}
+
+	.woocommerce #content div.product div.images,
+	.woocommerce div.product div.images,
+	.woocommerce-page #content div.product div.images,
+	.woocommerce-page div.product div.images,
+	.woocommerce ul.products.owl-carousel li.product {
+		width: 100%;
 	}
 
 	.woocommerce table.shop_table_responsive tr:nth-child(2n) td,
