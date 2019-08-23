@@ -856,6 +856,7 @@ button:focus, .button:focus {
 }
 
 
+%btn_brd_light-blue-green,
 .btn_brd_light-blue-green,
 .woocommerce .button.btn_brd_light-blue-green,
 .return-to-shop .button.wc-backward {
@@ -1266,6 +1267,14 @@ section {
 }
 /*OwL-Carousel*/
 .owl-carousel {
+	&.products .owl-stage {
+		display: flex;
+
+		.owl-item > li.product {
+			min-height: 100%;
+		}
+	}
+	
 	.owl-nav {
 		button {
 			display: inline-block;
@@ -1447,10 +1456,6 @@ ul li.product::before  {
 
 		.owl-stage-outer {
 			padding-bottom: 10px; /*Место для нижней тени товара*/
-		}
-
-		.owl-stage {
-			display: flex;
 		}
 
 		.owl-item {
@@ -1684,6 +1689,76 @@ ul li.product::before  {
 
 
 /*Модальные окна*/
+.xoo-cp-container {
+	border-radius: 0;
+	border: 0;
+	padding: 50px 15px 30px;
+	box-shadow: none;
+}
+.xoo-cp-btns {
+
+	a.xcp-btn {
+		border-radius: 0;
+		white-space: nowrap;
+		width: auto;
+		padding-left: 12px;
+		padding-right: 12px;
+		margin-top: 10px;
+
+		&.xoo-cp-close {
+			color: $light-blue-green;
+			@extend %btn_brd_light-blue-green;
+
+			&:hover {
+				color: $white;
+			}
+		}
+
+		@media (max-width: 500px) {
+			width: 100%;
+		}
+	}
+}
+.xoo-cp-btn-vc {
+	@extend %button-blue-green;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+span.xoo-cp-close {
+	font-size: 0;
+	background: none;
+	border-radius: 0;
+	border: 0;
+	top: 15px;
+	right: 15px;
+
+	&.xoo-cp-icon-cross::before {
+		content: '';
+		display: inline-block;
+		background: url(../img/sprite.png) no-repeat 0 -300px;
+		width: 25px;
+		height: 27px;
+
+	}
+}
+
+span.xoo-cp-close.xoo-cp-icon-cross:hover::before {
+	background-position: -46px -300px;
+}
+
+.xoo-cp-success {
+    color: $blue-green;
+	background-color: $light-blue-grey;
+}
+
+.xoo-cp-atcn {
+	border-radius: 0;
+	margin: 15px 0;
+}
+
 
 /*Быстрый просмотр*/
 .mfp-woosq .mfp-close {
@@ -1770,6 +1845,7 @@ ul li.product::before  {
 }
 
 .woocommerce.single-product {
+
 	color: $black-two;
 
 	div.product div.images img {
