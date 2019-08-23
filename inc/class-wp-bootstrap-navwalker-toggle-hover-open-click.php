@@ -196,7 +196,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			*/
 			if ( isset( $args->has_children ) && $args->has_children && $args->depth > 1 && $depth < $args->depth) {
 				$atts['href']          = $item->url;
-				$atts['data-toggle']   = 'collapse';
+				/*$atts['data-toggle']   = 'collapse';*/
 				$atts['data-target']   = '#'.$item->ID.'-'.$depth;
 				$atts['aria-haspopup'] = 'true';
 				$atts['aria-expanded'] = 'false';

@@ -116,6 +116,27 @@ function fleetservice_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+	//register MegaMenu widget if the Mega Menu is set as the menu location
+	$location = 'menu-1';
+	$css_class = 'mega-menu-parent';
+	$locations = get_nav_menu_locations();
+	if ( isset( $locations[ $location ] ) ) {
+	  $menu = get_term( $locations[ $location ], 'nav_menu' );
+	  if ( $items = wp_get_nav_menu_items( $menu->name ) ) {
+	    foreach ( $items as $item ) {
+	      if ( in_array( $css_class, $item->classes ) ) {
+	        register_sidebar( array(
+	          'id'   => 'mega-menu-item-' . $item->ID,
+	          'description' => 'Mega Menu items',
+	          'name' => $item->title . ' - Mega Menu',
+	          'before_widget' => '<li id="%1$s" class="mega-menu-item">',
+	          'after_widget' => '</li>', 
+
+	        ));
+	      }
+	    }
+	  }
+	}
 }
 add_action( 'widgets_init', 'fleetservice_widgets_init' );
 
@@ -141,7 +162,12 @@ function fleetservice_scripts() {
 	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.carousel.min.css');
 	wp_enqueue_style( 'owl-default', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.theme.default.min.css');
 	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
-	wp_enqueue_style( 'fleetservice-cataloge-menu', get_template_directory_uri() . '/css/cataloge-menu.css' );
+	wp_enqueue_style( 'fleetservice-menu', get_template_directory_uri() . '/css/menu.css' );
+	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
+	wp_enqueue_style( 'metisMenu', get_template_directory_uri() . '/libs/metisMenu/metisMenu.min.css' );
+	wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/libs/fontawesome/fontawesome.min.css' );
+	wp_enqueue_script( 'metisMenu', get_template_directory_uri() . '/libs/metisMenu/metisMenu.min.js', array('jquery'), null, true );
+	
 	
 	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, true );
 	if (is_category()) {
@@ -152,7 +178,7 @@ function fleetservice_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-	if (is_woocommerce()) {
+	if (is_woocommerce() || is_front_page()) {
 		wp_enqueue_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array('jquery'), null, true );
 		wp_enqueue_style( 'select2', plugins_url() . '/woocommerce/assets/css/select2.css',  null, true );
 	}		
@@ -195,6 +221,32 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory() . '/inc/woocommerce-functions.php';
 require get_template_directory() . '/inc/fleetservice-functions.php';
-//require get_template_directory() . '/inc/wp-bootstrap-navwalker-toggle-hover.php';
-//require get_template_directory() . '/inc/wp-bootstrap-navwalker-dropdown-click.php';
-require get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
+require get_template_directory() . '/inc/class-wp-bootstrap-navwalker-toggle-hover-open-click.php';
+require get_template_directory() . '/inc/wp_bootstrap4-mega-navwalker.php';
+
+add_filter( 'widget_text', 'do_shortcode' );
+
+add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
+
+function special_nav_class ($classes, $item) {
+    if (in_array('current-page-ancestor', $classes) || in_array('current-menu-item', $classes) ){
+        $classes[] = 'active ';
+    }
+    return $classes;        
+}
+class UL_Class_Walker extends Walker_Nav_Menu {
+  function start_lvl(&$output, $depth=0,  $args = array()) { 
+    $indent = ( $depth > 0  ? str_repeat( "\t", $depth ) : '' );
+	$display_depth=(int)$depth+2;
+    $output .= "\n$indent<ul class=\"level_".$display_depth."\">\n";
+  }
+}
+
+add_filter( 'walker_nav_menu_start_el','fleet_add_sub_menu_sign',1,4);   
+function fleet_add_sub_menu_sign($item_output, $item, $depth, $args) {
+	if(in_array('menu-item-has-children', $item->classes))
+    {
+      $item_output .= '<a href="#" class="my"><span class="dashicons dashicons-plus"></span></a>';
+    }
+    return $item_output;
+}

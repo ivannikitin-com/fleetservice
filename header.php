@@ -64,10 +64,12 @@
 									'theme_location' => 'menu-1',
 									'container'   	=> '',
 									'menu_id'        => 'primary-menu',
-									'menu_class'     => 'navbar-nav',
+									'menu_class'     => 'navbar-nav mr-auto',
+									'walker'  => new BootstrapNavMenuWalker()
 								) );
 								?>
 							</div><!--/.collapse-->
+						</div><!--/.row.no-gutters-->
 					</nav><!--/.nav-main-->
 
 					<div class="block-links">
