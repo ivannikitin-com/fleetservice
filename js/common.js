@@ -47,7 +47,7 @@
 		})
 		$(".related.products .owl-carousel, .up-sells.products .owl-carousel").owlCarousel ({
 			nav: true,
-			margin: 30,
+			margin: 20,
 			navText: false,
 			autoHeight:true,
 			responsive: {
