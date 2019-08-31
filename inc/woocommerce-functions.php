@@ -248,8 +248,8 @@ function fleet_form_one_click_html(){ ?>
 		<div id="modalOneClick" class="modal hide fade" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header"><div class="form_title"><?php _e('Купить в 1 клик','fleetservice');?></div><button class="close" type="button" data-dismiss="modal">&times;</button></div><!--/.modal-header-->
-				<div class="modal-body">
+				<div class="modal-header col-md-11 offset-md-1"><div class="form_title"><?php _e('Купить в 1 клик','fleetservice');?></div><button class="close" type="button" data-dismiss="modal">&times;</button></div><!--/.modal-header-->
+				<div class="modal-body col-md-9 offset-md-1">
 					<?php echo do_shortcode('[contact-form-7 id="6810" title="Купить в 1 клик" html_id="oneclickform"]'); ?>
 				</div><!--/.modal-body-->
 			</div><!--/.modal-content-->

@@ -67,13 +67,20 @@
 		})		
 		$('#menu-catalog-menu .menu-item.current-menu-ancestor > .collapse-menu.collapse').addClass('show');	
 		$('li.menu-item.active').parents('collapse-menu').show();
-		$('a.collapse').mouseenter(function()
+		$('a.collapse').mouseover(function(event)
 			 {
-			 console.log('menu a.collapse hover event');
-			 /*_next = $(this).next('.collapse-menu');	
-			 _next.addClass('show');
-			 _others=_next.parents('li.menu-item').first().siblings().children('.collapse-menu');
-			 _others.removeClass('show');*/
+			 let target = event.target;
+			 let related_target = event.relatedTarget;
+			 _sister_a =$(this).parent('li').closest('li').children('a:first');
+			 /*if (related_target == _sister_a) {
+			 	_sister_a.addClass('show');) 			 	
+			 }
+			 if (related_target = $(this).parent()) {
+			 	_others=_next.parents('li.menu-item').first().siblings().children('.collapse-menu');
+			 	_others.removeClass('show');
+			 }*/
+
+			 
 			});
 		$('.oneclickbuy').click(function(){
 			var variation_id = $('form#oneclickform.variations_form input[name=variation_id]').val();
@@ -99,5 +106,39 @@
 			return true;
 		});
 		$('.single-product table.variations select').select2();
+		$('body').on('mouseenter mouseleave', '.dropdown', function (e) {
+		    var dropdown = $(e.target).closest('.dropdown');
+		    var menu = $('.dropdown-menu', dropdown);
+		    dropdown.addClass('show');
+		    menu.addClass('show');
+		    setTimeout(function () {
+		        dropdown[dropdown.is(':hover') ? 'addClass' : 'removeClass']('show');
+		        menu[dropdown.is(':hover') ? 'addClass' : 'removeClass']('show');
+		    }, 300);
+		});
+		$('#menu-tip-produktsii,#menu-tip-produktsii-1,#menu-napravleniya-biznesa,#menu-napravleniya-biznesa-1').metisMenu({
+
+		  // enabled/disable the auto collapse.
+		  toggle: true,
+
+		  // prevent default event
+		  preventDefault: true,
+
+		  // default classes
+		  activeClass: 'active',
+		  collapseClass: 'collapse',
+		  collapseInClass: 'in',
+		  collapsingClass: 'collapsing',
+
+		  // .nav-link for Bootstrap 4
+		  triggerElement: 'a.my',
+
+		  // .nav-item for Bootstrap 4
+		  parentTrigger: 'li',
+
+		  // .nav.flex-column for Bootstrap 4
+		  subMenu: 'ul'
+
+		});
 	});
 })(jQuery);
