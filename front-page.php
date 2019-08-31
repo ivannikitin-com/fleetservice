@@ -53,7 +53,7 @@
 					</div>
 					<?php } ?>
 					<?php if ($trend_link_text) { ?>
-					<span href="#" class="more"><?php echo $trend_link_text; ?></span>
+					<span class="more"><?php echo $trend_link_text; ?></span>
 					<?php } ?>
 				</a>
 			</div><!--/.col-->
