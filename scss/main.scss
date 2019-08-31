@@ -486,7 +486,10 @@ body:not(.home) .site-content {
 	display: none !important;
 }
 
-.nav-main {
+.nav-main {	
+	padding-top: 0;
+	padding-bottom: 0;
+
 	.navbar-nav {
 		> li a.dropdown-toggle {
 			position: relative;
@@ -713,8 +716,6 @@ body:not(.home) .site-content {
 		span.breadcrumb_last {
 			margin-left: 6px;
 		}
-
-		margin-left: -6px;
 	}
 }
 
