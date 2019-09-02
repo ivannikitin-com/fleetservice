@@ -24,7 +24,6 @@ body {
 	overflow-x: hidden;
 	color: $black-three;
 	margin: 0;
-	min-width: 320px;
 }
 
 a {
@@ -1646,12 +1645,17 @@ section {
 .grid {
 	display: grid;
 }
+
 .fleet-sorting {
 	color: $warm-grey-two;
 }
+
 /*Постраничная навигация*/
 .wp-pagenavi {
-	text-align: center;
+	.fleet-sorting + & {
+		text-align: right;
+		margin-top: -26px;
+	}
 	& span, & a {
 		display: inline-block;
 		color: $black-three;
