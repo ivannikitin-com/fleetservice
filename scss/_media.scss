@@ -188,7 +188,11 @@
 		padding-bottom: 30px;
 	}
 
-
+	.single .post-thumbnail {
+		float: left;
+		width: 50%;
+		padding-right: 30px;
+	}
 }
 
 // ≤992px
@@ -244,6 +248,10 @@
 	
 	.woocommerce-cart .wc-proceed-to-checkout {
 		padding-top: 36px;
+	}
+
+	.single article blockquote {
+		max-width: 50%;
 	}
 
 }
