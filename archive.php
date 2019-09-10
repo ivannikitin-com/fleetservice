@@ -8,20 +8,18 @@
  */
 
 get_header();
+global $wp_query;
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
+<section class="news" style="background-color: #fff;">	
+	<div class="container">
 
 		<?php if ( have_posts() ) : ?>
-
-			<header class="page-header">
 				<?php
 				the_archive_title( '<h1 class="page-title">', '</h1>' );
 				the_archive_description( '<div class="archive-description">', '</div>' );
 				?>
-			</header><!-- .page-header -->
-
+		<div id="masonry_container" class="row">
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) :
@@ -34,20 +32,18 @@ get_header();
 				 */
 				get_template_part( 'template-parts/content', get_post_type() );
 
-			endwhile;
+			endwhile; ?>
 
-			the_posts_navigation();
-
-		else :
-
+		</div><!--/.row-->
+			<?php if (  $wp_query->max_num_pages > 1 ) :
+				echo '<div class="button btn_brd_black-three fleet_loadmore">'.__('Показать еще','fleetservice').'</div><span class="spinner"></span>';
+			endif; 
+		else:
 			get_template_part( 'template-parts/content', 'none' );
+		endif;?>
 
-		endif;
-		?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	</div><!--/.container-->
+</section>
 
 <?php
-get_sidebar();
 get_footer();

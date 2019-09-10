@@ -79,4 +79,16 @@
 #primary-menu > .menu-item-has-children a.my {
 	/*display: none !important;*/
 }
+.button.fleet_loadmore.loading:after {
+  font-family: WooCommerce;
+  content: "\e01c";
+  vertical-align: top;
+  font-weight: 400;
+  /*position: absolute;*/
+  top: .618em;
+  right: 1em;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  opacity: 1;
+}
 

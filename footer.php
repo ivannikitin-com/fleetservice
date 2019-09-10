@@ -74,7 +74,7 @@
 		</div><!--/.container-->
 		<div class="footer_bott">
 			<div class="container">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/counter.jpg" width="112" height="41" class="img-fluid">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/counter.jpg" alt="counter" width="112" height="41" class="img-fluid">
 			</div><!--/.container-->
 		</div><!--/.footer_bott-->
 	</footer><!-- #colophon -->
