@@ -177,7 +177,6 @@ function fleetservice_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 	if (is_woocommerce() || is_front_page()) {
-		echo '!';
 
 		wp_enqueue_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array('jquery'), null, false );
 		wp_enqueue_style( 'select2', plugins_url() . '/woocommerce/assets/css/select2.css',  null, false );

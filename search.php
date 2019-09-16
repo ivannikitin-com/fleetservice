@@ -39,7 +39,7 @@ global $wp_query;
 			endwhile; ?>
 		</div><!--/.row-->
 			<?php if (  $wp_query->max_num_pages > 1 ) :
-				echo '<div class="button btn_brd_light-blue-green fleet_loadmore">'.__('Показать еще','fleetservice').'</div><span class="spinner"></span>';
+				echo '<div class="button btn_brd_black-three fleet_loadmore">'.__('Показать еще','fleetservice').'</div><span class="spinner"></span>';
 			endif; 			
 
 		else :

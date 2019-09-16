@@ -23,16 +23,14 @@
 						$('#masonry_container').imagesLoaded( function() {
 							$('#masonry_container').masonry( 'appended', el, true ).masonry('layout');
 						});
-						/*result_count = JSON.parse(fleet_loadmore_params.posts); 
-						$('<div class="wc_query"></div>').insertBefore(button);*/
-						/*console.log('posts_per_page:'+fleet_loadmore_params.posts_per_page);*/
-						var woocommerce_result_count =$('.woocommerce-result-count').html().split(' ');
-						var upper = woocommerce_result_count[1].split('–');
-						console.log(woocommerce_result_count[1]);
-						console.log(upper[1]);
-						var new_upper = parseInt(upper[1]) + parseInt(fleet_loadmore_params.posts_per_page);
-						var result_count_string = $('.woocommerce-result-count').html().replace('–'+upper[1],'–'+new_upper);
-						$('.woocommerce-result-count').html(result_count_string);
+						if($('.woocommerce-result-count').length > 0) {
+							var woocommerce_result_count =$('.woocommerce-result-count').html().split(' ');
+							var upper = woocommerce_result_count[1].split('–');
+							var new_upper = parseInt(upper[1]) + parseInt(fleet_loadmore_params.posts_per_page);
+							var result_count_string = $('.woocommerce-result-count').html().replace('–'+upper[1],'–'+new_upper);
+
+							$('.woocommerce-result-count').html(result_count_string);
+						}
 						button.next('span.spinner').removeClass('is-active');
 						
 						fleet_loadmore_params.current_page++;

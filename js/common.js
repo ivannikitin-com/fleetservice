@@ -1,6 +1,8 @@
 (function($){
 	$(function(){
-		if (typeof ('masonry') != "undefined") {
+		console.log(typeof (masonry));
+		console.log(typeof (imagesLoaded));
+		if (typeof (imagesLoaded) != "undefined") {
 			var $container = $('#masonry_container');
 			$container.imagesLoaded().done( function() {
 				$container.masonry({
