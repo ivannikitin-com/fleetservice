@@ -9,12 +9,9 @@
 
 ?>
 
-<section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'fleetservice' ); ?></h1>
-	</header><!-- .page-header -->
-
-	<div class="page-content">
+<article id="post-<?php the_ID(); ?>" <?php post_class('entry clear'); ?>>
+	<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'fleetservice' ); ?></h1>
+	<div class="entry-content">
 		<?php
 		if ( is_home() && current_user_can( 'publish_posts' ) ) :
 
@@ -47,5 +44,5 @@
 
 		endif;
 		?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+	</div><!-- .entry-content -->
+</article>

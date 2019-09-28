@@ -15,9 +15,7 @@
 		if ( 'post' === get_post_type() ) :
 			?>
 			<div class="entry-meta text-uppercase mb-2">
-				<?php
-				fleetservice_posted_on();
-				?>
+				<time datetime="<?php echo get_the_date('Y-m-d');?>" class="news-item-date mt-md-0 mt-3"><?php echo wp_maybe_decline_date(get_the_date()); ?></time>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 
@@ -30,8 +28,8 @@
 			endif; ?>		
 
 		</header><!-- .entry-header -->
-
-		<div class="entry-meta mb-3">Рубрика: <a href="/">Уют в доме</a></div><!--/.entry-meta-->
+		<?php $single_post_categories = get_the_term_list($post->ID,'category');?>
+		<div class="entry-meta mb-3"><?php printf( __( 'Category: %s' ), $single_post_categories );?></div><!--/.entry-meta-->
 		
 		<?php fleetservice_post_thumbnail(); ?>
 

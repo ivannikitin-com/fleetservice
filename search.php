@@ -8,22 +8,22 @@
  */
 
 get_header();
+global $wp_query;
 ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+<section class="news" style="background-color: #fff;">	
+	<div class="container">
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
 				<h1 class="page-title">
 					<?php
 					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'fleetservice' ), '<span>' . get_search_query() . '</span>' );
+					printf( esc_html__( 'Результаты поиска по подстроке: %s', 'fleetservice' ), '<span>' . get_search_query() . '</span>' );
 					?>
 				</h1>
-			</header><!-- .page-header -->
 
+		<div id="masonry_container" class="row">
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) :
@@ -36,9 +36,11 @@ get_header();
 				 */
 				get_template_part( 'template-parts/content', 'search' );
 
-			endwhile;
-
-			the_posts_navigation();
+			endwhile; ?>
+		</div><!--/.row-->
+			<?php if (  $wp_query->max_num_pages > 1 ) :
+				echo '<div class="button btn_brd_black-three fleet_loadmore">'.__('Показать еще','fleetservice').'</div><span class="spinner"></span>';
+			endif; 			
 
 		else :
 
@@ -47,9 +49,8 @@ get_header();
 		endif;
 		?>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+	</div><!--container-->
+</section>	
 
 <?php
-get_sidebar();
 get_footer();

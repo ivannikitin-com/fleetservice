@@ -202,7 +202,6 @@ dfn, cite, em, i {
 }
 
 mark, ins {
-	background: #fff9c0;
 	text-decoration: none;
 }
 
@@ -321,7 +320,6 @@ big {
 	display: block;
 }
 
-.post,
 .page {
 	margin: 0 0 1.5em;
 }

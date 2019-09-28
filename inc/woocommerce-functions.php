@@ -40,12 +40,12 @@ remove_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 10 );
 add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper', 9 );
 add_action( 'woocommerce_before_shop_loop','before_ordering_text', 20 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering', 21 );
-add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 22 );
+add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 22);
 add_action( 'woocommerce_before_shop_loop','woocommerce_result_count', 23 );
 add_action( 'woocommerce_before_shop_loop','before_products_per_page_text', 24 );
-//add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 33 );
 add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper_close', 34 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_pagination', 35 );
+add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 31);
 add_filter( 'wppp_ppp_text','fleet_products_per_page',1,2 );
 function fleet_products_per_page($output_str, $value){
 	if ($value=='-1') {
@@ -54,14 +54,18 @@ function fleet_products_per_page($output_str, $value){
 	return $value;
 }
 function before_products_per_page_text() {
-	//echo '<div class="products_per_page_wrap">';
-	echo '<div class="ordering_label">'.__('Показать на странице:','fleetservice').'</div>';
+	echo '<div class="products_per_page_wrap">';
+	echo '<div class="ordering_label">'.__('Показать на странице:','fleetservice').'</div><!--/.ordering_label-->';
 }
+add_action( 'woocommerce_after_shop_loop','woocommerce_load_more',5 );
+add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_bottom_wrapper_open', 8 );
 add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper', 9 );
-add_action( 'woocommerce_after_shop_loop','woocommerce_result_count',10 );
-add_action( 'woocommerce_after_shop_loop','before_products_per_page_text',24 );
-add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper_close', 31 );
-add_action( 'woocommerce_after_shop_loop','woocommerce_pagination',35 );
+add_action( 'woocommerce_after_shop_loop','woocommerce_result_count', 10 );
+add_action( 'woocommerce_after_shop_loop','before_products_per_page_text', 24 );
+add_action( 'woocommerce_after_shop_loop','fleet_catalog_ordering_wrap_close', 33 );
+add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper_close', 34 );
+add_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 36 );
+add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_bottom_wrapper_close', 37 );
 function before_ordering_text() {
 	echo '<div class="shop_ordering"><div class="ordering_label">'.__('Сортировать по:','fleetservice').'</div>';
 }
@@ -100,20 +104,34 @@ if (function_exists('wp_pagenavi')) {
 	}
 	add_action( 'woocommerce_pagination', 'woocommerce_pagination', 10);
 }
+function woocommerce_load_more() {
+	global $wp_query;
+	if (  $wp_query->max_num_pages > 1 ) {
+		echo '<div class="button btn_brd_black-three fleet_loadmore">'.__('Показать еще','fleetservice').'</div><span class="spinner"></span>';
+	}
+}
 
 function fleet_sorting_wrapper() {
 	echo '<div class="fleet-sorting">';
 }
 
+function fleet_sorting_bottom_wrapper_open() {
+	echo '<div class="wrap brd-bottom pb-1 mt-md-4 mt-2">';
+}
+
 function fleet_sorting_wrapper_close() {
 	echo '</div><!--/.fleet-sorting-->';
 }
+function fleet_sorting_bottom_wrapper_close() {
+	echo '</div><!--/.wrap-->';
+}
 
 add_action( 'woocommerce_before_shop_loop_item','fleet_wish_compare_buttons',5 );
+remove_action( 'woocommerce_after_shop_loop_item', 'tm_woocompare_add_button_loop', 12 );
 function fleet_wish_compare_buttons(){ ?>
 	<div class="product-top d-flex justify-content-end align-items-end">
+	<?php tm_woocompare_add_button_loop($args); ?>
 	<?php echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]"); ?>
-	<!--<a href="#" class="compare"></a><a href="#" class="wishlist"></a>-->
 	</div>
 <?php }
 
@@ -207,6 +225,24 @@ add_filter( 'tinvwl_default_wishlist_title','fleet_default_wishlist_title' );
 function fleet_default_wishlist_title($wishlist_title){
 	return '';
 }
+/*Если товар продается оптом, то кладем в корзину минимальную партию*/
+add_filter( 'tinvwl_product_add_to_cart_quantity', 'fleet_wishlist_add_to_cart_quantity',1,2 );
+function fleet_wishlist_add_to_cart_quantity($quantity, $product){
+	$minimum_quantity = get_post_meta($product->get_id(),'_wpbo_minimum',true);
+	if ($minimum_quantity && $quantity == 1) {
+		$quantity = $minimum_quantity;
+	}
+	return $quantity;
+}
+
+/*******************
+*Compare page
+*******************/
+add_filter( 'tm_woocompare_dismiss_icon', 'fleet_delete_item_icon' );
+function fleet_delete_item_icon($icon_html) {
+	$result = '<i class="ftinvwl ftinvwl-times"></i>';
+	return $result;
+}
 
 /*******************
 *Single product page
@@ -223,12 +259,61 @@ add_filter( 'woocommerce_product_thumbnails_columns','fleet_single_product_thumb
 function fleet_single_product_thumbnails_columns($columns){
 	return 3;
 }
+
 add_action( 'pwb_before_single_product_brands','fleet_single_product_brands_label');
 function fleet_single_product_brands_label(){
 	echo '<div class="single-product-brand-label">'.__('Производитель:','fleetservice').'</div>';
 }
+
+add_action('woocommerce_single_product_summary','fleet_single_product_brand', 6);
+function fleet_single_product_brand() {
+      $brands = wp_get_post_terms( get_the_ID(), 'pwb-brand');
+
+      if( !is_wp_error( $brands ) ){
+
+          if( sizeof( $brands ) > 0 ){
+
+            $show_as = 'brand_image';
+
+            if( $show_as!='no' ){
+
+              do_action( 'pwb_before_single_product_brands', $brands );
+
+              echo '<div class="pwb-single-product-brands pwb-clearfix">';
+              foreach( $brands as $brand ){
+              		if ($brand->parent !=0 ) continue;
+                  $brand_link = get_term_link ( $brand->term_id, 'pwb-brand' );
+                  $attachment_id = get_term_meta( $brand->term_id, 'pwb_brand_image', 1 );
+
+                  $image_size = 'thumbnail';
+                  $image_size_selected = get_option('wc_pwb_admin_tab_brand_logo_size');
+                  if($image_size_selected!=false){
+                      $image_size = $image_size_selected;
+                  }
+
+                  $attachment_html = wp_get_attachment_image($attachment_id,$image_size);
+
+                  if( !empty($attachment_html) && $show_as=='brand_image' || !empty($attachment_html) && !$show_as ){
+                    echo '<a href="'.$brand_link.'" title="'.$brand->name.'">'.$attachment_html.'</a>';
+                  }else{
+                    echo '<a href="'.$brand_link.'" title="'.__( 'View brand', 'perfect-woocommerce-brands' ).'">'.$brand->name.'</a>';
+                  }
+              }
+              echo '</div>';
+
+              do_action( 'pwb_after_single_product_brands', $brands );
+
+            }
+
+          }
+
+      }
+
+  }
+
 add_action('woocommerce_single_product_summary','fleet_single_wishlist_lnk',8);
 function fleet_single_wishlist_lnk(){
+	tm_woocompare_add_button_loop($args);	
 	echo do_shortcode("[ti_wishlists_addtowishlist loop=yes]");
 }
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
@@ -243,13 +328,15 @@ function fleet_buy_in_1_click(){ ?>
 	<a href="#modalOneClick" class="button btn_brd_light-blue-green oneclickbuy" data-toggle="modal"><?php _e('Купить в 1 клик','fleetservice'); ?></a>
 	</div><!--/.buy_block-->
 <?php }
+remove_action( 'woocommerce_single_product_summary', 'tm_woocompare_add_button_single', 35 );
+
 add_action( 'woocommerce_after_single_product', 'fleet_form_one_click_html', 99 );
 function fleet_form_one_click_html(){ ?>
 		<div id="modalOneClick" class="modal hide fade" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header col-md-11 offset-md-1"><div class="form_title"><?php _e('Купить в 1 клик','fleetservice');?></div><button class="close" type="button" data-dismiss="modal">&times;</button></div><!--/.modal-header-->
-				<div class="modal-body col-md-9 offset-md-1">
+				<div class="modal-header"><div class="form_title"><?php _e('Купить в 1 клик','fleetservice');?></div><button class="close" type="button" data-dismiss="modal">&times;</button></div><!--/.modal-header-->
+				<div class="modal-body">
 					<?php echo do_shortcode('[contact-form-7 id="6810" title="Купить в 1 клик" html_id="oneclickform"]'); ?>
 				</div><!--/.modal-body-->
 			</div><!--/.modal-content-->

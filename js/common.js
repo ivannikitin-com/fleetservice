@@ -1,5 +1,15 @@
 (function($){
 	$(function(){
+		$('.wishlist_item input[type="checkbox"], .product-cb input.global-cb[type="checkbox"], .products-per-page .wppp-select, .woocommerce-ordering select').styler();
+		if (typeof (imagesLoaded) != "undefined") {
+			var $container = $('#masonry_container');
+			$container.imagesLoaded().done( function() {
+				$container.masonry({
+					singleMode: true,
+					itemSelector: '.news-item'
+				});
+			});
+		}
 		$(".mask, input[type='tel'], input#biling_phone, input#shipping_phone").mask("+7 (999) 999-9999");
 		$( ".site-search-toggle" ).on( "click", function() {
 			$( ".wrap-form" ).toggleClass( "form-visible" );
@@ -105,7 +115,10 @@
 			$('#modalOneClick .sku_wrapper .sku').html(product_sku);
 			return true;
 		});
-		$('.single-product table.variations select').select2();
+		console.log('typeof (select2):'+(typeof (select2) ));
+		if (typeof (select2) === "function") {
+			$('.single-product table.variations select, select.orderby, select.wppp-select').select2();
+		}
 		$('body').on('mouseenter mouseleave', '.dropdown', function (e) {
 		    var dropdown = $(e.target).closest('.dropdown');
 		    var menu = $('.dropdown-menu', dropdown);

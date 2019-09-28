@@ -144,34 +144,29 @@ add_action( 'widgets_init', 'fleetservice_widgets_init' );
  * Enqueue scripts and styles.
  */
 function fleetservice_scripts() {
-	wp_enqueue_style( 'fleetservice-style', get_stylesheet_uri() );
+	$dependencies = array('jquery');
 
+	wp_enqueue_style( 'fleetservice-style', get_stylesheet_uri() );
 	if (!is_admin()) {
 		wp_register_style('google-opensans', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap&subset=cyrillic-ext,latin-ext', array(), null, 'all');
 		wp_enqueue_style('google-opensans');
 		wp_register_style('google-opensanscondensed', 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700&display=swap&subset=cyrillic-ext,latin-ext', array(), null, 'all');
 		wp_enqueue_style('google-opensanscondensed');		
 	}
-		
-	//wp_enqueue_script( 'jquery', '//code.jquery.com/jquery-3.3.1.slim.min.js', array(), true );
-	wp_enqueue_script( 'popper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array(), true );
+	//wp_enqueue_script( 'popper', '//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', array(), true );
 	wp_enqueue_script( 'bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', array(), true );
-
-	wp_enqueue_script( 'common-js', get_template_directory_uri() . '/js/common.js', array( 'jquery' ), time(), true );
-
 	wp_enqueue_style( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.carousel.min.css');
 	wp_enqueue_style( 'owl-default', get_template_directory_uri() . '/libs/owl.carousel/dist/assets/owl.theme.default.min.css');
-	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
-	wp_enqueue_style( 'fleetservice-menu', get_template_directory_uri() . '/css/menu.css' );
-	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
 	wp_enqueue_style( 'metisMenu', get_template_directory_uri() . '/libs/metisMenu/metisMenu.min.css' );
-	wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/libs/fontawesome/fontawesome.min.css' );
 	wp_enqueue_script( 'metisMenu', get_template_directory_uri() . '/libs/metisMenu/metisMenu.min.js', array('jquery'), null, true );
-	
-	
 	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/libs/owl.carousel/dist/owl.carousel.min.js', array('jquery'), null, true );
-	if (is_category()) {
-	wp_enqueue_script( 'masonry', get_template_directory_uri() . '/libs/masonry.pkgd.js', array(''), time(), true );
+	if (is_category() || is_search()) {
+		wp_enqueue_script( 'imagesloaded');
+		wp_enqueue_script( 'masonry' );
+		//wp_enqueue_script( 'imagesLoaded', get_template_directory_uri() . '/libs/imagesloaded.pkgd.min.js', array('jquery'), null, true );
+		$dependencies[] = 'imagesloaded';
+		$dependencies[] = 'masonry';
+
 	}
 	wp_enqueue_script( 'maskedinput', get_template_directory_uri() . '/libs/jquery.maskedinput.min.js', array('jquery'), null, true );	
 
@@ -179,9 +174,21 @@ function fleetservice_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 	if (is_woocommerce() || is_front_page()) {
-		wp_enqueue_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array('jquery'), null, true );
-		wp_enqueue_style( 'select2', plugins_url() . '/woocommerce/assets/css/select2.css',  null, true );
-	}		
+
+		wp_enqueue_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.min.js', array('jquery'), null, false );
+		wp_enqueue_style( 'select2', plugins_url() . '/woocommerce/assets/css/select2.css',  null, false );
+		$dependencies[] = 'select2';
+	}	
+	wp_enqueue_script( 'common-js', get_template_directory_uri() . '/js/common.js', $dependencies, time(), true );	
+	if (!(is_woocommerce() || is_tax('pwb-brand'))) {
+		wp_dequeue_style('prdctfltr-css');
+	}
+	wp_enqueue_style( 'formstyler', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.css' );
+	wp_enqueue_style( 'formstylertheme', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.theme.css' );		
+	wp_enqueue_script( 'formstyler', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.min.js', array('jquery'), null, true );		
+	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
+	wp_enqueue_style( 'fleetservice-menu', get_template_directory_uri() . '/css/menu.css' );
+	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );	
 }
 	
 add_action( 'wp_enqueue_scripts', 'fleetservice_scripts' );
@@ -223,6 +230,7 @@ require get_template_directory() . '/inc/woocommerce-functions.php';
 require get_template_directory() . '/inc/fleetservice-functions.php';
 require get_template_directory() . '/inc/class-wp-bootstrap-navwalker-toggle-hover-open-click.php';
 require get_template_directory() . '/inc/wp_bootstrap4-mega-navwalker.php';
+require get_template_directory() . '/inc/loadmore.php';
 
 add_filter( 'widget_text', 'do_shortcode' );
 
@@ -244,9 +252,12 @@ class UL_Class_Walker extends Walker_Nav_Menu {
 
 add_filter( 'walker_nav_menu_start_el','fleet_add_sub_menu_sign',1,4);   
 function fleet_add_sub_menu_sign($item_output, $item, $depth, $args) {
-	if(in_array('menu-item-has-children', $item->classes))
-    {
-      $item_output .= '<a href="#" class="my"><span class="dashicons dashicons-plus"></span></a>';
-    }
-    return $item_output;
+	if (!($args->theme_location == 'menu-1' && $depth == 0)) {
+		if(in_array('menu-item-has-children', $item->classes))
+	    {
+	      $item_output .= '<a href="#" class="my"><span class="dashicons dashicons-plus"></span></a>';
+	    }
+	}
+	return $item_output;
+
 }

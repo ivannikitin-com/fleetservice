@@ -103,6 +103,36 @@
 		line-height: 23px;
 	}
 
+	.tinv-wishlist table.tinvwl-table-manage-list {
+		tbody td {
+			display: block;
+			width: 100% !important;
+			text-align: center;
+
+			&.product-remove {
+				display: none;
+			}
+			
+			&:not(:last-child) {
+				border-bottom: 0;
+			}
+		}
+
+		thead th:not(.product-name) {
+			display: none;
+		}
+	}
+
+	.tinv-wishlist .product-thumbnail {
+		max-width: none;
+		
+		img {
+			margin: 0 auto;
+			max-width: 100px;
+		}
+	}
+		
+
 }
 
 // ≥576px
@@ -153,8 +183,8 @@
 		max-width: 90%;
 	}
 
-	.products_per_page_wrap {
-		display: block;
+	.tinv-wishlist .tinv-modal .tinv-modal-inner {
+		max-width: 75%;
 	}
 
 }
@@ -193,6 +223,29 @@
 		width: 50%;
 		padding-right: 30px;
 	}
+
+	.tinv-wishlist .tinv-modal .tinv-modal-inner {
+		max-width: 65%;
+	}
+
+	.woocommerce {
+		.fleet-sorting {
+				
+			.products_per_page_wrap {
+				display: inline-block;
+							
+				.ordering_label {
+					margin: 0 12px 0 0;
+					vertical-align: middle;
+				}
+			}			
+		}		
+		
+		.wp-pagenavi {
+			display: block;
+		}
+	}	
+	
 }
 
 // ≤992px
@@ -254,6 +307,34 @@
 		max-width: 50%;
 	}
 
+	.tinv-wishlist .tinv-modal .tinv-modal-inner {
+		width: 550px;
+		// height: 500px;
+		max-width: none;
+		padding-top: 70px;
+		padding-bottom:  90px;
+	}
+
+	.tinv-wishlist .tinvwl_added_to_wishlist .tinv-txt {
+		margin-bottom: 40px;
+	}
+
+	.tinv-wishlist table td.product-name a {
+		font-size: 16px;
+	}
+
+	.tinv-wishlist .product-thumbnail {
+		width: 116px;
+	}
+
+	.woocommerce {
+		.fleet-sorting {
+			.products_per_page_wrap .ordering_label {
+				display: inline-block;
+			}
+		}
+	}	
+
 }
 
 // ≤1200px
@@ -281,6 +362,22 @@
 		.coupon {
 			max-width: 91.66667%;
 		}
+	}
+	
+	.tinv-wishlist .tinvwl_added_to_wishlist .tinv-txt {
+		margin-bottom: 60px;
+	}
+
+	.tinv-wishlist table {
+
+		td.product-price {
+			white-space: nowrap;
+
+			ins {
+				margin-left: 12px;
+			}
+		}
+		
 	}
 
 }

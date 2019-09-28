@@ -126,7 +126,7 @@ wp_enqueue_script( 'tinvwl' );
 							<td class="product-date">
 								<?php
 								echo apply_filters( 'tinvwl_wishlist_item_date', sprintf( // WPCS: xss ok.
-									'<time class="entry-date" datetime="%1$s">%2$s</time>', $wl_product['date'], mysql2date( get_option( 'date_format' ), $wl_product['date'] )
+									'<time class="entry-date" datetime="%1$s">%2$s</time>', $wl_product['date'], mysql2date( 'd.m.y', $wl_product['date'] )
 								), $wl_product, $product );
 								?>
 							</td>
@@ -188,5 +188,5 @@ wp_enqueue_script( 'tinvwl' );
 	<div class="tinv-lists-nav tinv-wishlist-clear">
 		<?php do_action( 'tinvwl_pagenation_wishlist', $wishlist ); ?>
 	</div>
-	<a href="/shop/" class="button btn_brd_light-blue-green "><?php echo __('Вернуться в магазин','fleetservice'); ?></a>
+	<a href="/shop/" class="button btn_brd_light-blue-green wc-backward"><?php echo __('Вернуться в магазин','fleetservice'); ?></a>
 </div>

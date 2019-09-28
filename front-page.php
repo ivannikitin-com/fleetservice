@@ -53,7 +53,7 @@
 					</div>
 					<?php } ?>
 					<?php if ($trend_link_text) { ?>
-					<span class="more"><?php echo $trend_link_text; ?></span>
+					<span href="#" class="more"><?php echo $trend_link_text; ?></span>
 					<?php } ?>
 				</a>
 			</div><!--/.col-->
@@ -221,7 +221,7 @@ if ($news_posts): ?>
 				<?php } ?>
 				<?php $last_news_flag = false; } ?>
 				<article class="news-item mb-md-0 mb-3">
-				<time pubdate datetime="<?php echo get_the_date('Y-m-d');?>" class="news-item-date mt-md-0 mt-3"><?php echo wp_maybe_decline_date(get_the_date()); ?></time>
+				<time datetime="<?php echo get_the_date('Y-m-d');?>" class="news-item-date mt-md-0 mt-3"><?php echo wp_maybe_decline_date(get_the_date()); ?></time>
 					<div class="news-item-title"><a href="<?php echo the_permalink(); ?>"><?php the_title(); ?></a></div>
 					<div class="news-item-descr">
 						<?php the_excerpt(); ?>
