@@ -142,6 +142,7 @@
 		input#coupon_code.input-text {
 			width: 100%;
 		}
+
 		button.button {
 			margin: 10px 0 0 0;
 			width: 100%;
@@ -153,6 +154,7 @@
 @media (max-width: 420px) {
 	.wrap_right {
 		display: block;
+
 		.block-links {
 			border-top: 1px solid $grey;
 		}
@@ -178,7 +180,12 @@
 	#slider_main .slider-item-descr {
 		font-size: 40px;
 		line-height: 40px;
-	}	
+	}
+
+	ul.product-cats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
 	
 	.woocommerce {
 		ul.products.grid[class*=columns-] {
@@ -251,7 +258,11 @@
 		.wp-pagenavi {
 			display: block;
 		}
-	}	
+	}
+	
+	.pwb-brand-banner-cont {
+		flex-flow: row;
+	}
 	
 }
 
@@ -275,24 +286,10 @@
 		padding-right: 14px;
 		padding-left: 14px;
 	}
-
-	.navbar-expand-lg .navbar-nav .sub-menu {
-		/*display: none;
-		list-style: none;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		right: 0;
-		white-space: nowrap;
-		background: $accent;
-		width: 100%;
-		border-top: 1px solid $white;
-		z-index: 99;*/
-	}
 	
 	ul.product-cats {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		// display: grid;
+		grid-template-columns: repeat(3, 1fr);
 	}
 	
 	.woocommerce {
@@ -316,7 +313,6 @@
 
 	.tinv-wishlist .tinv-modal .tinv-modal-inner {
 		width: 550px;
-		// height: 500px;
 		max-width: none;
 		padding-top: 70px;
 		padding-bottom:  90px;
@@ -350,11 +346,16 @@
 		width: 100vw;
 	}
 
+	ul.product-cats {
+		grid-template-columns: repeat(4, minmax(0%, 1fr));
+	}
+
 	.woocommerce {
 		ul.products.grid[class*=columns-] {
 			grid-template-columns: repeat(4, minmax(0%, 1fr));
 		}
 	}
+
 	.woocommerce-product-attributes.shop_attributes {
 		max-width: 655px;
 
