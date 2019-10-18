@@ -24,7 +24,7 @@
 
 
 /* Make dropdown visible on hover */
-@media (min-width: 767px) {
+@media (min-width: 768px) {
   .dropdown > .dropdown-menu {
     position: absolute;
 	/*top: 100%;*/
@@ -40,7 +40,7 @@
     box-shadow: none;
     opacity: 0;
     /*margin-top: 10px !important;*/
-    display: block;
+    /* display: block; */
     visibility:hidden;
     /*min-width: 150px;*/
     transition: all  0.2s ease-in-out;
@@ -60,23 +60,6 @@
   .dropdown:hover > .mega-menu-wrapper.dropdown-menu {
     display: flex;
   }
- /* .mega-menu-wrapper > li {
-    width:30%;
-    float:left;
-  }
-  .mega-menu-wrapper > li:first-child.mega-menu-item {
-    background-color: #14848e;
-  }
-  .mega-menu-wrapper > li:nth-child(2).mega-menu-item {
-    background-color: #43a1ac;
-  }
- .mega-menu-wrapper > li:nth-child(3).mega-menu-item {
-    background-color: #fff;
-  }*/
-  .menu-item-has-children a.my {
-  /*float:right;*/
-}
-#primary-menu > .menu-item-has-children a.my {
-	/*display: none !important;*/
-}
+ 
+ 
 
