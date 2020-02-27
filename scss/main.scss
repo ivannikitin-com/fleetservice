@@ -991,11 +991,11 @@ form input[type="radio"] {
 
   & .mailpoet-subscription-field label,
   & .woocommerce-privacy-policy-text label,
-  & .create-account label {
+  & .create-account label.checkbox {
     display: flex !important;
   }
 
-  & .create-account label {
+  & .create-account label.checkbox {
     margin-right: 1rem !important;
   }
 
@@ -4356,6 +4356,11 @@ ul.tabs li {
     .wc-proceed-to-checkout a.checkout-button {
       width: 100%;
       max-width: 235px;
+
+      @media (min-width: 1200px) {
+        display: block;
+        max-width: 100%;
+      }
     }
 
     table.shop_table {
@@ -4896,7 +4901,7 @@ ul.tabs li {
   background: $pale-grey;
 }
 
-/*Авторизация*/
+/*Авторизация/Регистрация*/
 .woocommerce-form-login {
   border-radius: 0 !important;
   &__rememberme {
@@ -4908,6 +4913,13 @@ ul.tabs li {
   width: 235px;
   margin-top: 10px;
   margin-bottom: 5px;
+}
+
+.woocommerce-form-register__submit {
+  height: 44px;
+  line-height: 44px;
+  padding: 0 4px;
+  width: 235px;
 }
 
 .woocommerce-ResetPassword .woocommerce-Button.button {
@@ -5320,6 +5332,10 @@ ul.tabs li {
     &:last-of-type {
       margin-right: 0;
     }
+  }
+
+  .form-row#account_password_field {
+    display: block;
   }
 }
 
