@@ -2874,6 +2874,7 @@ span.xoo-cp-close.xoo-cp-icon-cross:hover::before {
         width: 33.333333%;
         padding-left: 22px;
         padding-top: 26px;
+        text-align: center;
 
         @media (max-width: 767px) {
           padding-left: 10px;
@@ -4183,6 +4184,10 @@ body {
   .tinvwl-table-manage-list {
     .tinvwl-input-group {
       width: 100%;
+
+      .select2-container {
+        margin-top: 7px;
+      }
     }
 
     .product-action button {
