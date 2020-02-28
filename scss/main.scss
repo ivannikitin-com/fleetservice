@@ -1760,6 +1760,10 @@ form {
 
   .tinvwl-table-manage-list tfoot td {
     padding-top: 36px;
+
+    .select2.select2-container {
+      margin-top: 7px;
+    }
   }
 
   .tinvwl-input-group .form-control + .tinvwl-input-group-btn {
@@ -4184,10 +4188,6 @@ body {
   .tinvwl-table-manage-list {
     .tinvwl-input-group {
       width: 100%;
-
-      .select2-container {
-        margin-top: 7px;
-      }
     }
 
     .product-action button {
