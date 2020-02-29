@@ -5285,7 +5285,6 @@ ul.tabs li {
 }
 
 /*Оформление заказа*/
-.cheсkout,
 .myaccount {
   & #billing_myfield12_field label {
     display: none !important;
@@ -5311,7 +5310,7 @@ ul.tabs li {
 
   label[for="billing_myfield12"],
   .mailpoet-subscription-section h3 {
-    display: none;
+    display: none !important;
   }
 
   #map_wrap .modal-content {
