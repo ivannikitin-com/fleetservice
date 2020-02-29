@@ -5287,8 +5287,8 @@ ul.tabs li {
 /*Оформление заказа*/
 .cheсkout,
 .myaccount {
-  & .billing_myfield12_field label {
-    display: none;
+  & #billing_myfield12_field label {
+    display: none !important;
   }
 }
 
