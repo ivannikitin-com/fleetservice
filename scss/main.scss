@@ -5315,20 +5315,30 @@ ul.tabs li {
     }
 
     .form-row {
-      padding-left: 0;
-      padding-right: 0;
+      padding: 0;
+      margin: 0;
 
       &-first {
-        width: 50%;
-        @media (min-width: 768px) {
-          width: 60.5%;
+        width: 60.5%;
+
+        @media (max-width: 767.98px) {
+          width: 50%;
+        }
+
+        @media (max-width: 575.98px) {
+          width: 100%;
         }
       }
 
       &-last {
-        width: 49%;
-        @media (min-width: 768px) {
-          width: 38.5%;
+        width: 38.5%;
+        @media (max-width: 767.98px) {
+          width: 49%;
+        }
+
+        @media (max-width: 575.98px) {
+          margin: 10px 0 0 0;
+          width: 100%;
         }
 
         button[type="submit"] {
@@ -5391,6 +5401,10 @@ ul.tabs li {
 
   .form-row#account_password_field {
     display: block;
+  }
+
+  .place-order button.button:disabled[disabled] {
+    @extend %button_disabled_1;
   }
 }
 
