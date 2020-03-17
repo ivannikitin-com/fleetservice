@@ -1655,6 +1655,7 @@ button:focus,
 }
 
 .woocommerce #respond input#submit,
+.checkout_coupon.woocommerce-form-coupon button[type="submit"],
 .coupon button.button,
 .comment-form input.submit,
 .module-form-socials .button {
@@ -2301,6 +2302,7 @@ section {
 
 .fleet-sorting {
   color: $warm-grey-two;
+  font-size: 13px;
 
   &.bottom {
     border-bottom: 1px solid $warm-grey-three;
@@ -4369,7 +4371,6 @@ ul.tabs li {
     }
 
     table.shop_table {
-      // border-radius: 0;
       border: 0;
       line-height: 1.3em;
 
@@ -5303,13 +5304,56 @@ ul.tabs li {
 }
 
 .woocommerce-checkout {
+  .checkout_coupon.woocommerce-form-coupon {
+    border: 0;
+    width: 100%;
+    background: $pale-grey;
+    padding: 30px;
+
+    @media (min-width: 1200px) {
+      max-width: 756px;
+    }
+
+    .form-row {
+      padding-left: 0;
+      padding-right: 0;
+
+      &-first {
+        width: 50%;
+        @media (min-width: 768px) {
+          width: 60.5%;
+        }
+      }
+
+      &-last {
+        width: 49%;
+        @media (min-width: 768px) {
+          width: 38.5%;
+        }
+
+        button[type="submit"] {
+          height: 38px;
+          line-height: 38px;
+          padding: 0 10px;
+          width: 100%;
+        }
+      }
+    }
+
+    input#coupon_code {
+      border: 1px solid $silver;
+      height: 38px;
+      background: $white;
+      margin: 0;
+    }
+  }
+
   .woocommerce-radio-wrapper {
     display: flex;
     align-items: center;
   }
 
-  label[for="billing_myfield12"],
-  .mailpoet-subscription-section h3 {
+  label[for="billing_myfield12"] {
     display: none !important;
   }
 
