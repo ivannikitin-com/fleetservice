@@ -4397,6 +4397,7 @@ ul.tabs li {
 
   ul#shipping_method li {
     line-height: 1.1;
+    align-items: flex-start;
 
     .woocommerce-checkout-review-order-table & {
       display: flex;
@@ -4569,18 +4570,26 @@ ul.tabs li {
         padding: 30px 12px 20px;
 
         table {
-          th,
+          th {
+            padding-left: 0;
+          }
+
           td {
             padding-right: 0;
             padding-left: 0;
           }
 
           #shipping_method {
+            display: flex;
+            flex-direction: column;
+
             li {
               text-align: left;
+              align-items: flex-start;
 
-              input {
-                margin-top: 2px;
+              label {
+                line-height: normal;
+                margin-bottom: 0;
               }
             }
           }
