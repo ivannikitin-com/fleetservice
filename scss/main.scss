@@ -311,6 +311,7 @@ strong {
 
   .site-title {
     margin: 0;
+    display: none;
   }
 
   .phone {
@@ -692,6 +693,8 @@ strong {
       flex-grow: 1;
       max-width: 100%;
       padding-bottom: 35px;
+      overflow-y: auto;
+      height: calc(100vh - 46px);
     }
 
     h2 {
@@ -749,10 +752,24 @@ strong {
   ul.menu .sub-menu {
     padding: 14px 0 4px 15px;
 
-    li a {
+    li {
       display: flex;
+      flex-wrap: wrap;
+    }
 
-      &::before {
+    li a {
+      display: inline-flex;
+      align-items: flex-start;
+
+      &:not(.my) {
+        max-width: calc(100% - 32px);
+      }
+
+      &.my::before {
+        display: none;
+      }
+
+      &:not(.my)::before {
         content: "";
         flex: 0 0 4px;
         position: relative;
@@ -788,6 +805,10 @@ strong {
         .dashicons-plus:before {
           content: "\f460";
         }
+      }
+
+      & .dashicons {
+        display: inline;
       }
 
       & .dashicons,
@@ -2470,6 +2491,27 @@ ul li.product::before {
         }
       }
 
+      .cat_img_wrap {
+        height: 0;
+        position: relative;
+        padding-bottom: 100%;
+        margin-bottom: 18px;
+
+        img {
+          display: block;
+          position: absolute;
+          width: auto;
+          height: 100%;
+          object-fit: contain;
+          max-height: 100%;
+          max-width: 100%;
+          margin: 0;
+          left: 50%;
+          margin-right: -50%;
+          transform: translate(-50%, 0);
+        }
+      }
+
       h3 {
         font-family: $default-font;
         font-size: 14px;
@@ -2477,11 +2519,6 @@ ul li.product::before {
         line-height: 18px;
         text-transform: uppercase;
         margin-bottom: 0;
-      }
-
-      img {
-        vertical-align: top;
-        margin-bottom: 17px;
       }
     }
   }
@@ -4773,9 +4810,14 @@ ul.tabs li {
 
     &-table.tablesaw {
       margin: 34px 0 0 0;
+      width: 100%;
 
-      td.tm-woocompare-cell {
+      th.tm-woocompare-cell {
         width: 325px;
+      }
+
+      th.tm-woocompare-cell.title {
+        width: 150px;
       }
 
       &,
