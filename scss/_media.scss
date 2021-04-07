@@ -94,11 +94,30 @@
     padding-right: 0;
   }
 
-  .wrap_right {
-    .wrap-form {
-      display: none !important;
+  .site-header {
+    .site-search-toggle {
+      margin-right: 11px;
     }
 
+    .header-bott {
+      .row {
+        position: relative;
+      }
+    }
+
+    .wrap-form {
+      &.form-visible {
+        position: absolute;
+        background-color: $white;
+      }
+    }
+  }
+
+  .makeweight {
+    display: none;
+  }
+
+  .wrap_right {
     .hours {
       text-align: right;
     }
