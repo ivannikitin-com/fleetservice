@@ -5711,4 +5711,31 @@ ul.tabs li {
   }
 }
 
+.search-in-footer {
+  margin-bottom: 20px;
+
+  .site-search-toggle {
+    position: absolute;
+    right: 25px;
+    top: 9px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      background: url(../img/sprite.png) no-repeat -34px -66px;
+      width: 21px;
+      height: 21px;
+    }
+  }
+
+  .search-form {
+    input {
+      width: calc(100% - 35px);
+      border-right: none;
+      font-size: 16px;
+      border-color: $white;
+    }
+  }
+}
+
 @import "media"; // Always at the end
