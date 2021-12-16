@@ -16,6 +16,16 @@
 	<footer id="colophon" class="site-footer">
 		<div class="container">
 			<div class=" footer_main">
+				<div class="row search-in-footer">
+					<div class="col-sm-12">
+						<div class="wrap-form">
+							<div class="site-search-toggle"></div>
+							<form role="search" method="get" class="search-form" action="https://fleetservice.ru/" style="background: #fff;">
+								<span class="screen-reader-text">Найти:</span>
+								<input type="search" class="search-field" placeholder="" value="" name="s" style="width: calc( 100% - 35px);border-right: none;">
+							</form>							</div>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
 						<div class="f_title"><?php _e('Контакты','fleetservice'); ?></div>
@@ -47,7 +57,7 @@
 							<a rel="nofollow" target="_blank" href="<?php echo get_theme_mod( 'footer_instagram_lnk' ); ?>"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px"><image  x="0px" y="0px" width="20px" height="20px"  xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfjBRQRDw2vUiUBAAABb0lEQVQoz33TPUjVYRgF8N/9qzU4lIYGYgkRDUJpYSHRGm21aYPRB1QQNYlbY2tTTQU1FjfoY2lqaqmsoIhAiAapBCPE4kKpXE9D19s/1M4zHc457/O8vM9bCdDjuAEb/Isl79z1CURkJAtZD8sZi6iEYx5iwguLKqXz4pvdHmBUVbqSLKUn1qj2dKc9C0l6C2cxbsZqdKqZtdFhnCsM4mlTHHDHdz9UDZrzEx0m0S/VJPsbrU4lSeYzlyQ5HemL7E1yr1BHC9jptpqDNut0wLxbtplGUC9KM13FsGfgpSHcbNweZeNR89432UczjvwVy8ZGtonlMikbH+uwq8m26/VkbeM4ntsH9niFibKxBXUw5bwOr33x2VtdLnlDQy0KFSw2YjcMu2+Lbo8ccr25QxRyOcmFNV96pU4muSJbk/xK17q2Takl6Ws1a0TVVxdNNkdYQZsh17Q6YfpPaiz/w5mVxYUdRvVrW/UVplR9gN/F5/StJYN4jQAAAABJRU5ErkJggg==" />
 </svg></a><?php } ?>
 							<?php if (get_theme_mod( 'footer_facebook_lnk' )) { ?>
-							<a rel="nofollow" target="_blank" href="<?php echo get_theme_mod( 'footer_instagram_lnk' ); ?>"><svg 
+							<a rel="nofollow" target="_blank" href="<?php echo get_theme_mod( 'footer_facebook_lnk' ); ?>"><svg 
  xmlns="http://www.w3.org/2000/svg"
  xmlns:xlink="http://www.w3.org/1999/xlink"
  width="8px" height="14px">
@@ -74,12 +84,15 @@
 		</div><!--/.container-->
 		<div class="footer_bott">
 			<div class="container">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/counter.jpg" width="112" height="41" class="img-fluid">
+				<?php if (get_theme_mod( 'footer_iks' )) { ?>
+					<?php echo get_theme_mod( 'footer_iks' ); ?>
+				<?php } ?>
 			</div><!--/.container-->
 		</div><!--/.footer_bott-->
 	</footer><!-- #colophon -->
 	
 </div><!-- #page -->
+
 
 <?php wp_footer(); ?>
 

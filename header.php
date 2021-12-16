@@ -14,22 +14,24 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0 shrink-to-fit=no" />
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<?php (is_page('kontakty'))?$class='kontakty':$class='';?>
+<body <?php body_class($class); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'fleetservice' ); ?></a>
 
-	<header id="masthead" class="site-header sticky-top">
+	<header id="masthead" class="site-header">
 		<div class="container">
 			<div class="row row_h">				
 				<div class="site-branding col-3 col-sm-3 col-md-2 col-lg-2">
 					<?php
-					if ( is_front_page() && is_home() ) :
+					if ( is_front_page() ) :
 						$logo_img = '';
 						if( $custom_logo_id = get_theme_mod('custom_logo') ){
 							$logo_img = wp_get_attachment_image( $custom_logo_id, 'full', false, array(
@@ -64,15 +66,17 @@
 									'theme_location' => 'menu-1',
 									'container'   	=> '',
 									'menu_id'        => 'primary-menu',
-									'menu_class'     => 'navbar-nav',
+									'menu_class'     => 'navbar-nav mr-auto',
+									'walker'  => new BootstrapNavMenuWalker()
 								) );
 								?>
 							</div><!--/.collapse-->
+						</div><!--/.row.no-gutters-->
 					</nav><!--/.nav-main-->
 
 					<div class="block-links">
 						<div class="row no-gutters flex-nowrap align-items-center">
-							<div class="col-auto col-lg-4 d-flex wrap_wishcompare">
+							<div class="col-auto col-lg-auto d-flex wrap_wishcompare">
 								<a href="<?php echo get_theme_mod('wishist_url'); ?>" class="wishlist"><span class="d-none d-lg-inline"><?php _e('Избранное','fleetservice'); ?></span></a>
 								<a href="<?php echo get_theme_mod('compare_url'); ?>" class="compare"><span class="d-none d-lg-inline"><?php _e('Сравнение','fleetservice'); ?></span></a>
 							</div>
@@ -89,7 +93,7 @@
 								<?php $cart_contents_count = WC()->cart->get_cart_contents_count(); 
 								$cart_contents_sum = WC()->cart->get_cart_subtotal( );
 								?>
-								<a href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>" class="minicart"><span class="d-none d-sm-inline">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span></a>
+								<a href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>" class="minicart cart-contents"><span class="d-none d-sm-inline">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span></a>
 							</div>
 						</div><!--/.row-->
 					</div><!--/.block-links-->
@@ -100,7 +104,7 @@
 							<div class="col-lg-3 hours d-sm-block d-none">
 								<?php echo get_theme_mod('working_hours'); ?>
 							</div>		
-							<div class="wrap-form col-md-auto col-lg-auto ml-auto">
+							<div id="wrap-form_header" class="wrap-form col-md-auto col-lg-auto ml-auto">
 								<a href="#" class="site-search-toggle"></a>
 								<span class="makeweight">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span>
 								<?php get_search_form(); ?>
@@ -111,7 +115,15 @@
 			</div><!--/.row-->
 		</div><!--/.container-->
 	</header><!-- #masthead -->
-
+	<?php if (!is_front_page()) { ?>
+	<div class="breadcrumbs">
+		<div class="container">
+		<?php if ( function_exists('yoast_breadcrumb') ) {
+		  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+		} ?>
+		</div><!--/.container-->
+	</div>
+	<?php } ?>
 	<div id="content" class="site-content">
 		
 

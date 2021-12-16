@@ -1,0 +1,15 @@
+[
+    {
+        "title": "\u0412\u044b\u0434\u0435\u043b\u0435\u043d\u043d\u044b\u0439 \u0442\u0435\u043a\u0441\u0442",
+        "selector": "p",
+        "classes": "font-size-3 secondary-font",
+        "type": "item"
+    },
+    {
+        "title": "\u041f\u043e\u043b\u043e\u0441\u0430\u044f \u0442\u0430\u0431\u043b\u0438\u0446\u0430",
+        "selector": "table",
+        "classes": "table-striped",
+        "editor_css": ".table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {\r\n   background-color: #eef8f9;\r\n}",
+        "type": "item"
+    }
+]

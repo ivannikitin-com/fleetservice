@@ -9,12 +9,9 @@
 
 ?>
 
-<section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'fleetservice' ); ?></h1>
-	</header><!-- .page-header -->
-
-	<div class="page-content">
+<article id="post-<?php the_ID(); ?>" <?php post_class('entry clear'); ?>>
+	<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'fleetservice' ); ?></h1>
+	<div class="entry-content">
 		<?php
 		if ( is_home() && current_user_can( 'publish_posts' ) ) :
 
@@ -35,17 +32,20 @@
 			?>
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'fleetservice' ); ?></p>
-			<?php
-			get_search_form();
-
-		else :
+			<div class="row no-gutters align-items-center justify-content-left">		
+				<div class="wrap-form col-sm-12 col-md-6 col-lg-6">
+					<a href="#" class="site-search-toggle"></a>
+			<?php get_search_form(); ?>
+				</div>
+			</div>
+		<?php else :
 			?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'fleetservice' ); ?></p>
 			<?php
-			get_search_form();
+			//get_search_form();
 
 		endif;
 		?>
-	</div><!-- .page-content -->
-</section><!-- .no-results -->
+	</div><!-- .entry-content -->
+</article>

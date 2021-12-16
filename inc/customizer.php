@@ -165,7 +165,16 @@ function fleetservice_customize_register( $wp_customize ) {
 				'section' => 'section_footer',
 				'type' => 'textarea',
 			)
-		);								
+		);	
+		$wp_customize->add_setting('footer_iks', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_iks', array(
+				'label' => 'html-код ИКС Яндекс',
+				'section' => 'section_footer',
+				'type' => 'textarea',
+			)
+		);
 }
 add_action( 'customize_register', 'fleetservice_customize_register' );
 

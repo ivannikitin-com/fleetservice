@@ -1,12 +1,23 @@
 $default-font: "Open Sans", sans-serif;
-$secondary-font: 'Open Sans Condensed', sans-serif;
+$secondary-font: "Open Sans Condensed", sans-serif;
 $accent: #14848e;
 
 // Customization Bootstrap vars from "app/libs/bootstrap/scss/_variables.scss"
 $grid-gutter-width: 30px;
 $grid-columns: 12;
-$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px);
-$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 1170px);
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1170px
+);
 
 $gutter: $grid-gutter-width;
 
@@ -20,6 +31,7 @@ $blue-green: #14848e;
 $light-blue-green: #2eb3bf;
 $light-blue-grey: #cbe8eb;
 $grey: #ecedee;
+$ghostwhite: #f9f9fa;
 $steel-grey: #798c8e;
 $dark: $accent;
 $pale-grey: #f5f8fa;
@@ -28,4 +40,10 @@ $black-two: #363636;
 $black-three: #252525;
 $ugly-blue: #27858b;
 $warm-grey-two: #8c8c8c;
-$silver: #ecedee;
+$warm-grey-three: #f0f0f2;
+$silver: #e5e5e5;
+$orange: #f26522;
+$red: #9e0b0f;
+$zambezi: #595959;
+$whisper: #e5e5e5;
+$dark-grayish: #222226;

@@ -110,6 +110,7 @@ if ( $products->have_posts() ) : ?>
 		</div><!--/.container-->
 	</div><!--/.bestsellers-list-->
 </section><!--/.bestsellers-->
+<?php fleet_form_one_click_html(); ?>
 <?php endif; ?>
 <?php endif; ?>
 
@@ -118,7 +119,7 @@ $short_information_title = get_field('short_information_title');
 $slogun_icon = get_field('slogun_icon');
 $slogun_text = get_field('slogun_text');
 $front_page_content = get_the_content();
-$more_info_lnk = get_field('more_info_lnk');
+$more_info_link = get_field('more_info_link');
 if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?> 
 <section class="about-us" style="background-color: #fff;">	
 	<div class="container">
@@ -134,7 +135,7 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 				<?php if (isset($slogun_icon) || $slogun_text) { ?>
 				<div class="about-us-slogan">
 					<?php if ($slogun_icon) { ?>
-					<img src="<?php echo $slogun_icon['url']; ?>" width="130" height="179" class="img-fluid">
+					<div class="about-us-slogan-icon"><img src="<?php echo $slogun_icon['url']; ?>" width="130" height="179" class="img-fluid"></div>
 					<?php } ?>
 					<?php if ($slogun_text) { ?>
 					<div class="about-us-slogan-txt">
@@ -147,8 +148,8 @@ if ($front_page_content || $slogun_text = get_field('slogun_text')) : ?>
 				<div class="about-us-main_txt">				
 				<?php echo the_content(); ?>
 				</div>
-				<?php if ($more_info_lnk) { ?>
-				<a href="<?php echo $more_info_lnk; ?>" class="more"><?php _e('More','fleetservice'); ?></a>
+				<?php if ($more_info_link) { ?>
+				<a href="<?php echo $more_info_link; ?>" class="more"><?php _e('Узнать больше','fleetservice'); ?></a>
 				<?php } ?>
 				<?php } ?>
 			</div>
@@ -217,11 +218,11 @@ if ($news_posts): ?>
 				 <?php if ($last_news_flag) { 
 				 $post_thumb_url = get_the_post_thumbnail_url(get_the_ID(),'full'); 
 				 if ($post_thumb_url) { ?>
-				<img src="<?php echo $post_thumb_url; ?>" class="img-fluid mb-md-0 mb-4">	
+				 <div class="img-wrap text-center"><img src="<?php echo $post_thumb_url; ?>" class="img-fluid mb-md-0 mb-4"></div>
 				<?php } ?>
 				<?php $last_news_flag = false; } ?>
 				<article class="news-item mb-md-0 mb-3">
-				<time pubdate datetime="<?php echo get_the_date('Y-m-d');?>" class="news-item-date mt-md-0 mt-3"><?php echo wp_maybe_decline_date(get_the_date()); ?></time>
+				<time datetime="<?php echo get_the_date('Y-m-d');?>" class="news-item-date mt-md-0 mt-3"><?php echo wp_maybe_decline_date(get_the_date()); ?></time>
 					<div class="news-item-title"><a href="<?php echo the_permalink(); ?>"><?php the_title(); ?></a></div>
 					<div class="news-item-descr">
 						<?php the_excerpt(); ?>
