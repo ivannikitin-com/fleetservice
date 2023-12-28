@@ -1,55 +1,174 @@
-.woocommerce-address-fields #billing_myfield12_field > label {
-	display:none;
+a.disabled-link,
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button.disabled-link {
+    background-color: #cbe8eb;
+    color: #14848e;
+    border: 1px solid #cbe8eb;
+    opacity: 1;
+    pointer-events: none;
+    cursor: not-allowed;
 }
-.woocommerce ul.products li.product .img_wrap img {
-	padding:1px;
+
+#zbs-nav-tabs li::before,
+.zbs-portal-nav li::before,
+ul.products li.product::before {
+    display: none !important;
 }
-.error404 .entry-content .site-search-toggle, .search-no-results .entry-content .site-search-toggle{
-	margin: 8px;
-	position: absolute;
+
+.page-description ul li::before,
+.term-description ul li::before,
+.woocommerce-Tabs-panel--description ul li::before,
+.woocommerce-product-details__short-description ul li::before,
+:not(.woocommerce-checkout.woocommerce-page) .entry ul li::before {
+    position: relative;
 }
-.error404 .entry-content .site-search-toggle:before, .search-no-results .entry-content .site-search-toggle:before  {
-    content: "";
-    display: inline-block;
-    background: url(../img/sprite.png) no-repeat -34px -66px;
-    width: 21px;
-    height: 21px;
+
+
+.ysm-search-widget .search-submit::before {
+    display: none !important;
 }
-.error404 .entry-content input[type="search"], .search-no-results .entry-content input[type="search"] {
-	padding-left: 40px;
+
+.smart-search-results {
+    width: 100% !important;
 }
-.woocommerce-account .mailpoet_paragraph:nth-of-type(4) {
-    display: block!important;
+
+.smart-search-results {
+    top: 30px;
 }
+
 /*
-.search-in-footer {
-    margin-bottom: 20px;
+#modalOneClick {
+    z-index: 1050;
+    background: transparent;
+    position: fixed;
+    max-width: none;
+    width: 100%;
+    padding: 0;
 }
-.search-in-footer .site-search-toggle {
-    position: absolute;
-    right: 25px;
-    top: 9px;
-}
-.search-in-footer .site-search-toggle:before {
-    content: "";
-    display: inline-block;
-    background: url(../img/sprite.png) no-repeat -34px -66px;
-    width: 21px;
-    height: 21px;
-}
-
-.search-in-footer .search-form input {
-    width: calc( 100% - 35px);
-    border-right: none;
-    font-size: 16px;
-}
-
-.search-in-footer .search-form input:focus {
-    border:none;
-}
-
-@media (min-width:768px){
-    .search-in-footer {
-        display: none;
+@media (min-width: 576px) {
+#modalOneClick .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
     }
 }*/
+.woocommerce-address-fields #billing_myfield12_field>label {
+    display: none;
+}
+
+.woocommerce ul.products li.product .img_wrap img {
+    padding: 1px;
+}
+
+.woocommerce.single-product .summary .price del {
+    font-size: 18px;
+}
+
+
+.woocommerce ul.products li.product .price ins,
+.woocommerce.single-product .summary .price ins .woocommerce-Price-amount {
+    color: #ff0000;
+}
+
+.error404 .entry-content .site-search-toggle,
+.search-no-results .entry-content .site-search-toggle {
+    margin: 8px;
+    position: absolute;
+}
+
+.error404 .entry-content .site-search-toggle:before,
+.search-no-results .entry-content .site-search-toggle:before {
+    content: "";
+    display: inline-block;
+    background: url(../img/sprite.png) no-repeat -34px -66px;
+    width: 21px;
+    height: 21px;
+}
+
+.error404 .entry-content input[type="search"],
+.search-no-results .entry-content input[type="search"] {
+    padding-left: 40px;
+}
+
+.woocommerce-account .mailpoet_paragraph:nth-of-type(4) {
+    display: block !important;
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+}
+
+.socials__telegram-image {
+    height: 22px;
+    width: 22px;
+    fill: #fff;
+    background: #289ed8;
+    border-radius: 50%;
+}
+
+.socials__yandex_zen-image {
+    height: 22px;
+    width: 22px;
+}
+
+.socials__ok-image {
+    width: 22px;
+    height: 22px;
+    fill: #ffab49;
+}
+
+.socials__vk-image {
+    width: 22px;
+    height: 22px;
+}
+
+.brands .brands-list a.c_change img {
+    max-height: 80px;
+    width: auto;
+}
+
+.woocommerce-cart .cart-collaterals .cart_totals {
+	clear: both;
+}
+
+.woocommerce .cart-collaterals .cross-sells,
+.woocommerce-page .cart-collaterals .cross-sells {	
+	width: 100%;
+}
+
+.woocommerce .cart-collaterals .cross-sells ul.products,
+.woocommerce-page .cart-collaterals .cross-sells ul.products {
+	padding-left: 0;
+}
+
+.cross-sells .section-title {
+	margin-right: 34px;
+}
+
+.woocommerce .cross-sells .products.owl-carousel {
+	margin-top: 27px;
+}
+
+.cross-sells .owl-carousel .owl-nav {
+	position: absolute;
+	top: -48px;
+  right: 0;
+}
+
+@media (max-width: 767.98px) {
+    .site-footer .socials a {
+        margin-left: 25px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .woocommerce ul.product-cats {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .woocommerce ul.product-cats li.category {
+        flex: 1 1 50%;
+        max-width: 50%;
+        min-width: 25ch;
+    }
+}

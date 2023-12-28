@@ -19,6 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 $grid = (is_shop() || is_archive())?'grid':'';
-$carousel =  (is_singular('product'))?' owl-carousel':'';
+$carousel =  (is_singular('product') || is_cart())?' owl-carousel':'';
 ?>
 <ul class="<?php echo $grid; ?> products <?php echo $carousel; ?> columns-<?php echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?>">

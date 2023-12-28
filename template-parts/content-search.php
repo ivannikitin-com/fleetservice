@@ -9,7 +9,7 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('news-item col-sm-6'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('news-item col-sm-3'); ?>>
 	<a href="<?php echo esc_url( get_permalink() ); ?>" class="a_wrap">
 		<?php 
 		$attr = array(

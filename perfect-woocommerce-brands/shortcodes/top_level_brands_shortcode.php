@@ -14,11 +14,13 @@ function top_level_brands_shortcode( $atts ) {
       'title_position' => 'before'
     ), $atts, 'pwb-all-brands' );
 
-    $hide_empty = ( $atts['hide_empty'] != 'true' ) ? false : true;
+    if ($atts['hide_empty'] === "true" ) {
+      $atts['hide_empty'] = 1;
+    }
 
     ob_start();
 
-    $brands_args = array( 'hide_empty' => $hide_empty, 'orderby' => $atts['order_by'], 'order' =>$atts['order'], 'parent' => 0 );
+    $brands_args = array( 'hide_empty' => $atts['hide_empty'], 'orderby' => $atts['order_by'], 'order' =>$atts['order'], 'parent' => 0 );
 
     $brands = array();
     /*if( $atts['order_by'] == 'rand' ){
@@ -27,7 +29,8 @@ function top_level_brands_shortcode( $atts ) {
     }else{
       $brands = \Perfect_Woocommerce_Brands\Perfect_Woocommerce_Brands::get_brands( $hide_empty, $atts['order_by'], $atts['order'] );
     }*/
-    $brands = get_terms('pwb-brand', $brands_args);
+
+    $brands = get_terms('pwb-brand', $brands_args);   
     foreach( $brands as $key => $brand ){
           $brand_image_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
           $brand_banner_id = get_term_meta($brand->term_id, 'pwb_brand_banner', true);
@@ -39,12 +42,12 @@ function top_level_brands_shortcode( $atts ) {
     foreach ( $brands as $key => $brand ) {
 
       //$count = self::count_visible_products( $brand->term_id );
-      $count = 1;
+      //$count = 1;
 
-      if ( ! $count && $hide_empty ){
+      if ( ! $brand->count && $brands_args['hide_empty'] ){
         unset( $brands[$key] );
       } else {
-        $brands[$key]->count_pwb = $count;
+        $brands[$key]->count_pwb = $brand->count;
       }
 
     }
@@ -57,6 +60,38 @@ function top_level_brands_shortcode( $atts ) {
 
     return ob_get_clean();
   }
+
+function top_level_brands_shortcode_4_frontpage( $atts ) {
+
+    $atts = shortcode_atts( array(
+      'number'        => 44,
+      'hide_empty'     => true,
+      'order_by'       => 'name',
+      'order'          => 'ASC',
+      'title_position' => 'before'
+    ), $atts, 'pwb-all-brands' );
+
+    $hide_empty = ( $atts['hide_empty'] != 'true' ) ? false : true;
+
+    ob_start();
+
+    $brands_args = array( 'hide_empty' => $hide_empty, 'orderby' => $atts['order_by'], 'order' =>$atts['order'], 'parent' => 0 );
+
+    $brands = array();
+    $brands = get_terms('pwb-brand', $brands_args);
+
+    //remove residual empty brands
+    foreach ( $brands as $brand ) { 
+      $brand_image_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
+      $brand_image = wp_get_attachment_image($brand_image_id, 'thumbnail', array('class'  => 'attachment-full size-full'));
+          ?>
+      <a href="<?php echo get_term_link( $brand );?>" title="<?php echo $brand->name; ?>" class="c_change">
+        <?php echo $brand_image;?></a>
+    <?php } ?>
+    </div><!--/.container-->
+
+    <?php return ob_get_clean();
+  }  
 
   /**
    *  WP_Term->count property don´t care about hidden products
@@ -173,5 +208,76 @@ function pagination( $display_array, $show_per_page, $image_size, $title_positio
     }else{
       echo __('No results','perfect-woocommerce-brands');
     }
+
+  }
+
+  function top_level_brands_list_shortcode( $atts ) {
+    //$grouped_brands = get_transient( 'pwb_az_listing_cache_' . get_locale() );
+    $grouped_brands = array();    
+
+    if ( ! $grouped_brands ) {
+
+      $atts = shortcode_atts( array(
+        'hide_empty'     => false,
+        'order_by'       => 'name',
+        'order'          => 'ASC'
+      ), $atts, 'top-level-brands-list' );
+
+      if ($atts['hide_empty'] === "true" ) {
+        $atts['hide_empty'] = true;
+      }
+      $brands_args = array( 'get'=>'all', 'hide_empty' => true, 'orderby' => $atts['order_by'], 'order' =>$atts['order'], 'parent' => 0 );
+
+      $grouped_brands = array();
+
+      $brands = get_terms('pwb-brand', $brands_args);
+
+      foreach ( $brands as $brand ) {
+
+        if ( ! $hide_empty || ( $hide_empty && check_products( $brand->term_id ) ) ) {
+
+          $letter                      = mb_substr( htmlspecialchars_decode( $brand->name ), 0, 1 );
+          $letter                      = strtolower( $letter );
+          $grouped_brands[ $letter ][] = array( 'brand_term' => $brand );
+
+        }
+      }
+
+      //set_transient( 'pwb_az_listing_cache_' . get_locale(), $grouped_brands, 43200 );// 12 hours
+      ob_start();
+      include WP_PLUGIN_DIR . '/perfect-woocommerce-brands/templates/shortcodes/az-listing.php';
+      return ob_get_clean();
+    }
+  }
+
+  function check_products( $brand_id ) {
+
+    $args = array(
+      'posts_per_page' => -1,
+      'post_type'      => 'product',
+      'post_status'    => 'publish',
+      'tax_query'      => array(
+        array(
+          'taxonomy' => 'pwb-brand',
+          'field'    => 'term_id',
+          'terms'    => array( $brand_id ),
+        ),
+      ),
+      'fields'         => 'ids',
+    );
+
+    if ( get_option( 'woocommerce_hide_out_of_stock_items' ) === 'yes' ) {
+      $args['meta_query'] = array(
+        array(
+          'key'     => '_stock_status',
+          'value'   => 'outofstock',
+          'compare' => 'NOT IN',
+        ),
+      );
+    }
+
+    $wp_query = new WP_Query( $args );
+    wp_reset_postdata();
+    return $wp_query->posts;
 
   }

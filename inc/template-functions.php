@@ -82,3 +82,32 @@ function redirect_single_post() {
 		}
 	}
 }
+
+add_filter('wpseo_metadesc', function($metadesc){
+	
+	if(is_product() && !$metadesc)
+	{
+		$_product = wc_get_product( get_the_id() );
+		if ($_product->get_price()) {
+			//$price = wc_price($_product->get_price());
+			$price = $_product->get_price_html();
+			$price = wc_price($_product->get_price());
+		} else {
+			$price = 'по запросу.';
+		}
+		$color = ($_product->get_attribute( 'pa_color' ))?$_product->get_attribute( 'pa_color' ).'. ':'';
+		$volume = ($_product->get_attribute( 'pa_volume' ))?$_product->get_attribute( 'pa_volume' ).'. ':'';
+		$volume ='';
+		$values = get_the_terms( get_the_id(), 'pa_volume');
+		 
+		foreach ( $values as $value ) {
+		  $volume .= $value->name.'. ';
+		}		
+		$attr = ($color)?$color:$volume;
+		$excerpt = get_the_excerpt();
+		$metadesc = $attr.' Цена: '.$price.' '.$excerpt;
+		$metadesc = str_replace("&nbsp;",' ',$metadesc);
+	}
+	
+	return $metadesc;
+}, 10, 1);

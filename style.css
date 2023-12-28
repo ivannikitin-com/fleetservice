@@ -14,9 +14,12 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 */
 
 hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
 }
 
 /**
@@ -25,21 +28,28 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
 }
 
 abbr[title] {
-  border-bottom: none; /* 1 */
-  text-decoration: underline; /* 2 */
-  text-decoration: underline dotted; /* 2 */
+  border-bottom: none;
+  /* 1 */
+  text-decoration: underline;
+  /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */
 }
 
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
 }
 
 small {
@@ -127,8 +137,10 @@ progress {
  */
 
 [type="search"] {
-  -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2 */
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
 }
 
 /**
@@ -145,8 +157,10 @@ progress {
  */
 
 ::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
 }
 
 summary {
@@ -179,7 +193,8 @@ template {
   padding: 0;
   position: absolute !important;
   width: 1px;
-  word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+  word-wrap: normal !important;
+  /* Many screen reader and browser combinations announce broken words as they would appear visually. */
 }
 
 .screen-reader-text:focus {
@@ -246,9 +261,9 @@ template {
 .site-content:after,
 .site-footer:before,
 .site-footer:after {
-	content: "";
-	display: table;
-	table-layout: fixed;
+  content: "";
+  display: table;
+  table-layout: fixed;
 }
 
 .clear:after,
@@ -257,7 +272,7 @@ template {
 .site-header:after,
 .site-content:after,
 .site-footer:after {
-	clear: both;
+  clear: both;
 } */
 
 /*--------------------------------------------------------------
@@ -357,7 +372,28 @@ object {
 .gallery-caption {
   display: block;
 }
-.woocommerce.single-product .summary .brand_wrap img{
+
+.brand-list li::before {
+  display: none !important;
+}
+
+.woocommerce.single-product .summary .brand_wrap img {
   max-height: 60px;
   width: auto;
+}
+
+.single article .entry-content ul li {
+  position: relative;
+  display: list-item;
+}
+
+:not(.woocommerce-checkout.woocommerce-page) .entry ul li::before,
+.single article .entry-content ul li::before {
+  position: absolute;
+}
+
+
+.single article .entry-content strong {
+  margin: 0;
+  font-size: inherit;
 }

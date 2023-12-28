@@ -187,6 +187,10 @@ function fleetservice_scripts() {
 		$dependencies[] = 'select2';
 	}
 
+/*	if (is_front_page()) {
+		wp_dequeue_script( 'slick' );
+	}*/
+
 	wp_enqueue_style( 'formstyler', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.css' );
 	wp_enqueue_style( 'formstylertheme', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.theme.css' );		
 	wp_enqueue_script( 'formstyler', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.min.js', array('jquery'), null, true);
@@ -198,7 +202,9 @@ function fleetservice_scripts() {
 	wp_enqueue_script( 'common-js', get_template_directory_uri() . '/js/common.js', $dependencies, time(), true );	
 	if (!(is_woocommerce() || is_tax('pwb-brand'))) {
 		wp_dequeue_style('prdctfltr-css');
-	}	
+	}
+	//
+	//wp_enqueue_style( 'modal',  $path . '/js-css/jquery.modal.min.css', array( ) );		
 	wp_enqueue_style( 'fleetservice-main', get_template_directory_uri() . '/css/main.css' );
 	wp_enqueue_style( 'fleetservice-additional', get_template_directory_uri() . '/css/additional.css' );
 	if (is_account_page()) {
@@ -235,6 +241,24 @@ function fleetservice_scripts() {
 }
 	
 add_action( 'wp_enqueue_scripts', 'fleetservice_scripts' );
+
+/*add_action('admin_enqueue_scripts', 'fleet_admin_js', 99);
+ 
+function fleet_admin_js(){
+	wp_enqueue_script('fleet-wp-admin', get_stylesheet_directory_uri() .'/js/admin-script.js', array('jquery'), null, true  );
+}*/
+
+add_action('admin_enqueue_scripts', 'fleet_early_admin_js', 1);
+function fleet_early_admin_js(){
+	wp_enqueue_script('early-wp-admin', get_stylesheet_directory_uri() .'/js/early-admin.js', array('jquery'), null, false  );
+}
+
+
+function fleetservice_dequeue() {
+	wp_dequeue_style('modal');
+}
+
+add_action( 'wp_head', 'fleetservice_dequeue', 9999 );
 
 function my_myme_types($mime_types){
     $mime_types['svg'] = 'image/svg+xml'; // поддержка SVG

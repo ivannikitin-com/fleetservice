@@ -156,6 +156,24 @@ function fleetservice_customize_register( $wp_customize ) {
 				'section' => 'section_footer',
 				'type' => 'text',
 			)
+		);			
+		$wp_customize->add_setting('footer_Telegram_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_Telegram_lnk', array(
+				'label' => 'Ссылка на Telegram',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
+		);			
+		$wp_customize->add_setting('footer_Yandex_Zen_lnk', 
+			array('default' => '')
+		);
+		$wp_customize->add_control('footer_Yandex_Zen_lnk', array(
+				'label' => 'Ссылка на Яндекс.Дзен',
+				'section' => 'section_footer',
+				'type' => 'text',
+			)
 		);
 		$wp_customize->add_setting('footer_text_block', 
 			array('default' => '')

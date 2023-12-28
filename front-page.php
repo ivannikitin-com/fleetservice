@@ -72,8 +72,8 @@
 	</div><!--/.container-->	
 	<div class="brands-list">
 		<div class="container">
-	<?php echo do_shortcode('[pwb-carousel items="featured" items_to_show="5" items_to_scroll="1" image_size="full" autoplay="true" arrows="true" hide_empty="false"]'); ?>
-		</div><!--/.container-->		
+	<?php //echo do_shortcode('[pwb-carousel items="featured" items_to_show="5" items_to_scroll="1" image_size="full" autoplay="true" arrows="true" hide_empty="false"]'); ?>
+	<?php echo do_shortcode('[brands-on-frontpage image_size="full" order_by="name" order="ASC"]'); ?>	
 	</div><!--.brands-list-->	
 	
 </section><!--/.brands-->

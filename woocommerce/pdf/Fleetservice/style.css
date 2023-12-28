@@ -1,0 +1,237 @@
+@charset "utf-8";
+/* Main Body */
+@page {
+	margin-top: 1cm;
+	margin-bottom: 3cm;
+	margin-left: 2cm;
+	margin-right: 2cm;
+}
+
+body {
+	background: #fff;	
+	color: #000;
+	margin: 0cm;
+	font-size: 9pt;
+	line-height: 100%; /* fixes inherit dompdf bug */
+	/* overflow-wrap: anywhere; */
+}
+
+h1, h2, h3, h4 {
+	font-weight: bold;
+	margin: 0.67em 0;
+}
+
+h2 {
+	font-size: 14pt;
+}
+
+h3, h4 {
+	font-size: 9pt;
+}
+
+ol,
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li,
+ul {
+	margin-bottom: 0.75em;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+p + p {
+	margin-top: 1.25em;
+}
+
+/* Basic Table Styling */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	/* page-break-inside: always; */
+	border: 0;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+/* item meta formatting for WC2.6 and older */
+
+dt, dd, dd p {
+	display: inline;
+	font-size: 7pt;
+	line-height: 7pt;
+}
+
+/*custom styles*/
+
+@media print {
+	table {
+		page-break-inside: always;
+		break-inside: always;
+	}
+
+	img {
+		page-break-inside: avoid;
+		break-inside: avoid;
+	}
+
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+
+.nowrap {
+	white-space: nowrap;
+}
+
+h1 {
+	font-size: 19px;
+}
+
+caption,
+.fwBold {
+	font-weight: bold;
+}
+
+.no-borders td,
+.no-borders th {
+	border: none;
+}
+
+.padding0 {
+	padding: 0;
+}
+
+th,
+td {
+	padding: 2px 4px;
+}
+
+th {
+	border: 1px solid #000;
+}
+
+td {
+	vertical-align: top;
+	border: 1px solid #000;
+}
+
+
+.brdTop0 {
+	border-top: 0;
+}
+
+.brdBott0 {
+	border-bottom: 0;
+}
+
+.brdLeft0 {
+	border-left: 0;
+}
+
+.brdRight0 {
+	border-right: 0;
+}
+
+.fs-small {
+	font-size: 93%;
+}		
+
+.txtCenter {
+	text-align: center;
+}
+
+.txtRight {
+	text-align: right;
+}
+
+table.invoice tfoot tr:first-child td {
+	padding-top: 14px;
+}
+
+table.invoice tfoot tr:last-of-type td {
+	padding-bottom: 7px;
+}
+
+table.invoice tfoot {
+	border-bottom: 2px solid #000;
+}
+
+table.visa {
+	position: relative;
+}
+
+.sign-1,
+.sign-2,
+.stamp {
+	position: relative;
+}
+
+.stamp {
+	width: 200px;
+}
+
+.stamp__img {
+	right: 18%;
+	top: -47px;	
+	width: 152px;
+	height: 150px;
+	z-index: 1;
+}
+
+.stamp__img,
+.sign-1__autograph,
+.sign-2__autograph {
+	position: absolute;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: contain;
+}
+
+.sign-1__autograph {
+	right: 47%;
+	top: -12px;
+	width: 50px;
+	height: 50px;
+	z-index: 2;
+}
+
+.sign-2__autograph {
+	right: 24%;
+	top: 0px;
+	width: 75px;
+	height: 50px;
+	z-index: 3;
+}
+
+.sign {
+	width: 110px;
+	height: auto;
+}
+
+.qr {
+	max-width: 512px;
+	height: auto;
+}
+
+a {
+	text-decoration: none;
+	color: #14848e;
+}
+
+.padBott__td-1 td {
+	padding-bottom: 14px;
+}
+
+.first-uppercase:first-letter {
+	text-transform: uppercase;
+}

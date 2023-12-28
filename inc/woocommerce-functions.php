@@ -226,14 +226,17 @@ function fleet_loop_sku(){
 add_action( 'woocommerce_after_shop_loop_item','fleet_loop_quick_view',9 );
 function fleet_loop_quick_view() { 
 	global $product;
-	echo do_shortcode('[woosq id="'.$product->get_id().'"]');
-	/*<a href="#" class="quick-view button"><?php _e('Quick view','fleetservice') ?></a>*/
+	echo do_shortcode('[woosq id="'.$product->get_id().'"]'); 
+/*<a href="#" class="quick-view button"><? _e('Quick view','fleetservice')</a>*/
 }
 remove_action( 'woocommerce_after_shop_loop_item_title','woocommerce_template_loop_price',10 );
 add_action( 'woocommerce_after_shop_loop_item','woocommerce_template_loop_price',6 );
 
 // Отделяем категории от товаров
 function fleet_product_subcategories( $args = array() ) {
+	if (is_search()) {
+		return;
+	}
 	$parentid = get_queried_object_id();
 	$args = array(
 	'parent' => $parentid
@@ -491,7 +494,8 @@ function get_product_price_callback(){
 		wp_die();
 	}
 
-	$result['product_price'] = get_post_meta($_POST['product_id'],'_price',true).' '.get_woocommerce_currency_symbol();
+	//$result['product_price'] = get_post_meta($_POST['product_id'],'_price',true).' '.get_woocommerce_currency_symbol();
+	$result['product_price'] = strip_tags(wc_price(get_post_meta($_POST['product_id'],'_price',true)));
 	$result['product_quantity'] = (isset($_POST['quantity']))?$_POST['quantity']:'';
 	$result['product_sku'] = get_post_meta($_POST['product_id'],'_sku',true);
 	$product_post = get_post($_POST['product_id']);
@@ -532,9 +536,20 @@ function my_action_javascript() {
 				quantity: quantity
 			};
 
-			// 'ajaxurl' не определена во фронте, поэтому мы добавили её аналог с помощью wp_localize_script()
 			jQuery.post( bocajax.url, data, function(response) {
 				var features = jQuery.parseJSON(response);
+				let minimum2buy = <?php echo get_option( 'fleet_min_cart_total' ); ?>;
+				let price = features['product_price'].split('&')[0];
+				 if (features['product_quantity'] * price < minimum2buy) {
+				 		if (document.querySelector(".woocommerce-error") === null) {
+				 			$('.form_one_click').prepend( '<ul class="woocommerce-error" role="alert"><li>Вам нужно указать товара на сумму минимум 2000.</li></ul>' );
+				 		}
+				 } else {
+				 		$('.form_one_click .woocommerce-error').remove();
+				 }
+				console.log('minimum2buy=' + minimum2buy);
+				console.log('product_price  = ' + price);
+
 				//Заполняем скрытые поля формы для формирования тела письма
 				$('form#oneclickform input[name="product-title"]').val(features['product_title']);
 				$('form#oneclickform input[name="product-quantity"]').val(features['product_quantity']);
@@ -674,6 +689,8 @@ function fleet_my_order_columns($order_table_columns) {
 // Add Link (Tab) to My Account menu
 add_filter ( 'woocommerce_account_menu_items', 'misha_log_history_link', 40 );
 function misha_log_history_link( $menu_links ){
+
+	$menu_links['edit-address'] = __( 'Addresses', 'woocommerce' );
  
 	$menu_links = array_slice( $menu_links, 0, 4, true ) 
 	+ array( 'mailing' => __( 'Рассылки','fleetservice' ))
@@ -705,13 +722,6 @@ add_action ( 'woocommerce_order_details_after_customer_details', 'woocommerce_or
 
 add_filter( 'woocommerce_billing_fields', 'fleet_remove_required', 999);
 function fleet_remove_required($fields) {
-	
-	/*echo '<pre>';
-	echo print_r($_POST);
-	echo '</pre>';*/
-	/*echo '<pre>';
-	echo print_r($fields);
-	echo '</pre>';*/
 	if (is_page('my-account')) {
 		unset($fields['billing_myfield18']);
 	}
@@ -772,6 +782,57 @@ function agogo_save_address_validation($user_id, $load_address, $address, $custo
 /*******************
 * Checkout page
 *******************/
+
+/*Ограничение на минимальную сумму заказа*/
+//add_action( 'woocommerce_before_cart' , 'fleet_minimum_order_amount' );
+//add_action( 'woocommerce_before_checkout_form_cart_notices', 'fleet_minimum_order_amount');
+add_action( 'woocommerce_check_cart_items', 'fleet_minimum_order_amount' );
+function fleet_minimum_order_amount() {
+    $minimum = get_option( 'fleet_min_cart_total' );
+
+    if ( $minimum && WC()->cart->cart_contents_total < $minimum) {
+    	wc_clear_notices();
+      wc_print_notice( 
+          sprintf( 'Вам нужно положить в корзину товара на сумму минимум %s.' , 
+              $minimum, 
+          ), 'error' 
+      );
+    } else {
+    	//wc_clear_notices();
+    }
+}
+
+add_filter( 'woocommerce_get_settings_products', 'fleet_add_settings', 10, 2 );
+ 
+function fleet_add_settings( $settings, $current_section ) {
+ 
+	if ( 'advanced' === $current_section ) {
+ 
+		$settings[] = array(
+			'name' => 'Условия для оформления заказа',
+			'type' => 'title'
+		);
+
+		$settings[] = array(
+			'name'     => 'Минимальная стоимость заказа',
+			'desc_tip' => 'Если сумма заказа меньше, то заказ оформить нельзя',
+			'id'       => 'fleet_min_cart_total',
+			'type'     => 'number',
+			'css'      => 'max-width:100px;',
+		);
+
+		$settings[] = array(
+			'type' => 'sectionend'
+		);		
+ 
+	}
+ 
+	return $settings;
+ 
+}
+
+
+
 //add_action( 'woocommerce_review_order_after_order_total','fleet_shipping_text',10 );
 function fleet_shipping_text(){
 	echo '<div id="shipping_cost_text">';
@@ -809,7 +870,7 @@ add_action('woocommerce_checkout_process', 'my_custom_checkout_field_process');
 
 function my_custom_checkout_field_process() {
     // Check if set, if its not set add an error.
-    if ( $_POST['billing_myfield12'] ) {
+    if ( $_POST['billing_myfield12'] == "Физическое лицо" ) {
         add_filter( 'woocommerce_checkout_fields' , 'remove_required_attr',1 );
         function remove_required_attr($fields){
         	$fields['billing']['billing_company']['required'] = false;
@@ -818,7 +879,7 @@ function my_custom_checkout_field_process() {
         	$fields['billing']['billing_myfield15']['required'] = false;//Банк
         	$fields['billing']['billing_myfield16']['required'] = false;//Р/с
         	$fields['billing']['billing_myfield17']['required'] = false;//Корр./с
-			return $fields;
+					return $fields;
         }
         return;
     }
@@ -943,6 +1004,9 @@ function fleet_set_tag_on_product_save( $product_id ) {
 	}
 }
 add_shortcode( 'top-level-brands', 'top_level_brands_shortcode' );
+add_shortcode( 'brands-on-frontpage', 'top_level_brands_shortcode_4_frontpage' );
+add_shortcode( 'top-level-brands-list', 'top_level_brands_list_shortcode' );
+
 
 
 //Ajax Обновление кратких данных из корзины
@@ -979,32 +1043,20 @@ function fleet_add_id_sortable_column($sortable_columns){
   $sortable_columns['colID'] = 'views_views';
   return $sortable_columns;}
 
-
-//add_action( 'woocommerce_admin_order_data_after_billing_address', 'fleet_admin_order_fields',999 );
-function fleet_admin_order_fields($order) {
-	echo '<pre>';
-  	print_r($order);
-  	echo '</pre>';
-}
-
 if (function_exists('wcmmq_s_set_min_qt_in_shop_loop')) {
 add_filter('woocommerce_loop_add_to_cart_link','wcmmq_s_set_min_qt_in_shop_loop',10,3);
 }
 
 function fleet_wc_remove_password() {
-
 	if(wp_script_is("wc-password-strength-meter", "enqueued")) {
 	
-		wp_dequeue_script("wc-password-strength-meter"); 
-		
-	}
-	
+		wp_dequeue_script("wc-password-strength-meter"); 		
+	}	
 }
-
 add_action( 'wp_print_scripts', 'fleet_wc_remove_password', 100);
 
-add_filter( 'woocommerce_formatted_address_replacements', 'agogo_formatted_address_replacements', 10, 2 );
-function agogo_formatted_address_replacements( $address, $args ) {
+add_filter( 'woocommerce_formatted_address_replacements', 'fleet_formatted_address_replacements', 10, 2 );
+function fleet_formatted_address_replacements( $address, $args ) {
 	$address['{email}'] = '';
 	$address['{phone}'] = '';
     $address['{payer}'] = '';
@@ -1130,10 +1182,17 @@ function agogo_woocommerce_custom_address_format( $formats ) {
     return $formats;
 }
 
-/*add_filter( 'woocommerce_save_account_details_required_fields' ,'agogo_edit_account_remove_required_names' );
-function agogo_edit_account_remove_required_names( $fields ) {
-   unset($fields['account_first_name']);
-   unset($fields['account_last_name']);
-   unset($fields['account_display_name']);
-   return $fields;
-}*/
+/*********
+* Cart
+********/
+
+remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+
+add_filter( 'woocommerce_cross_sells_columns', 'fleet_change_cross_sells_columns' );
+function fleet_change_cross_sells_columns( $columns ) { return 4; }
+
+add_filter( 'woocommerce_cross_sells_total', 'fleet_change_cross_sells_product_no' );
+  
+function fleet_change_cross_sells_product_no( $columns ) {
+return 12;
+}

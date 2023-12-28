@@ -179,5 +179,14 @@ defined( 'ABSPATH' ) || exit;
 		</div><!--/.end col-->
 	</div><!--/.row-->
 
+	<div class="row">
+		<div class="col-12">
+			<div class="cart-collaterals">
+				<?php woocommerce_cross_sell_display(); ?>
+			</div>
+
+		</div>
+	</div>
+
 <?php do_action( 'woocommerce_after_cart' ); ?>
 </div><!--/.container-->
