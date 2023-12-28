@@ -1196,3 +1196,75 @@ add_filter( 'woocommerce_cross_sells_total', 'fleet_change_cross_sells_product_n
 function fleet_change_cross_sells_product_no( $columns ) {
 return 12;
 }
+
+
+add_filter( 'woocommerce_stock_html', 'ouput_instock_status', 10, 3);
+function ouput_instock_status( $html, $availability, $product ){
+	if ( $product->get_stock_status() == 'instock' && !$html) {
+		$html = '<p class="stock instock">'.__('В наличии','fleetservice').'</p>';
+	}
+	return $html;
+}
+
+/* Добавление настроек для комментариев к статусам остатка в карточке товара */
+add_filter( 'woocommerce_get_settings_products', 'add_statuses_comments_settings', 10, 2 );
+ 
+function add_statuses_comments_settings( $settings, $current_section ) {
+ 
+	if ( 'inventory' === $current_section ) {
+ 
+		// заголовок
+		$settings[] = array(
+			'name' => 'Настройки комментариев к статусам остатка для карточки товара',
+			'type' => 'title',
+			'desc' => 'Настройки плагина для WooCommerce'
+		);
+ 
+		$settings[] = array(
+			'name'     => 'Комментарий для статуса "Есть в наличии"',
+			'desc_tip' => '',
+			'id'       => 'instock_comment',
+			'type'     => 'textarea',
+		);
+ 
+		$settings[] = array(
+			'name'     => 'Комментарий для статуса "Нет в наличии"',
+			'desc_tip' => '',
+			'id'       => 'outofstock_comment',
+			'type'     => 'textarea',
+		);
+ 
+		$settings[] = array(
+			'name'     => 'Комментарий для статуса "В невыполненом заказе"',
+			'desc_tip' => '',
+			'id'       => 'inbackorder_comment',
+			'type'     => 'textarea',
+		);
+ 
+	}
+ 
+	return $settings;
+ 
+}
+
+add_filter( 'woocommerce_get_stock_html', 'output_stock_status_comment', 10, 2  );
+function output_stock_status_comment($html, $product) {
+	  $status = $product->get_stock_status();
+	  $status_comment = '';
+  switch( $status ) {
+    case 'outoftock':
+			$status_comment = get_option( 'outofstock_comment' );
+			break;
+    case 'onbackorder':
+    	$status_comment = get_option( 'inbackorder_comment' );
+      break;
+    case 'instock':
+    	$status_comment = get_option( 'instock_comment' );
+      break;
+  }
+  	if ($status_comment) {
+  		$status_comment = '<p>'.$status_comment.'</p>';
+  	}
+	return $html.$status_comment;
+}
+
