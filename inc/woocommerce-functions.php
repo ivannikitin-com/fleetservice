@@ -1198,7 +1198,7 @@ return 12;
 }
 
 
-add_filter( 'woocommerce_stock_html', 'ouput_instock_status', 10, 3);
+//add_filter( 'woocommerce_stock_html', 'ouput_instock_status', 10, 3);
 function ouput_instock_status( $html, $availability, $product ){
 	if ( $product->get_stock_status() == 'instock' && !$html) {
 		$html = '<p class="stock instock">'.__('В наличии','fleetservice').'</p>';
@@ -1252,7 +1252,7 @@ function output_stock_status_comment($html, $product) {
 	  $status = $product->get_stock_status();
 	  $status_comment = '';
   switch( $status ) {
-    case 'outoftock':
+    case 'outofstock':
 			$status_comment = get_option( 'outofstock_comment' );
 			break;
     case 'onbackorder':
