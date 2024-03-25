@@ -97,13 +97,18 @@ add_filter('wpseo_metadesc', function($metadesc){
 		}
 		$color = ($_product->get_attribute( 'pa_color' ))?$_product->get_attribute( 'pa_color' ).'. ':'';
 		$volume = ($_product->get_attribute( 'pa_volume' ))?$_product->get_attribute( 'pa_volume' ).'. ':'';
+		$size = ($_product->get_attribute( 'pa_size' ))?$_product->get_attribute( 'pa_size' ).'. ':'';
 		$volume ='';
 		$values = get_the_terms( get_the_id(), 'pa_volume');
 		 
 		foreach ( $values as $value ) {
 		  $volume .= $value->name.'. ';
-		}		
-		$attr = ($color)?$color:$volume;
+		}
+		$attr_array = [];
+		if ($color) { $attr_array[] = $color; }
+		if ($size) { $attr_array[] = $size; }
+		if ($volume) { $attr_array[] = $volume; }
+		$attr = implode('', $attr_array);
 		$excerpt = get_the_excerpt();
 		$metadesc = $attr.' Цена: '.$price.' '.$excerpt;
 		$metadesc = str_replace("&nbsp;",' ',$metadesc);
