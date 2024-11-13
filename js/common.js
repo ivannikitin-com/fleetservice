@@ -24,11 +24,36 @@ if ( $( window ).width() < 992 ) {
 
 ( function( $ ) {
 	$( function() {
+		let searchForm = document.querySelector( '.searchMobile .search-form' );
+		let inputS = document.querySelector( '.searchMobile .search-form input[name="s"]' );
+		if ( searchForm ) {
+			inputS.insertAdjacentHTML( 'afterend', '<button type="reset" class="search-reset" title="Кликни, чтобы очистить поле"><span class="sr-only">×</span></button>' );
+			let searchReset = document.querySelector( '.searchMobile .search-form button[type="reset"]' );
+			inputS.addEventListener( 'change', function( e ) {
+				if ( e.target.value ) {
+					searchReset.style.display = 'block';
+					console.log( 'show reset' );
+				} else {
+					searchReset.style.display = 'none';
+					console.log( 'hide reset' );
+				}
+			} );
+			searchReset.addEventListener( 'touchstart', function( event ) {
+				event.preventDefault();
+				inputS.value = '';
+				let wrapper =  event.target.classList.contains( 'ysm-active' ) ? event.target : event.target.closest( '.ysm-search-widget' );
+				console.log(wrapper);
+				if ( ! wrapper.length ) {
+					wrapper.classList.add( 'ysm-hide' );
+				}св
+			} );
+		}
+
 		/*$(document).on('shown.bs.modal','#map_wrap', function () {     //событие открытия окна
-          	console.info('inside shown.bs.modal function');
-    		myMap.container.getElement().style.width = '200px';
-    		myMap.container.getElement().style.height = '200px';
-    		myMap.container.fitToViewport();
+						console.info('inside shown.bs.modal function');
+				myMap.container.getElement().style.width = '200px';
+				myMap.container.getElement().style.height = '200px';
+				myMap.container.fitToViewport();
 		});*/
 		$( document ).on( 'blur change', '#billing_myfield13, #billing_myfield14, #billing_myfield15, #billing_myfield16, #billing_myfield17', function() {
 			if ( !$( '.wooccm-file-list' ).find( '.wooccm-file-file' ).length ) {
@@ -151,6 +176,7 @@ if ( $( window ).width() < 992 ) {
 		$( "#slider_main.owl-carousel" ).owlCarousel( {
 			items: 1,
 			dotsEach: true,
+			nav: true,
 			loop: true,
 			autoplay: true
 		} );
@@ -341,14 +367,14 @@ if ( $( window ).width() < 992 ) {
 		});*/
 
 		/*$('body').on('mouseenter mouseleave click', '.dropdown', function (e) {
-		    var dropdown = $(e.target).closest('.dropdown');
-		    var menu = $('.dropdown-menu', dropdown);
-		    dropdown.addClass('show');
-		    menu.addClass('show');
-		    setTimeout(function () {
-		        dropdown[dropdown.is(':hover') ? 'addClass' : 'removeClass']('show');
-		        menu[dropdown.is(':hover') ? 'addClass' : 'removeClass']('show');
-		    }, 300);
+				var dropdown = $(e.target).closest('.dropdown');
+				var menu = $('.dropdown-menu', dropdown);
+				dropdown.addClass('show');
+				menu.addClass('show');
+				setTimeout(function () {
+						dropdown[dropdown.is(':hover') ? 'addClass' : 'removeClass']('show');
+						menu[dropdown.is(':hover') ? 'addClass' : 'removeClass']('show');
+				}, 300);
 		});*/
 
 		$( '#menu-tip-produktsii,#menu-tip-produktsii-1,#menu-napravleniya-biznesa,#menu-napravleniya-biznesa-1' ).metisMenu( {
@@ -390,7 +416,6 @@ if ( $( window ).width() < 992 ) {
 
 		$( '#menu-catalog-menu li.menu-item-has-children' ).on( 'mouseover click', function() {
 			$( '#menu-catalog-menu li.menu-item-has-children' ).children( 'ul.collapse-menu' ).each( function() {
-				console.log( '!' );
 				if ( $( this ).css( 'display' ) == 'none' ) {
 					$( this ).siblings( 'a.my' ).html( '<span class="dashicons dashicons-plus"></span>' );
 				} else {
@@ -424,6 +449,10 @@ if ( $( window ).width() < 992 ) {
 		$( 'body' ).on( 'updated_cart_totals updated_checkout', function() {
 			setTimeout( setCheckoutButtonState, 500 );
 		} );
+
+		$('.woocommerce-cart').ajaxComplete(function () {
+			$( document.body ).trigger( 'wc_fragment_refresh' );
+		});
 
 	} );
 } )( jQuery );
