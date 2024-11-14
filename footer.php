@@ -33,8 +33,19 @@
               <div class="bottom_navbar__txt">Главная</div>
             </a>
           </li>
-
+					
           <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-menu mobile-menu-toggle">
+						<button class="bottom_navbar__button navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+								<svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+										d="M3 10h15M3 5h15M3 15h15" />
+								</svg>
+
+								<div class="bottom_navbar__txt">Меню</div>
+						</button>
+          </li>
+
+          <!-- <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-menu mobile-menu-toggle">
             <a class="bottom_navbar__link" href="#">
               <svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
@@ -43,7 +54,7 @@
 
               <div class="bottom_navbar__txt">Меню</div>
             </a>
-          </li>
+          </li> -->
 
           <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-catalog">
             <a class="bottom_navbar__link" href="/shop/">

@@ -1010,20 +1010,49 @@ add_shortcode( 'top-level-brands-list', 'top_level_brands_list_shortcode' );
 
 
 //Ajax Обновление кратких данных из корзины
-add_filter( 'woocommerce_add_to_cart_fragments', 'fleet_header_add_to_cart_fragment' );
+add_filter( 'woocommerce_add_to_cart_fragments', 'fleet_minicart_fragment' );
 
-function fleet_header_add_to_cart_fragment( $fragments ) {
+function fleet_minicart_fragment( $fragments ) {
+	// Миникорзина в шапке - для дескотопов
 	ob_start();
 	?>
 
 	<?php $cart_contents_count = WC()->cart->get_cart_contents_count(); 
 	$cart_contents_sum = WC()->cart->get_cart_subtotal( );
+	$products_count = 0; //Количество товарных позации (в общем случае отличается от общего количества штук всех товаров в корзине)
+    foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+        $products_count++;
+    }
 	?>
-	<a href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>" class="minicart cart-contents"><span class="d-none d-sm-inline">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span></a>
+	<a href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>" class="minicart cart-contents"><span class="d-none d-sm-inline">(<?php echo $products_count; ?>) : <?php echo $cart_contents_sum; ?></span></a>
 	<?php
 	$fragments['a.cart-contents'] = ob_get_clean();
+
+	// Миникорзина в футере - для мобильных
+	ob_start(); 
+	?>
+
+						<a class="bottom_navbar__link bottom_navbar__link--minicart" href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>">
+              <span class="bottom_navbar__quantity"><?php echo $products_count; ?></span>
+
+              <svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" clip-path="url(#a)">
+                  <path d="M8 16.667a.833.833 0 1 0 0 1.666.833.833 0 0 0 0-1.666Zm9.167 0a.833.833 0 1 0 0 1.667.833.833 0 0 0 0-1.667ZM1.333.833h3.334L6.9 11.992a1.667 1.667 0 0 0 1.667 1.341h8.1a1.666 1.666 0 0 0 1.666-1.341L19.667 5H5.5"></path>
+                </g>
+                <defs>
+                  <clipPath id="a">
+                    <path fill="currentColor" d="M.5 0h20v20H.5z"></path>
+                  </clipPath>
+                </defs>
+              </svg>
+
+              <div class="bottom_navbar__txt"><?php _e( 'Cart', 'woocommerce' ); ?></div>
+            </a>
+  <?php
+  	$fragments['a.bottom_navbar__link--minicart'] = ob_get_clean();
 	return $fragments;
 }
+
 
 //Добавление колонки с id изображения в таблицу медиафайлов в админке для облегчения
 //поиска прикрепленных к заказу карточек клиентов
@@ -1268,3 +1297,31 @@ function output_stock_status_comment($html, $product) {
 	return $html.$status_comment;
 }
 
+
+/*Прикрепление pdf-счета к письму о заказе по условию*/
+add_filter( 'wpo_wcpdf_get_document_file', 'attach_pdf_to_email_by_condition', 99, 3);
+function attach_pdf_to_email_by_condition( $file_path, $document, $output_format ){
+	$order = wc_get_order( $document->order_id );
+	$not_in_stock = false;
+
+	//Проверяем наличие товаров заказа на складе
+	$order_items           = $order->get_items();
+	foreach ( $order_items as $item_id => $item ) {
+				$product = $item->get_product();
+				if (!$product->is_in_stock()) {
+					$not_in_stock = true;
+					break;
+				}
+	}
+
+	//Определяем, на какое лицо оформлен заказ
+	$person = $order->get_meta( '_billing_myfield12', true );
+	file_put_contents('/var/www/fleetservice.ru/www/wp-content/themes/fleetservice/inc/attach_pdf_to_email_by_condition.log',$person.PHP_EOL, FILE_APPEND);
+
+	//Прикрепляем счет к заказу, если условие выполнено
+	if ( $person == 'Юридическое лицо' || $not_in_stock ) {
+		return '';
+	} else {
+		return $file_path;
+	}
+}

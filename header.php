@@ -21,7 +21,14 @@
 	<?php wp_head(); ?>
 </head>
 
-<?php (is_page('kontakty'))?$class='kontakty':$class='';?>
+<?php  $class='';
+if (is_page('kontakty')) { 
+	$class='kontakty';
+}
+if (is_page('wishlist')) { 
+	$class='wishlist'; 
+}
+?>
 <body <?php body_class($class); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'fleetservice' ); ?></a>
