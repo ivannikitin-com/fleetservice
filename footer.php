@@ -10,6 +10,105 @@
  */
 
 ?>
+<?php
+		// wp_nav_menu( array(
+		// 	'theme_location' => 'menu-3',
+		// 	'container'   	=> '',
+		// 	'menu_class'     => 'bottom_navbar__menu-list',
+		// ) );
+		?>
+ 
+		<nav class="bottom_navbar">
+      <div class="bottom_navbar__menu">
+        <ul class="bottom_navbar__menu-list">
+          <li class="bottom_navbar__menu-item bottom_navbar__menu-item--icon-home menu-item">
+            <a class="bottom_navbar__link" href="/">
+              <svg class=" bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+                  d="m3 7.5 7.5-5.833L18 7.5v9.167a1.667 1.667 0 0 1-1.667 1.666H4.667A1.667 1.667 0 0 1 3 16.667V7.5Z" />
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+                  d="M8 18.333V10h5v8.333" />
+              </svg>
+
+              <div class="bottom_navbar__txt">Главная</div>
+            </a>
+          </li>
+					
+          <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-menu mobile-menu-toggle">
+						<button class="bottom_navbar__button btn__navbarmain navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+								<svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+										d="M3 10h15M3 5h15M3 15h15" />
+								</svg>
+
+								<div class="bottom_navbar__txt">Меню</div>
+						</button>
+          </li>
+
+          <!-- <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-menu mobile-menu-toggle">
+            <a class="bottom_navbar__link" href="#">
+              <svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+                  d="M3 10h15M3 5h15M3 15h15" />
+              </svg>
+
+              <div class="bottom_navbar__txt">Меню</div>
+            </a>
+          </li> -->
+
+          <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-catalog">
+            <a class="bottom_navbar__link" href="/shop/">
+              <svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+                  d="M3 2.5h5.833v5.833H3V2.5ZM12.167 2.5H18v5.833h-5.833V2.5ZM12.167 11.667H18V17.5h-5.833v-5.833ZM3 11.667h5.833V17.5H3v-5.833Z" />
+              </svg>
+
+              <div class="bottom_navbar__txt">Каталог</div>
+            </a>
+          </li>
+
+          <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-minicart">
+            <a class="bottom_navbar__link bottom_navbar__link--minicart" href="<?php echo get_permalink( get_option('woocommerce_cart_page_id') ); ?>">
+              <span class="bottom_navbar__quantity"><?php echo $products_count; ?></span>
+
+              <svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+                <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+                  clip-path="url(#a)">
+                  <path
+                    d="M8 16.667a.833.833 0 1 0 0 1.666.833.833 0 0 0 0-1.666Zm9.167 0a.833.833 0 1 0 0 1.667.833.833 0 0 0 0-1.667ZM1.333.833h3.334L6.9 11.992a1.667 1.667 0 0 0 1.667 1.341h8.1a1.666 1.666 0 0 0 1.666-1.341L19.667 5H5.5" />
+                </g>
+                <defs>
+                  <clipPath id="a">
+                    <path fill="currentColor" d="M.5 0h20v20H.5z" />
+                  </clipPath>
+                </defs>
+              </svg>
+
+              <div class="bottom_navbar__txt"><?php _e( 'Cart', 'woocommerce' ); ?></div>
+            </a>
+          </li>
+
+          <li class="menu-item bottom_navbar__menu-item bottom_navbar__menu-item--icon-wishlist">
+            <a href="<?php echo get_theme_mod('wishist_url'); ?>">
+              <svg class="bottom_navbar__icon" xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none">
+                <g clip-path="url(#a)">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667"
+                    d="M17.867 3.842a4.584 4.584 0 0 0-6.484 0l-.883.883-.883-.883a4.584 4.584 0 0 0-6.484 6.483l.884.883 6.483 6.484 6.483-6.484.884-.883a4.584 4.584 0 0 0 0-6.483Z" />
+                </g>
+                <defs>
+                  <clipPath id="a">
+                    <path fill="currentColor" d="M.5 0h20v20H.5z" />
+                  </clipPath>
+                </defs>
+              </svg>
+
+              <div class="bottom_navbar__txt"><?php _e('Избранное','fleetservice'); ?></div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </nav>
 
 	</div><!-- #content -->
 
@@ -20,10 +119,12 @@
 					<div class="col-sm-12">
 						<div class="wrap-form">
 							<div class="site-search-toggle"></div>
-							<form role="search" method="get" class="search-form" action="https://fleetservice.ru/" style="background: #fff;">
+							<!-- <form role="search" method="get" class="search-form" action="https://fleetservice.ru/" style="background: #fff;">
 								<span class="screen-reader-text">Найти:</span>
 								<input type="search" class="search-field" placeholder="" value="" name="s" style="width: calc( 100% - 35px);border-right: none;">
-							</form>							</div>
+							</form> -->
+							<?php echo do_shortcode( '[smart_search id="2"]' ); ?>							
+						</div>
 					</div>
 				</div>
 				<div class="row">
