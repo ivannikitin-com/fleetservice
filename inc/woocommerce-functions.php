@@ -180,32 +180,12 @@ function fleet_li_inner_wrap_close() {
 	echo '</div><!--/.product-inner-->';
 }
 
-add_action( 'woocommerce_before_shop_loop_item_title','fleet_wrap_badge_open',5 );
-function fleet_wrap_badge_open(){ ?>
-	<div class="wrap_badge">
-<?php }
-
-add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_new_flash', 6 );
-function woocommerce_show_product_loop_new_flash() {
-		wc_get_template( 'loop/new-flash.php' );
-}
-
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash',10 );
-add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash',7);
-
-add_action( 'woocommerce_before_shop_loop_item_title','fleet_wrap_badge_close',8 );
-function fleet_wrap_badge_close(){ ?>
-	</div><!--/.wrap_badge-->
-<?php }
 
 add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_img_wrap_open',9 );
 function fleet_loop_img_wrap_open(){ ?>
 	<div class="img_wrap">
 <?php }
-
-add_action( 'woocommerce_before_single_product_summary', 'fleet_wrap_badge_open', 5 );
-
-add_action( 'woocommerce_before_single_product_summary', 'fleet_wrap_badge_close', 11 );
 
 add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_img_wrap_close',12 );
 function fleet_loop_img_wrap_close(){ ?>
