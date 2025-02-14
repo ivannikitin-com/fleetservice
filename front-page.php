@@ -3,28 +3,21 @@
 
 <?php if( have_rows('front_page_slider') ): ?>
 <!--SLIDER-->
-<section id="slider_main" class="owl-carousel owl-theme d-none d-md-block">
+<section id="slider_primary" class="owl-carousel owl-theme">
 	<?php while ( have_rows('front_page_slider') ) : the_row();
 		$image = get_sub_field('slide_img');
+		$image_medium = get_sub_field('slide_img-medium');
+		$image_small = get_sub_field('slide_img-small');
 		$text1 = get_sub_field('slide_text_1');
-		$text2 = get_sub_field('slide_text_2');
-		$text3 = get_sub_field('slide_text_3'); 
 		$slide_lnk_url = get_sub_field('slide_lnk_url');?>
-	<<?php echo ($slide_lnk_url)?'a href="'.$slide_lnk_url.'"':'div'; ?> class="slider-item" style="background-image: url(<?php echo $image['url']; ?>)">	
-		<div class="container">
-			<div class="row">
-				<div class="col-md-10">
-					<div class="slider-item-content d-flex flex-column">
-						<div class="slider-item-date"><span><?php echo $text1; ?></span></div>
-						<div class="slider-item-caption"><?php echo $text2; ?></div>
-						<div class="slider-item-descr"><?php echo $text3; ?></div>
-					</div>
-				</div>
-			</div><!--/.row-->
-		</div><!--/.container-->
-	</<?php echo ($slide_lnk_url)?'a':'div'; ?>><!--/.slider-item-->
+	<<?php echo ($slide_lnk_url)?'a href="'.$slide_lnk_url.'" title="Перейти"':'div'; ?> class="slider-item">	
+		<img class="slider_primary__image slider_primary__image--desktop" src="<?php echo $image['url']; ?>" alt="<?php echo $text1; ?>" width="2000" height="566">
+    <img class="slider_primary__image slider_primary__image--tablet" src="<?php echo $image_medium['url']; ?>" alt="<?php echo $text1; ?>" width="992" height="350">
+		<img class="slider_primary__image slider_primary__image--mobile" src="<?php echo $image_small['url']; ?>" alt="<?php echo $text1; ?>" width="768" height="500">
+
+	</<?php echo ($slide_lnk_url)?'a':'div'; ?>>
 	<?php  endwhile; ?>
-</section><!--/#slider_main-->
+</section><!--/#slider_primary-->
 <?php endif; ?>
 
 <section class="catalog" style="background-color: #f5f8fa;">

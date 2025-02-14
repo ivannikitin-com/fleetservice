@@ -22,17 +22,34 @@ ul.products li.product::before {
     position: relative;
 }
 
+.site-header .wrap-form.form-visible {
+    display: block;
+}
 
 .ysm-search-widget .search-submit::before {
     display: none !important;
 }
 
-.smart-search-results {
-    width: 100% !important;
+.ysm-search-widget button[type="reset"],
+.header button[type="reset"].search-reset {
+    display: none !important;
 }
 
-.smart-search-results {
-    top: 30px;
+.site-header .search-form .search-field {
+    padding-left: 20px;
+}
+
+.site-header .ysm-search-widget label {
+    transform: translateY(-100%);
+    left: 12px;
+}
+
+.smart-search-popup {
+    min-width: 100%;
+}
+
+.site-header .wrap-form.form-visible .search-form {
+    margin-left: 0;
 }
 
 /*
@@ -172,6 +189,71 @@ ul.products li.product::before {
     text-transform: uppercase;
 }
 
+#slider_main .slider-item {
+    /* background-size: 100% auto; */
+}
+
+.owl-carousel .owl-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.products .owl-carousel .owl-nav {
+    padding: 0;
+    top: -60px;
+    left: auto;
+    justify-content: flex-end;
+    column-gap: 1rem;
+    transform: translateY(0);
+}
+
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel .owl-nav button.owl-prev {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    border-radius: 0;
+    background: hsla(0, 0%, 100%, .6);
+}
+
+.owl-theme .owl-nav [class*=owl-]:hover {
+    background-color: hsla(0, 0%, 100%, .6);
+}
+
+.owl-carousel .owl-nav button>span {
+    font-size: 0;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 40px;
+    background-repeat: no-repeat;
+}
+
+.owl-carousel .owl-nav button.owl-prev>span,
+.products .owl-nav button.owl-prev {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'/%3E%3C/svg%3E");
+}
+
+.owl-carousel .owl-nav button.owl-next>span,
+.products .owl-nav button.owl-next {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E");
+}
+
+.products .owl-nav button.owl-prev,
+.products .owl-nav button.owl-next {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: 100% 50%;
+}
+
 @media (max-width: 767.98px) {
     .site-footer .socials a {
         margin-left: 25px;
@@ -189,4 +271,243 @@ ul.products li.product::before {
         max-width: 50%;
         min-width: 25ch;
     }
+
+    .woocommerce.single-product .up-sells.products .owl-nav,
+    .woocommerce.single-product .related.products .owl-nav {
+        position: static;
+        margin-top: .6rem;
+        justify-content: center;
+    }
+}
+
+
+/* SLIDER MAIN */
+.slider_primary__image--desktop,
+.slider_primary__image--tablet {
+    display: none !important;
+}
+
+#slider_primary a.slider-item {
+    display: block;
+    width: 100%;
+}
+
+#slider_primary {
+    padding: 0;
+    background-color: #f5f8fa;
+}
+
+#slider_primary a.slider-item:hover {
+    text-decoration: none;
+}
+
+#slider_primary .owl-dots {
+    position: absolute;
+    display: flex;
+    flex: 0 0 auto;
+    transform: translateX(50%);
+    right: 50%;
+    bottom: 12px;
+}
+
+#slider_primary .owl-dots .owl-dot {
+    zoom: 1;
+    display: inline-block;
+}
+
+#slider_primary .owl-dots .owl-dot span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, .35);
+    margin: 9px;
+    -webkit-transition: opacity .2s ease;
+    transition: opacity .2s ease;
+}
+
+#slider_primary .owl-dots .owl-dot.active span,
+#slider_primary .owl-dots .owl-dot:hover span {
+    background: #fff;
+}
+
+@media (min-width: 576px) {
+    .slider_primary__image--mobile {
+        display: none !important;
+    }
+
+    .slider_primary__image--tablet {
+        display: block !important;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .slider_primary__image--desktop {
+        display: block !important;
+    }
+
+    .slider_primary__image--tablet {
+        display: none !important;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    #slider_primary.owl-carousel .owl-nav button.owl-next,
+    #slider_primary.owl-carousel .owl-nav button.owl-prev {
+        width: 30px;
+        height: 30px;
+    }
+
+    #slider_primary.owl-carousel .owl-nav button>span {
+        width: 15px;
+        height: 20px;
+    }
+
+    #slider_primary.owl-carousel .owl-nav {
+        padding-inline: 30px;
+    }
+
+}
+
+@media (max-width: 991px) {
+    #slider_primary .owl-dots {
+        position: static;
+        transform: translateX(0);
+        justify-content: center;
+        padding-block: 8px;
+    }
+
+    #slider_primary.owl-carousel .owl-nav {
+        margin-top: -22px;
+        /* height dots under slides */
+    }
+
+    #slider_primary .owl-dots .owl-dot.active span,
+    #slider_primary .owl-dots .owl-dot:hover span {
+        background: #16838d;
+    }
+
+    #slider_primary .owl-dots .owl-dot span {
+        background: #6cb2b8;
+    }
+
+}
+
+@media (max-width: 699px) {
+    #slider_primary.owl-carousel .owl-nav {
+        padding-inline: 20px;
+    }
+
+}
+
+/* end of SLIDER MAIN */
+
+
+/* NEW STYLES FOR Navigation*/
+
+.woocommerce nav.woocommerce-pagination {
+    display: block;
+    text-align: right;
+    line-height: 1;
+    margin-top: 6px;
+}
+
+.woocommerce nav.woocommerce-pagination ul {
+    border: none;
+}
+
+.woocommerce nav.woocommerce-pagination ul li {
+    float: none;
+    border-right: 0;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+    display: inline-block;
+    color: #252525;
+    height: 30px;
+    line-height: 28px;
+    font-size: 13px;
+    text-align: center;
+    padding: 0 .2em;
+    min-width: 30px;
+    margin: 0 3px 0 0;
+    background: #fff;
+    border: 1px solid #ecedee;
+    vertical-align: top;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a:focus,
+.woocommerce nav.woocommerce-pagination ul li a:hover {
+    background: #14848e;
+    color: #fff;
+    border-color: #14848e;
+    text-decoration: none;
+}
+
+.woocommerce nav.woocommerce-pagination ul li span.current {
+    font-weight: bold;
+    border-color: #000;
+    background: #fff;
+    color: #252525;
+}
+
+.woocommerce nav.woocommerce-pagination ul a.next.page-numbers:hover,
+.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers:hover,
+.woocommerce nav.woocommerce-pagination ul a.next.page-numbers:focus,
+.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers:focus {
+    background-color: #fff;
+    border-color: #252525;
+    color: #252525;
+}
+
+/* 
+.woocommerce nav.woocommerce-pagination ul a.next.page-numbers,
+.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers {
+    text-indent: -999em;
+}
+
+.woocommerce nav.woocommerce-pagination ul a.next.page-numbers::before,
+.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers::before {
+    content: "";
+    display: block;
+    position: relative;
+    width: 6px;
+    height: 10px;
+    top: 9px;
+    background-image: url(../img/sprite.png);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+}
+
+
+.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers::before {
+    background-position: 0 -245px;
+} */
+
+.wpcbm-badges[class*="left"] .wpcbm-badge,
+.wpcbm-badges-single_before_title .wpcbm-badge {
+    margin-right: 10px;
+    font-family: "Open Sans Condensed", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 100px;
+    box-shadow: none !important;
+}
+
+.wpcbm-badges {
+    justify-content: left;
+}
+
+.wpcbm-badges-top-left {
+    top: 0;
+    left: 0;
+}
+
+.wpcbm-badge-inner {
+    text-align: center;
 }

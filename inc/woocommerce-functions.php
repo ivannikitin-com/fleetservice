@@ -1268,3 +1268,31 @@ function output_stock_status_comment($html, $product) {
 	return $html.$status_comment;
 }
 
+
+/*Прикрепление pdf-счета к письму о заказе по условию*/
+add_filter( 'wpo_wcpdf_get_document_file', 'attach_pdf_to_email_by_condition', 99, 3);
+function attach_pdf_to_email_by_condition( $file_path, $document, $output_format ){
+	$order = wc_get_order( $document->order_id );
+	$not_in_stock = false;
+
+	//Проверяем наличие товаров заказа на складе
+	$order_items           = $order->get_items();
+	foreach ( $order_items as $item_id => $item ) {
+				$product = $item->get_product();
+				if (!$product->is_in_stock()) {
+					$not_in_stock = true;
+					break;
+				}
+	}
+
+	//Определяем, на какое лицо оформлен заказ
+	$person = $order->get_meta( '_billing_myfield12', true );
+	file_put_contents('/var/www/fleetservice.ru/www/wp-content/themes/fleetservice/inc/attach_pdf_to_email_by_condition.log',$person.PHP_EOL, FILE_APPEND);
+
+	//Прикрепляем счет к заказу, если условие выполнено
+	if ( $person == 'Юридическое лицо' || $not_in_stock ) {
+		return '';
+	} else {
+		return $file_path;
+	}
+}

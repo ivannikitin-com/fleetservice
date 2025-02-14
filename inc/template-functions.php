@@ -97,7 +97,7 @@ add_filter('wpseo_metadesc', function($metadesc){
 		}
 		$color = ($_product->get_attribute( 'pa_color' ))?$_product->get_attribute( 'pa_color' ).'. ':'';
 		$volume = ($_product->get_attribute( 'pa_volume' ))?$_product->get_attribute( 'pa_volume' ).'. ':'';
-		$size = ($_product->get_attribute( 'pa_size' ))?$_product->get_attribute( 'pa_size' ).'. ':'';
+		$size = ($_product->get_attribute( 'pa_size' ))?'Размер: '.$_product->get_attribute( 'pa_size' ).'. ':'';
 		$volume ='';
 		$values = get_the_terms( get_the_id(), 'pa_volume');
 		 
