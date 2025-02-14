@@ -26,7 +26,7 @@ if (is_page('kontakty')) {
 	$class='kontakty';
 }
 if (is_page('wishlist')) { 
-	$class='wishlist'; 
+	$class='fleet-wishlist'; 
 }
 ?>
 <body <?php body_class($class); ?>>
@@ -117,7 +117,7 @@ if (is_page('wishlist')) {
 							<div id="wrap-form_header" class="wrap-form col-md-auto col-lg-auto ml-auto desktop">
 								<a href="#" class="site-search-toggle"></a>
 								<span class="makeweight">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span>
-								<?php get_search_form(); ?>
+								<?php echo do_shortcode( '[smart_search id="3"]' ); ?>
 							</div>
 						</div><!--/.row-->
 					</div><!--/.header-bott-->
@@ -146,7 +146,7 @@ if (is_page('wishlist')) {
 				endif; ?>
 		
 		<a href="tel:<?php echo phone_clean(get_theme_mod('header_phone')); ?>" class="phone phone--mobile" title="Позвонить"><span class="phone__txt"><?php echo get_theme_mod('header_phone'); ?></span></a>
-		<div class="searchMobile"><?php get_search_form(); ?></div>
+		<div class="searchMobile"><?php echo do_shortcode( '[smart_search id="1"]' ); ?></div>
 			<?php if (is_user_logged_in()) { 
 				$account_anchor = __('Личный кабинет','fleetservice');
 				

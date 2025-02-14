@@ -31,9 +31,37 @@ if ($(window).width() < 992) {
 
 (function ($) {
 	$(function () {
-		let searchForm = document.querySelector('.searchMobile .search-form');
-		let inputS = document.querySelector('.searchMobile .search-form input[name="s"]');
-		if (searchForm) {
+		let searchForms = document.querySelectorAll('.search-form');
+
+		if (searchForms) {
+			searchForms.forEach(searchForm => {
+				let inputS = searchForm.elements['s'];
+				inputS.insertAdjacentHTML('afterend', '<button type="reset" class="search-reset" title="Кликни, чтобы очистить поле"><span class="sr-only">×</span></button>');
+				let searchReset = searchForm.querySelector('button[type="reset"]');
+				inputS.addEventListener('input', function (e) {
+					if (e.target.value) {
+						searchReset.style.display = 'block';
+					} else {
+						searchReset.style.display = 'none';
+					}
+				});
+
+				['click', 'touchstart'].forEach(function (e) {
+					searchReset.addEventListener(e, function (event) {
+						event.preventDefault();
+						event.stopPropagation();
+						event.target.parentElement.querySelector('.search-field').value = '';
+						/* let wrapper = event.target.classList.contains('ysm-active') ? event.target : event.target.closest('.ysm-search-widget'); */
+						let wrapper = event.target.closest('.ysm-search-widget');
+						console.log(wrapper);
+						if (wrapper) {
+							wrapper.classList.toggle('ysm-hide');
+							searchReset.style.display = "none";
+						}
+					});
+				});
+			});
+			/* let inputSs = document.querySelector('.searchMobile .search-form input[name="s"]');
 			inputS.insertAdjacentHTML('afterend', '<button type="reset" class="search-reset" title="Кликни, чтобы очистить поле"><span class="sr-only">×</span></button>');
 			let searchReset = document.querySelector('.searchMobile .search-form button[type="reset"]');
 			inputS.addEventListener('input', function (e) {
@@ -43,6 +71,7 @@ if ($(window).width() < 992) {
 					searchReset.style.display = 'none';
 				}
 			});
+			
 			searchReset.addEventListener('touchstart', function (event) {
 				event.preventDefault();
 				inputS.value = '';
@@ -51,7 +80,7 @@ if ($(window).width() < 992) {
 					wrapper.classList.add('ysm-hide');
 					searchReset.style.display = "none";
 				} 
-			});
+			}); */
 		}
 
 		/*$(document).on('shown.bs.modal','#map_wrap', function () {     //событие открытия окна
@@ -178,12 +207,18 @@ if ($(window).width() < 992) {
 			$("#wrap-form_header").toggleClass("form-visible");
 			$("#wrap-form_header .search-field").focus();
 		});
-		$("#slider_main.owl-carousel").owlCarousel({
+
+		$("#slider_primary.owl-carousel").owlCarousel({
 			items: 1,
 			dotsEach: true,
-			nav: true,
+			nav: false,
 			loop: true,
-			autoplay: true
+			autoplay: true,
+			responsive: {
+				767: {
+					nav: true,
+				}
+			}
 		});
 
 		/*Подключение к отзывам на Главной*/
@@ -461,3 +496,16 @@ if ($(window).width() < 992) {
 
 	});
 })(jQuery);
+
+// Функция для проверки, прокручена ли страница
+// function isPageScrolled() {
+// 	return window.scrollY > 0 || document.documentElement.scrollTop > 0;
+// }
+
+
+
+
+window.addEventListener('scroll', function () {
+	const mystickyNav = document.querySelector('#mysticky-nav');
+	console.log(mystickyNav.style.top);
+})

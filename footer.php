@@ -119,10 +119,12 @@
 					<div class="col-sm-12">
 						<div class="wrap-form">
 							<div class="site-search-toggle"></div>
-							<form role="search" method="get" class="search-form" action="https://fleetservice.ru/" style="background: #fff;">
+							<!-- <form role="search" method="get" class="search-form" action="https://fleetservice.ru/" style="background: #fff;">
 								<span class="screen-reader-text">Найти:</span>
 								<input type="search" class="search-field" placeholder="" value="" name="s" style="width: calc( 100% - 35px);border-right: none;">
-							</form>							</div>
+							</form> -->
+							<?php echo do_shortcode( '[smart_search id="2"]' ); ?>							
+						</div>
 					</div>
 				</div>
 				<div class="row">
