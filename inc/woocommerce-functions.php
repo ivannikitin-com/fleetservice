@@ -205,11 +205,6 @@ function fleet_loop_img_wrap_open(){ ?>
 
 add_action( 'woocommerce_before_single_product_summary', 'fleet_wrap_badge_open', 5 );
 
-add_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_new_flash', 6 );
-function woocommerce_show_product_new_flash() {
-		wc_get_template( 'single-product/new-flash.php' );
-}
-
 add_action( 'woocommerce_before_single_product_summary', 'fleet_wrap_badge_close', 11 );
 
 add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_img_wrap_close',12 );

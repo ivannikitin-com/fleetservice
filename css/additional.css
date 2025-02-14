@@ -494,7 +494,7 @@ ul.products li.product::before {
     font-family: "Open Sans Condensed", sans-serif;
     font-size: 18px;
     font-weight: 700;
-    line-height: 1;
+    padding: 0px 10px;
     min-width: 100px;
     box-shadow: none !important;
 }
@@ -510,4 +510,9 @@ ul.products li.product::before {
 
 .wpcbm-badge-inner {
     text-align: center;
+}
+
+.woocommerce .wrap_badge {
+    right: 0;
+    left: auto;
 }
