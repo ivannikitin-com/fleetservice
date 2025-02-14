@@ -1,11 +1,11 @@
 if ($(window).width() < 992) {
 	document.addEventListener("DOMContentLoaded", function () {
-		let btns = document.querySelectorAll(".navbar-toggler");
+		let btns = document.querySelectorAll(".navbar-toggler.btn__navbarmain");
 		let nav = document.querySelector(".nav-main");
 
 		function mobileMenu(element) {
 
-			let btnstate = element.closest('button.navbar-toggler').getAttribute("aria-expanded");
+			let btnstate = element.closest('button.navbar-toggler.btn__navbarmain').getAttribute("aria-expanded");
 			if (btnstate == "false") {
 				document.body.classList.add("menu-open");
 				let backdrop = document.createElement("div");

@@ -58,7 +58,7 @@ if (is_page('wishlist')) {
 				</div><!-- .site-branding -->
 				
 				<div class="col-9 col-sm-9 col-md-10 col-lg-10 col-xl-9 offset-xl-1 navbar-expand-lg wrap_right">
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+					<button class="navbar-toggler btn__navbarmain" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<nav class="navbar navbar-dark bg-dark nav-main">
