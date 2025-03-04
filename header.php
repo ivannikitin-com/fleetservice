@@ -117,7 +117,8 @@ if (is_page('wishlist')) {
 							<div id="wrap-form_header" class="wrap-form col-md-auto col-lg-auto ml-auto desktop">
 								<a href="#" class="site-search-toggle"></a>
 								<span class="makeweight">(<?php echo $cart_contents_count; ?>) : <?php echo $cart_contents_sum; ?></span>
-								<?php echo do_shortcode( '[smart_search id="11"]' ); ?>
+								<?php echo do_shortcode( '[smart_search id="3"]' ); ?>
+>>>>>>> 7c80806e9b9dab3eff3191c4a2a1b230a79df0d2
 							</div>
 						</div><!--/.row-->
 					</div><!--/.header-bott-->
