@@ -42,23 +42,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 			<?php endforeach; ?>
 
-			<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
-
-				<?php do_action( 'woocommerce_cart_totals_before_shipping' ); ?>
-
-				<?php wc_cart_totals_shipping_html(); ?>
-
-				<?php do_action( 'woocommerce_cart_totals_after_shipping' ); ?>
-
-			<?php elseif ( WC()->cart->needs_shipping() && 'yes' === get_option( 'woocommerce_enable_shipping_calc' ) ) : ?>
-
-				<tr class="shipping">
-					<th><?php _e( 'Shipping', 'woocommerce' ); ?></th>
-					<td data-title="<?php esc_attr_e( 'Shipping', 'woocommerce' ); ?>"><?php woocommerce_shipping_calculator(); ?></td>
-				</tr>
-
-			<?php endif; ?>
-
 			<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
 				<tr class="fee">
 					<th><?php echo esc_html( $fee->name ); ?></th>
@@ -91,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<tr class="order-total">
 				<th><?php _e( 'Total', 'woocommerce' ); ?></th>
-				<td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
+				<td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php echo wc_price( WC()->cart->get_total('edit') - WC()->cart->shipping_total - WC()->cart->shipping_tax_total ); ?></td>
 			</tr>
 
 			<?php do_action( 'woocommerce_cart_totals_after_order_total' ); ?>
