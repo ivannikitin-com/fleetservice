@@ -1,3 +1,8 @@
+.woocommerce ul.products li.product span.onsale {
+    position: absolute;
+    min-width: 90px;
+}
+
 a.disabled-link,
 .woocommerce-cart .wc-proceed-to-checkout a.checkout-button.disabled-link {
     background-color: #cbe8eb;
