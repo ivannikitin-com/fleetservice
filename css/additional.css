@@ -767,6 +767,10 @@ ul.products li.product::before {
 /* end of SLIDER MAIN */
 
 
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-block: 0;
+}
+
 /* NEW STYLES FOR Navigation*/
 
 .woocommerce nav.woocommerce-pagination {
@@ -785,8 +789,17 @@ ul.products li.product::before {
     border-right: 0;
 }
 
+.wp-pagenavi a.nextpostslink::before,
+.wp-pagenavi a.previouspostslink::before {
+    background-image: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
 .woocommerce nav.woocommerce-pagination ul li a,
-.woocommerce nav.woocommerce-pagination ul li span {
+.woocommerce nav.woocommerce-pagination ul li span,
+.woocommerce .wp-pagenavi a,
+.woocommerce .wp-pagenavi span {
     display: inline-block;
     color: #252525;
     height: 30px;
@@ -795,14 +808,20 @@ ul.products li.product::before {
     text-align: center;
     padding: 0 .2em;
     min-width: 30px;
-    margin: 0 3px 0 0;
+    margin: 0 6px 0 0;
     background: #fff;
     border: 1px solid #ecedee;
     vertical-align: top;
 }
 
+.woocommerce .wp-pagenavi *:last-child {
+    margin-right: 0;
+}
+
 .woocommerce nav.woocommerce-pagination ul li a:focus,
-.woocommerce nav.woocommerce-pagination ul li a:hover {
+.woocommerce nav.woocommerce-pagination ul li a:hover,
+.woocommerce .wp-pagenavi a:hover,
+.woocommerce .wp-pagenavi a:focus {
     background: #14848e;
     color: #fff;
     border-color: #14848e;
@@ -819,7 +838,11 @@ ul.products li.product::before {
 .woocommerce nav.woocommerce-pagination ul a.next.page-numbers:hover,
 .woocommerce nav.woocommerce-pagination ul a.prev.page-numbers:hover,
 .woocommerce nav.woocommerce-pagination ul a.next.page-numbers:focus,
-.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers:focus {
+.woocommerce nav.woocommerce-pagination ul a.prev.page-numbers:focus,
+.woocommerce .wp-pagenavi a.nextpostslink:hover,
+.woocommerce .wp-pagenavi a.nextpostslink:focus,
+.woocommerce .wp-pagenavi a.previouspostslink:hover,
+.woocommerce .wp-pagenavi a.previouspostslink:focus {
     background-color: #fff;
     border-color: #252525;
     color: #252525;
