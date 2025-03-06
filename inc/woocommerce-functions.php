@@ -54,8 +54,6 @@ function fleet_wc_date_format($date_format){
 *******************/
 remove_action( 'woocommerce_before_shop_loop','woocommerce_result_count', 20 );
 remove_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering', 30 );
-remove_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 10 );
-
 add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper', 9 );
 add_action( 'woocommerce_before_shop_loop','before_ordering_text', 20 );
 add_action( 'woocommerce_before_shop_loop','woocommerce_catalog_ordering', 21 );
@@ -63,7 +61,6 @@ add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 
 add_action( 'woocommerce_before_shop_loop','woocommerce_result_count', 23 );
 add_action( 'woocommerce_before_shop_loop','before_products_per_page_text', 24 );
 add_action( 'woocommerce_before_shop_loop', 'fleet_sorting_wrapper_close', 34 );
-add_action( 'woocommerce_before_shop_loop','woocommerce_pagination', 35 );
 add_action( 'woocommerce_before_shop_loop','fleet_catalog_ordering_wrap_close', 31);
 add_filter( 'wppp_ppp_text','fleet_products_per_page',1,2 );
 function fleet_products_per_page($output_str, $value){
@@ -83,7 +80,6 @@ add_action( 'woocommerce_after_shop_loop','woocommerce_result_count', 10 );
 add_action( 'woocommerce_after_shop_loop','before_products_per_page_text', 24 );
 add_action( 'woocommerce_after_shop_loop','fleet_catalog_ordering_wrap_close', 33 );
 add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_wrapper_close', 34 );
-add_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 36 );
 add_action( 'woocommerce_after_shop_loop', 'fleet_sorting_bottom_wrapper_close', 37 );
 add_action( 'woocommerce_after_shop_loop', 'fleet_form_one_click_html', 99 );
 function before_ordering_text() {
@@ -117,13 +113,19 @@ function fleet_woocommerce_catalog_orderby( $sortby ) {
 	return $sortby;
 } 
 
-if (function_exists('wp_pagenavi')) {
-	remove_action('woocommerce_pagination', 'woocommerce_pagination', 10);
-	function woocommerce_pagination() {
+remove_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 10 );
+/*if (function_exists('wp_pagenavi')) {*/
+	function fleet_pagination() {
 			wp_pagenavi(); 		
 	}
-	add_action( 'woocommerce_pagination', 'woocommerce_pagination', 10);
-}
+	add_action( 'woocommerce_before_shop_loop', 'fleet_pagination', 35 );
+	add_action( 'woocommerce_after_shop_loop', 'fleet_pagination', 36 );
+/*} else {
+	add_action( 'woocommerce_before_shop_loop','woocommerce_pagination', 35 );
+	add_action( 'woocommerce_after_shop_loop','woocommerce_pagination', 36 );
+}*/
+
+
 function woocommerce_load_more() {
 	global $wp_query;
 	$current_page = (get_query_var('paged')) ? get_query_var('paged') : 1; 
@@ -180,7 +182,7 @@ function fleet_li_inner_wrap_close() {
 	echo '</div><!--/.product-inner-->';
 }
 
-remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash',10 );
+//remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash',10 );
 
 add_action( 'woocommerce_before_shop_loop_item_title','fleet_loop_img_wrap_open',9 );
 function fleet_loop_img_wrap_open(){ ?>
@@ -339,6 +341,9 @@ function fleet_delete_item_icon($icon_html) {
 /*******************
 *Single product page
 *******************/
+
+remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_show_product_sale_flash', 4 );
 
 add_filter( 'woocommerce_display_product_attributes', 'fleet_remove_attribs_links',1,2);
 function fleet_remove_attribs_links($product_attributes, $product){

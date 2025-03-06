@@ -115,18 +115,6 @@
 	<footer id="colophon" class="site-footer">
 		<div class="container">
 			<div class=" footer_main">
-				<div class="row search-in-footer">
-					<div class="col-sm-12">
-						<div class="wrap-form">
-							<div class="site-search-toggle"></div>
-							<!-- <form role="search" method="get" class="search-form" action="https://fleetservice.ru/" style="background: #fff;">
-								<span class="screen-reader-text">Найти:</span>
-								<input type="search" class="search-field" placeholder="" value="" name="s" style="width: calc( 100% - 35px);border-right: none;">
-							</form> -->
-							<?php echo do_shortcode( '[smart_search id="2"]' ); ?>							
-						</div>
-					</div>
-				</div>
 				<div class="row">
 					<div class="col-sm-6 col-md-4">
 						<div class="f_title"><?php _e('Контакты','fleetservice'); ?></div>
