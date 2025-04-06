@@ -465,6 +465,8 @@ if( $( window ).width() < 992 ) {
 				$( ".prdctfltr_buttons" ).fadeIn();
 				document.querySelector( '.prdctfltr_buttons' ).style.top = posTop + "px";
 				document.querySelector( '.prdctfltr_buttons' ).classList.add( "fixed" );
+			} else {
+				document.querySelector( '.prdctfltr_buttons' ).classList.remove( "fixed" );
 			}
 
 		} );
