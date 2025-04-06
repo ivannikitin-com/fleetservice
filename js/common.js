@@ -430,6 +430,45 @@ if( $( window ).width() < 992 ) {
 			$( document.body ).trigger( 'wc_fragment_refresh' );
 		} );
 
+		/* 		$('.prdctfltr_filter:not(.prdctfltr_byprice) label').click(function(e){
+					let curr_chckbx = $(this).find('input[type="checkbox"]');
+					// - curr_chckbx.offset().top
+					let positionTop = curr_chckbx.offset().top;
+					let clickY = e.clientY;
+					if ($(window).width() > 991) {
+						//console.log(clickPosition);
+						
+						if(clickY){
+							$(".prdctfltr_buttons").fadeIn();
+							//$(".prdctfltr_buttons").css({top: positionTop+'px'});
+							document.querySelector('.prdctfltr_buttons').style.top = clickY+"px";
+						}
+					}
+				}); */
+
+		/* 		document.addEventListener('click', function(e){
+					let clickY = e.clientY;
+					if ($(window).width() > 991) {
+						
+						if(clickY){
+							$(".prdctfltr_buttons").fadeIn();
+							document.querySelector('.prdctfltr_buttons').style.top = clickY+"px";
+						}
+					}
+				}); */
+
+		document.addEventListener( 'click', function( e ) {
+			console.log( e.target.closest( 'label[class^="prdctfltr_"]' ) );
+			if( e.target.closest( 'label[class^="prdctfltr_"]' ) ) {
+				const rect = e.target.getBoundingClientRect();
+				let posTop = rect.top - 50 + 12;
+				$( ".prdctfltr_buttons" ).fadeIn();
+				document.querySelector( '.prdctfltr_buttons' ).style.top = posTop + "px";
+				document.querySelector( '.prdctfltr_buttons' ).classList.add( "fixed" );
+			}
+
+		} );
+
 	} );
 } )( jQuery );
 

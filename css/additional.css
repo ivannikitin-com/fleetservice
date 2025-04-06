@@ -7,8 +7,24 @@
     align-content: start;
 }
 
+.single .post-thumbnail+.entry-content ul li>*:last-child,
+.single .post-thumbnail+.entry-content ol li>*:last-child,
+.single .summary.entry-summary ul li>*:last-child,
+.single .summary.entry-summary ol li>*:last-child,
+.single article .entry-content ul li>*:last-child,
+.single .summary.entry-summary ul li>*:last-child,
+.single .post-thumbnail+.entry-content ul li:last-child,
+.single .post-thumbnail+.entry-content ol li:last-child,
+.single .summary.entry-summary ul li:last-child,
+.single .summary.entry-summary ol li:last-child,
+.single article .entry-content ul li:last-child,
+.single .summary.entry-summary ul li:last-child {
+    margin-bottom: 0;
+}
+
 .single .post-thumbnail+.entry-content ol,
 .single .summary.entry-summary ol {
+    padding-top: .5rem;
     padding-left: 28px !important;
 }
 
@@ -959,4 +975,52 @@ ul.products li.product::before {
 .woocommerce .wrap_badge {
     right: 0;
     left: auto;
+}
+
+.prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed {
+    display: inline;
+    top: 393px;
+    position: fixed;
+    left: 250px;
+    white-space: nowrap;
+    padding: 16px !important;
+    background-color: #fff;
+    border-radius: none;
+    flex-direction: column;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .25));
+    box-shadow: none;
+    z-index: 9;
+    height: auto;
+    width: 152px
+}
+
+.prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed .prdctfltr_woocommerce_filter_submit {
+    background-color: #14848e;
+    color: #f5f8fa;
+}
+
+.prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed .prdctfltr_woocommerce_filter_submit:before {
+    background-position: -38px -226px;
+}
+
+.prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed .prdctfltr_woocommerce_filter_submit:hover {
+    background-color: #2eb3bf;
+    border-color: #2eb3bf;
+}
+
+.prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed:after {
+    content: "";
+    position: absolute;
+    left: -.625rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #fff;
+    z-index: -1;
+}
+
+.prdctfltr_wc.prdctfltr_wc_widget .prdctfltr_buttons.fixed .prdctfltr_woocommerce_filter_submit {
+    padding: 16px;
+    margin-bottom: 0 !important;
 }
