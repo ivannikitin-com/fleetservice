@@ -458,14 +458,15 @@ if( $( window ).width() < 992 ) {
 				}); */
 
 		document.addEventListener( 'click', function( e ) {
-			console.log( e.target.closest( 'label[class^="prdctfltr_"]' ) );
-			if( e.target.closest( 'label[class^="prdctfltr_"]' ) ) {
+			if( e.target.closest( 'label[class^="prdctfltr_"]' ) || e.target.closest( 'span[class^="irs-slider"]' ) ) {
+				console.log( document.querySelector( '.prdctfltr-widget' ).offsetWidth );
 				const rect = e.target.getBoundingClientRect();
 				let posTop = rect.top - 50 + 12;
 				$( ".prdctfltr_buttons" ).fadeIn();
 				document.querySelector( '.prdctfltr_buttons' ).style.top = posTop + "px";
 				document.querySelector( '.prdctfltr_buttons' ).classList.add( "fixed" );
 			} else {
+				$( ".prdctfltr_buttons" ).fadeIn();
 				document.querySelector( '.prdctfltr_buttons' ).classList.remove( "fixed" );
 			}
 

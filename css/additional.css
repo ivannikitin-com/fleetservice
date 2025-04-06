@@ -981,7 +981,7 @@ ul.products li.product::before {
     display: inline;
     top: 393px;
     position: fixed;
-    left: 250px;
+    left: 28%;
     white-space: nowrap;
     padding: 16px !important;
     background-color: #fff;
@@ -1023,4 +1023,12 @@ ul.products li.product::before {
 .prdctfltr_wc.prdctfltr_wc_widget .prdctfltr_buttons.fixed .prdctfltr_woocommerce_filter_submit {
     padding: 16px;
     margin-bottom: 0 !important;
+}
+
+
+@media (max-width: 767px) {
+    .prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed {
+        left: auto;
+        right: 15px;
+    }
 }
