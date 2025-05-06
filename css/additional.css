@@ -644,7 +644,7 @@ text-align: center;
 
 .home ul.product-cats li.category a:hover {
     text-decoration: none;
-  }
+}
 
 .home ul.product-cats li.category h3 {
     font-family: "Open Sans", sans-serif;
@@ -653,7 +653,19 @@ text-align: center;
     line-height: 18px;
     text-transform: uppercase;
     margin-bottom: 0;
-  }
+}
+
+.all_categories {
+    text-align: center;
+    margin-top: 55px;
+}
+
+.all_categories > a {
+    font-size: 13px;
+    color: #27858b;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
 
 @media only screen and (min-width: 769px) {
     .header-mobile {

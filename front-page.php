@@ -39,7 +39,9 @@ if ($main_categories):?>
 			</li>
 		<?php endforeach; ?>
 			</ul>
+			
 		</div>
+		<div class="col-12 all_categories"><a href="/shop/"><?php _e('Смотреть ещё','fleetservice'); ?></a></div>
 	</div>
 </div>
 </section>
