@@ -251,6 +251,8 @@ function fleet_admin_js(){
 add_action('admin_enqueue_scripts', 'fleet_early_admin_js', 1);
 function fleet_early_admin_js(){
 	wp_enqueue_script('early-wp-admin', get_stylesheet_directory_uri() .'/js/early-admin.js', array('jquery'), null, false  );
+	wp_enqueue_script( 'select2', plugins_url() . '/woocommerce/assets/js/select2/select2.full.js', array('jquery'), null, true );
+		$dependencies[] = 'select2';
 }
 
 
