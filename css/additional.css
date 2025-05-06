@@ -989,7 +989,7 @@ ul.products li.product::before {
     flex-direction: column;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .25));
     box-shadow: none;
-    z-index: 2147483648;
+    z-index: 2147483647;
     height: auto;
     width: 152px
 }
