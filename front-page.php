@@ -20,6 +20,31 @@
 </section><!--/#slider_primary-->
 <?php endif; ?>
 
+
+<?php $main_categories = get_field('categories'); 
+if ($main_categories):?>
+<section id="main_categories">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="product-cats">
+		<?php foreach ($main_categories as $category): ?>
+			<li class="category product">
+			<a href="<?php echo get_term_link($category->term_id); ?>" class="<?php echo $category->slug; ?>">
+			<div class="cat_img_wrap">
+				<?php woocommerce_subcategory_thumbnail( $category ); ?>
+			</div>
+			<h3><?php echo $category->name; ?></h3>
+			</a>
+			</li>
+		<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</div>
+</section>
+<?php endif; ?>
+
 <section class="catalog" style="background-color: #f5f8fa;">
 	<div class="container">
 		<?php $catalog_section_title =  get_field ('catalog_section_title');
