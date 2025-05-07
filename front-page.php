@@ -34,7 +34,7 @@
 			$trend_text = get_sub_field('trend_text');
 			$trend_link_text = get_sub_field('trend_link_text'); 
 			$trend_link_url = get_sub_field('trend_link_url');?>
-			<div class="col-sm-6 col-md-4 catalog-item item-1">
+			<div class="col-sm-6 col-md-3 catalog-item item-1">
 				<a href="<?php echo ($trend_link_url)?$trend_link_url:'#'?>" class="catalog-item-link">
 					<div class="icon"><?php echo (isset($trend_icon['url']))?file_get_contents($trend_icon['url']):''; ?></div>
 					<?php if ($trend_title) { ?>
