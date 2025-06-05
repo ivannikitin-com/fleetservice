@@ -330,3 +330,14 @@ function fleet_add_sub_menu_sign($item_output, $item, $depth, $args) {
 	return $item_output;
 
 }
+
+/**
+ * Отключаем встроенный функционал брендов WooCommerce
+ * чтобы избежать дублирования с Perfect WooCommerce Brands
+ */
+add_action('init', 'unregister_product_brand_taxonomy', 999);
+function unregister_product_brand_taxonomy() {
+    if (taxonomy_exists('product_brand')) {
+        unregister_taxonomy('product_brand');
+    }
+}
