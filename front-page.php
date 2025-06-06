@@ -57,9 +57,13 @@
 </section><!--/.catalog-->
 
 <?php $main_categories = get_field('categories'); 
+$categories_section_title =  get_field ('categories_section_title');
 if ($main_categories):?>
 <section id="main_categories">
 <div class="container">
+		<?php if ($categories_section_title) { ?>
+		<h2 class="section-title" style="font-size: 30px; line-height: 33px;"><?php echo $categories_section_title; ?></h2>
+		<?php } ?>
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="product-cats">
