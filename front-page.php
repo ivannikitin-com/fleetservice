@@ -23,6 +23,9 @@
 <section class="catalog" style="background-color: #f5f8fa;">
 	<div class="container">
 		<?php $catalog_section_title =  get_field ('catalog_section_title');
+/* 		echo '<pre>';
+		var_dump(get_field ('business_trend'));
+		echo '</pre>'; */
 		if ($catalog_section_title) { ?>
 		<h2 class="section-title" style="font-size: 30px; line-height: 33px;"><?php echo $catalog_section_title; ?></h2>
 		<?php } ?>
@@ -36,7 +39,19 @@
 			$trend_link_url = get_sub_field('trend_link_url');?>
 			<div class="col-sm-6 col-md-3 catalog-item item-1">
 				<a href="<?php echo ($trend_link_url)?$trend_link_url:'#'?>" class="catalog-item-link">
-					<div class="icon"><?php echo (isset($trend_icon->url))?file_get_contents($trend_icon->url):''; ?></div>
+					<div class="icon">
+						<?php 
+						if (isset($trend_icon['ID'])) {
+							$file_path = get_attached_file($trend_icon['ID']);
+							if ($file_path && file_exists($file_path)) {
+								$svg_content = file_get_contents($file_path);
+								if ($svg_content !== false) {
+									echo $svg_content;
+								}
+							}
+						}
+						?>
+					</div>
 					<?php if ($trend_title) { ?>
 					<div class="title-item"><?php echo $trend_title; ?></div>
 					<?php } ?>

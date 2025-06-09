@@ -341,3 +341,21 @@ function unregister_product_brand_taxonomy() {
         unregister_taxonomy('product_brand');
     }
 }
+
+// Добавляем поддержку SVG
+function add_svg_support($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'add_svg_support');
+
+// Исправляем отображение SVG в медиабиблиотеке
+function fix_svg_thumb_display() {
+    echo '<style>
+        td.media-icon img[src$=".svg"], img[src$=".svg"].attachment-post-thumbnail { 
+            width: 100% !important; 
+            height: auto !important; 
+        }
+    </style>';
+}
+add_action('admin_head', 'fix_svg_thumb_display');
