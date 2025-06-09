@@ -36,7 +36,7 @@
 			$trend_link_url = get_sub_field('trend_link_url');?>
 			<div class="col-sm-6 col-md-3 catalog-item item-1">
 				<a href="<?php echo ($trend_link_url)?$trend_link_url:'#'?>" class="catalog-item-link">
-					<div class="icon"><?php echo (isset($trend_icon['url']))?file_get_contents($trend_icon['url']):''; ?></div>
+					<div class="icon"><?php echo (isset($trend_icon->url))?file_get_contents($trend_icon->url):''; ?></div>
 					<?php if ($trend_title) { ?>
 					<div class="title-item"><?php echo $trend_title; ?></div>
 					<?php } ?>
@@ -86,6 +86,9 @@ if ($main_categories):?>
 </section>
 <?php endif; ?>
 
+<?php $main_brands = get_field('brands'); 
+$brands_section_title =  get_field ('brands_section_title');
+if ($main_brands):?>
 <section class="brands" style="background-color: #fff;">
 	<div class="container">
 		<?php $brand_section_title =  get_field ('brand_section_title');
@@ -95,11 +98,21 @@ if ($main_categories):?>
 	</div><!--/.container-->	
 	<div class="brands-list">
 		<div class="container">
-	<?php //echo do_shortcode('[pwb-carousel items="featured" items_to_show="5" items_to_scroll="1" image_size="full" autoplay="true" arrows="true" hide_empty="false"]'); ?>
-	<?php echo do_shortcode('[brands-on-frontpage image_size="full" order_by="name" order="ASC"]'); ?>	
+	<?php foreach ($main_brands as $brand): 
+		$brand_image_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
+		$brand_image = wp_get_attachment_image($brand_image_id, 'thumbnail', array('class'  => 'attachment-full size-full'));
+  	?>
+			<div class="brand-item">
+				<a href="<?php echo get_term_link( $brand );?>" title="<?php echo $brand->name; ?>" class="c_change">
+				<?php echo $brand_image;?>
+				</a>
+			</div>
+	<?php endforeach; ?>
+		</div>
 	</div><!--.brands-list-->	
 	
 </section><!--/.brands-->
+<?php endif; ?>
 
 <!-- ХИТЫ ПРОДАЖ -->
 

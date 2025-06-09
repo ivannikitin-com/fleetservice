@@ -244,6 +244,12 @@ ul.products li.product::before {
     width: auto;
 }
 
+.brands .brands-list .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .woocommerce-cart .cart-collaterals .cart_totals {
     clear: both;
 }
