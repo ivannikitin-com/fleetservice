@@ -245,9 +245,9 @@ ul.products li.product::before {
 }
 
 .brands .brands-list .container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    text-align: center;
+    -moz-text-align-last: left;
+    text-align-last: center;
 }
 
 .woocommerce-cart .cart-collaterals .cart_totals {
@@ -665,12 +665,12 @@ text-align: center;
     margin-bottom: 0;
 }
 
-.all_categories {
+.all_categories, .all_brands {
     text-align: center;
     margin-top: 25px;
 }
 
-.all_categories > a {
+.all_categories > a, .all_brands > a {
     font-size: 13px;
     color: #27858b;
     text-transform: uppercase;

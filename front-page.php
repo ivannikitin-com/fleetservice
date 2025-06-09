@@ -98,6 +98,7 @@ if ($main_brands):?>
 	</div><!--/.container-->	
 	<div class="brands-list">
 		<div class="container">
+			<div class="row">
 	<?php foreach ($main_brands as $brand): 
 		$brand_image_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
 		$brand_image = wp_get_attachment_image($brand_image_id, 'thumbnail', array('class'  => 'attachment-full size-full'));
@@ -108,6 +109,12 @@ if ($main_brands):?>
 				</a>
 			</div>
 	<?php endforeach; ?>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-12 all_brands"><a href="/brends/">Смотреть еще</a></div>
+			</div>
 		</div>
 	</div><!--.brands-list-->	
 	
