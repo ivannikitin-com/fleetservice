@@ -1,3 +1,7 @@
+.block-links a.minicart {
+	border-right: 1px solid #ecedee;
+}
+
 .single .post-thumbnail+.entry-content ul,
 .single .post-thumbnail+.entry-content ol,
 .single .summary.entry-summary ul,
