@@ -187,13 +187,7 @@
 				</div><!--/.row-->
 			</div><!-- footer_main-->
 		</div><!--/.container-->
-		<div class="footer_bott">
-			<div class="container">
-				<?php if (get_theme_mod( 'footer_iks' )) { ?>
-					<?php echo get_theme_mod( 'footer_iks' ); ?>
-				<?php } ?>
-			</div><!--/.container-->
-		</div><!--/.footer_bott-->
+		
 	</footer><!-- #colophon -->
 	
 </div><!-- #page -->
