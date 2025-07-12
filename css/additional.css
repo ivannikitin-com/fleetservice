@@ -1081,6 +1081,12 @@ text-align: center;
     left: auto;
 }
 
+.wpcbm-badge-style-04 {
+    border-width: 1px;
+    line-height: 1;
+    padding: 7px 10px;
+}
+
 .prdctfltr-widget .prdctfltr_wc .prdctfltr_buttons.fixed {
     display: inline;
     top: 393px;
