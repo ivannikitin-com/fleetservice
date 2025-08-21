@@ -876,7 +876,7 @@ function my_custom_checkout_field_process() {
         }
         return;
     }
-    $inn = $_POST['billing_myfield13'];
+/*     $inn = $_POST['billing_myfield13'];
     if (strlen($inn)!=10 && strlen($inn)!=12 ) {
     // your function's body above, and if error, call this wc_add_notice
     wc_add_notice( __( 'ИНН должен содержать 10 или 12 цифр.' ), 'error' );
@@ -895,7 +895,7 @@ function my_custom_checkout_field_process() {
     if (strlen($kors)!=20 ) {
     // your function's body above, and if error, call this wc_add_notice
     wc_add_notice( __( 'Корр/с должен содержать 20 цифр.' ), 'error' );
-	}	
+	} */	
 }
 
 add_filter( 'woocommerce_package_rates', 'custom_package_rates', 10, 2 );
