@@ -763,6 +763,19 @@ function agogo_save_address_validation($user_id, $load_address, $address, $custo
 * Checkout page
 *******************/
 
+// Убираем префикс "Платежи " из сообщения об ошибке
+// Более правильный способ - использовать родной фильтр
+add_filter( 'woocommerce_checkout_required_field_notice', 'customize_checkout_error_message', 10, 2 );
+
+function customize_checkout_error_message( $error_message, $field_label ) {
+    // Просто возвращаем сообщение без префикса "Payment"
+	$field_label = str_replace( 'Платежи ', '', $field_label );
+    return sprintf( 
+        __( '%s is a required field.', 'woocommerce' ),
+        '<strong>' . esc_html( $field_label ) . '</strong>'
+    );
+}
+
 /*Ограничение на минимальную сумму заказа*/
 //add_action( 'woocommerce_before_cart' , 'fleet_minimum_order_amount' );
 //add_action( 'woocommerce_before_checkout_form_cart_notices', 'fleet_minimum_order_amount');
