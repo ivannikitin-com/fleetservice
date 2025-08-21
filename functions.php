@@ -187,9 +187,18 @@ function fleetservice_scripts() {
 		$dependencies[] = 'select2';
 	}
 
-/*	if (is_front_page()) {
-		wp_dequeue_script( 'slick' );
-	}*/
+	if (is_checkout()) {
+		wp_enqueue_script( 'wooccm-checkout-fix', get_template_directory_uri() . '/js/wooccm-checkout-fix.js', array('jquery', 'wooccm-checkout'), null, true );
+		// Локализуем скрипт для передачи данных в JavaScript
+		wp_localize_script('wooccm-checkout-fix', 'wooccm_fix', array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('wooccm_fix_nonce'),
+			'messages' => array(
+				'restored' => __('Кнопка восстановлена', 'woocommerce'),
+				'error' => __('Произошла ошибка', 'woocommerce')
+			)
+		));
+	}
 
 	wp_enqueue_style( 'formstyler', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.css' );
 	wp_enqueue_style( 'formstylertheme', get_template_directory_uri() . '/libs/jQueryFormstyler/jquery.formstyler.theme.css' );		
