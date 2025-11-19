@@ -100,9 +100,11 @@ add_filter('wpseo_metadesc', function($metadesc){
 		$size = ($_product->get_attribute( 'pa_size' ))?'Размер: '.$_product->get_attribute( 'pa_size' ).'. ':'';
 		$volume ='';
 		$values = get_the_terms( get_the_id(), 'pa_volume');
-		 
-		foreach ( $values as $value ) {
-		  $volume .= $value->name.'. ';
+		
+		if ($values) {
+			foreach ( $values as $value ) {
+			  $volume .= $value->name.'. ';
+			}
 		}
 		$attr_array = [];
 		if ($color) { $attr_array[] = $color; }
@@ -116,3 +118,27 @@ add_filter('wpseo_metadesc', function($metadesc){
 	
 	return $metadesc;
 }, 10, 1);
+
+add_filter('wpcf7_validate_dynamic_hidden', 'validate_dynamichidden_field', 10, 2);
+function validate_dynamichidden_field($result, $tag) {
+    $tag = new WPCF7_Shortcode($tag);
+    $name = $tag->name;
+
+    // Проверяем, что поле заполнено
+    if (empty($_POST[$name])) {
+        $result->invalidate($tag, '');
+    }
+
+    return $result;
+}
+add_filter('wpcf7_validate_hidden', 'validate_hidden_field', 10, 2);
+function validate_hidden_field($result, $tag) {
+    $tag = new WPCF7_Shortcode($tag);
+    $name = $tag->name;
+
+    if (empty($_POST[$name])) {
+        $result->invalidate($tag, 'Это поле обязательно для заполнения.');
+    }
+
+    return $result;
+}

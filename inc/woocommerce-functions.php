@@ -465,20 +465,28 @@ function fleet_form_one_click_html(){ ?>
 	</div><!--/#modalOneClick-->
 <?php }
 
-/*Получение цены на выбранный товар для формы заказа в 1 клик*/
-add_action( 'wp_ajax_get_product_price', 'get_product_price_callback' );
-add_action('wp_ajax_nopriv_get_product_price', 'get_product_price_callback');
-function get_product_price_callback(){
-	if (!isset($_POST['product_id']) || empty($_POST['product_id'])) {
+/*Получение инфы о выбранном товаре для формы заказа в 1 клик*/
+add_action( 'wp_ajax_get_product_info', 'get_product_info_callback' );
+add_action('wp_ajax_nopriv_get_product_info', 'get_product_info_callback');
+function get_product_info_callback(){
+		
+	file_put_contents('/var/www/fleetservice.ru/www/wp-content/themes/fleetservice/inc/temp.log',print_r($_POST,true).PHP_EOL, FILE_APPEND);
+
+	if ((!isset($_POST['product_id']) || empty($_POST['product_id'])) && (!isset($_POST['product_sku']) || empty($_POST['product_sku']))) {
 		echo '';
 		wp_die();
 	}
 
-	//$result['product_price'] = get_post_meta($_POST['product_id'],'_price',true).' '.get_woocommerce_currency_symbol();
-	$result['product_price'] = strip_tags(wc_price(get_post_meta($_POST['product_id'],'_price',true)));
+	if ($_POST['product_id']) {
+		$product_id = $_POST['product_id'];
+	} else {
+		$product_id = wc_get_product_id_by_sku($_POST['product_sku']);
+	}
+	
+	$result['product_price'] = strip_tags(wc_price(get_post_meta($product_id,'_price',true)));
 	$result['product_quantity'] = (isset($_POST['quantity']))?$_POST['quantity']:'';
-	$result['product_sku'] = get_post_meta($_POST['product_id'],'_sku',true);
-	$product_post = get_post($_POST['product_id']);
+	$result['product_sku'] = get_post_meta($product_id,'_sku',true);
+	$product_post = get_post($product_id);
 	$result['product_title'] = $product_post->post_title;
 	$result['product_url'] = get_permalink($_POST['product_id']);
 	$result = json_encode($result);
@@ -511,7 +519,7 @@ function my_action_javascript() {
 			var product_price = '';
 	    
 			var data = {
-				action: 'get_product_price',
+				action: 'get_product_info',
 				product_id: product_id,
 				quantity: quantity
 			};
@@ -542,7 +550,7 @@ function my_action_javascript() {
 				$('#modalOneClick .sku_wrapper .sku').html(features['product_sku']);
 				$.magnificPopup.close();
 	        });
-		});
+		});		
 	});
 	</script>
 	<?php
