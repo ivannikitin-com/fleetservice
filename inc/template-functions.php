@@ -128,6 +128,14 @@ function validate_dynamichidden_field($result, $tag) {
     if (empty($_POST[$name])) {
         $result->invalidate($tag, '');
     }
+	if ($name == 'checker' ) {
+		// Проверяем значение этого поля. Если оно меньше, чем текущее время в миллисекундах, на 2 минуты или менее, то ошибка
+		$checker = $_POST[$name];
+		$current_time = time()*1000;
+		if ($checker < $current_time - 120000) {
+			$result->invalidate($tag, 'Это спам-бот.');
+		}
+    }
 
     return $result;
 }
