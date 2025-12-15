@@ -48,8 +48,10 @@
 
 .single article .entry-content ul li,
 .single .summary.entry-summary ul li {
-    display: inline-flex;
-    align-items: start;
+	display: inline-block;
+	vertical-align: top;
+    /* display: inline-flex;
+    align-items: start; */
 }
 
 .single article .entry-content ul li::before,
@@ -112,7 +114,8 @@ ul.products li.product::before {
 .woocommerce-Tabs-panel--description ul li::before,
 .woocommerce-product-details__short-description ul li::before,
 :not(.woocommerce-checkout.woocommerce-page) .entry ul li::before {
-    position: relative;
+	position: static;
+    /* position: relative; */
 }
 
 .site-header .wrap-form.form-visible {
