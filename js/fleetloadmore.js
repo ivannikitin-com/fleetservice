@@ -9,6 +9,29 @@
 			return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 		}
 
+		function parseQueryString(str) {
+			var params = {};
+			if (!str) return params;
+			str.split('&').forEach(function(pair) {
+				var kv = pair.split('=');
+				if (kv.length >= 2) {
+					params[decodeURIComponent(kv[0])] = decodeURIComponent((kv.slice(1).join('=')).replace(/\+/g, ' '));
+				}
+			});
+			return params;
+		}
+
+		function buildPfFilters() {
+			var qs = location.search ? location.search.substring(1) : '';
+			var params = parseQueryString(qs);
+			var orderby = $('select.orderby').val() || params.orderby || fleet_loadmore_params.orderby || 'menu_order title';
+			params.orderby = orderby;
+			if (fleet_loadmore_params.term_slug && fleet_loadmore_params.taxonomy) {
+				params[fleet_loadmore_params.taxonomy] = fleet_loadmore_params.term_slug;
+			}
+			return { fleet_loadmore: params };
+		}
+
 		function loadProducts() {
 			if (typeof fleet_loadmore_params === 'undefined') return;
 
@@ -22,7 +45,7 @@
 			if ($spinner.length) $spinner.addClass('is-active');
 
 			var orderby = $('select.orderby').val() || getUrlParameter('orderby') || fleet_loadmore_params.orderby || 'menu_order title';
-			var filterParams = location.search ? location.search.substring(1) : '';
+			var pfFilters = buildPfFilters();
 			var nextPage = currentPage + 1;
 
 			var ajaxData = {
@@ -32,7 +55,7 @@
 				term_id: fleet_loadmore_params.term_id,
 				taxonomy: fleet_loadmore_params.taxonomy,
 				orderby: orderby,
-				filter_params: filterParams,
+				pf_filters: pfFilters,
 				posts_per_page: fleet_loadmore_params.posts_per_page
 			};
 			if (fleet_loadmore_params.initial_meta_key) {
@@ -96,7 +119,7 @@
 									term_id: fleet_loadmore_params.term_id,
 									taxonomy: fleet_loadmore_params.taxonomy,
 									orderby: orderby,
-									filter_params: filterParams,
+									pf_filters: buildPfFilters(),
 									posts_per_page: fleet_loadmore_params.posts_per_page
 								};
 								if (fleet_loadmore_params.initial_meta_key) d.initial_meta_key = fleet_loadmore_params.initial_meta_key;

@@ -1,7 +1,7 @@
 <?php
 /**
  * Load More products — по образцу casalusso.
- * Передаём orderby и filter_params из URL, чтобы сохранялись фильтры и сортировка.
+ * Передаём pf_filters (параметры фильтрации из URL) для сохранения фильтров и сортировки.
  */
 
 function fleet_load_more_scripts() {
@@ -14,12 +14,18 @@ function fleet_load_more_scripts() {
 
 	wp_register_script( 'fleet_loadmore', get_stylesheet_directory_uri() . '/js/fleetloadmore.js', array( 'jquery' ), null, true );
 
+	$term_slug = '';
+	if ( is_product_taxonomy() && get_queried_object() ) {
+		$term = get_queried_object();
+		$term_slug = ( $term && isset( $term->slug ) ) ? $term->slug : '';
+	}
 	$localize = array(
 		'ajaxurl'   => admin_url( 'admin-ajax.php' ),
 		'nonce'     => wp_create_nonce( 'fleet_loadmore_nonce' ),
 		'max_pages' => $wp_query->max_num_pages,
 		'current_page' => max( 1, (int) get_query_var( 'paged' ) ),
 		'term_id'   => is_product_taxonomy() ? get_queried_object_id() : 0,
+		'term_slug' => $term_slug,
 		'taxonomy'  => ( is_product_taxonomy() && get_queried_object() ) ? get_queried_object()->taxonomy : '',
 		'posts_per_page' => isset( $wp_query->query_vars['posts_per_page'] ) ? $wp_query->query_vars['posts_per_page'] : apply_filters( 'loop_shop_per_page', wc_get_default_products_per_row() * wc_get_default_product_rows_per_page() ),
 		'orderby' => isset( $wp_query->query_vars['orderby'] ) ? $wp_query->query_vars['orderby'] : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) ),
@@ -36,7 +42,8 @@ function fleet_load_more_scripts() {
 add_action( 'wp_enqueue_scripts', 'fleet_load_more_scripts' );
 
 /**
- * Разбирает query string и добавляет параметры в $_GET для WooCommerce
+ * Разбирает query string и добавляет параметры в $_GET для WooCommerce и Product Filter.
+ * WooCommerce get_layered_nav_chosen_attributes ожидает filter_*, Product Filter — pa_*.
  */
 function fleet_parse_filter_params( $query_string ) {
 	if ( empty( $query_string ) ) {
@@ -44,11 +51,61 @@ function fleet_parse_filter_params( $query_string ) {
 	}
 	$query_string = ltrim( $query_string, '?' );
 	parse_str( $query_string, $params );
-	if ( is_array( $params ) ) {
-		foreach ( $params as $key => $value ) {
-			$_GET[ $key ] = $value;
+	if ( ! is_array( $params ) ) {
+		return;
+	}
+	foreach ( $params as $key => $value ) {
+		$_GET[ $key ] = $value;
+		// WooCommerce ищет только filter_*, дублируем pa_* → filter_*
+		if ( strpos( $key, 'pa_' ) === 0 ) {
+			$attr = substr( $key, 3 );
+			$_GET[ 'filter_' . $attr ] = $value;
 		}
 	}
+}
+
+/**
+ * Строит tax_query для атрибутов pa_* и filter_* из query string.
+ * WC может использовать lookup table и не добавлять атрибуты в tax_query.
+ */
+function fleet_build_filter_tax_query( $query_string ) {
+	$tax_queries = array();
+	if ( empty( $query_string ) ) {
+		return $tax_queries;
+	}
+	$query_string = ltrim( $query_string, '?' );
+	parse_str( $query_string, $params );
+	if ( ! is_array( $params ) ) {
+		return $tax_queries;
+	}
+	foreach ( $params as $key => $value ) {
+		if ( ! is_string( $value ) || $value === '' ) {
+			continue;
+		}
+		if ( strpos( $key, 'pa_' ) === 0 ) {
+			$taxonomy = sanitize_title( $key );
+		} elseif ( strpos( $key, 'filter_' ) === 0 ) {
+			$attribute = wc_sanitize_taxonomy_name( str_replace( 'filter_', '', $key ) );
+			$taxonomy  = wc_attribute_taxonomy_name( $attribute );
+		} else {
+			continue;
+		}
+		if ( ! taxonomy_exists( $taxonomy ) ) {
+			continue;
+		}
+		$terms = array_map( 'sanitize_title', explode( ',', $value ) );
+		$terms = array_filter( $terms );
+		if ( empty( $terms ) ) {
+			continue;
+		}
+		$tax_queries[] = array(
+			'taxonomy' => $taxonomy,
+			'field'    => 'slug',
+			'terms'    => $terms,
+			'operator' => 'IN',
+		);
+	}
+	return $tax_queries;
 }
 
 /**
@@ -63,11 +120,33 @@ function fleet_load_more_products() {
 	$term_id  = isset( $_POST['term_id'] ) ? absint( $_POST['term_id'] ) : 0;
 	$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) ) : '';
 	$orderby  = isset( $_POST['orderby'] ) ? sanitize_text_field( wp_unslash( $_POST['orderby'] ) ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
-	$filter_params = isset( $_POST['filter_params'] ) ? sanitize_text_field( wp_unslash( $_POST['filter_params'] ) ) : '';
 	$posts_per_page = isset( $_POST['posts_per_page'] ) ? absint( $_POST['posts_per_page'] ) : apply_filters( 'loop_shop_per_page', wc_get_default_products_per_row() * wc_get_default_product_rows_per_page() );
 
-	// Имитируем GET-параметры страницы, чтобы сработали фильтры WooCommerce и Product Filter
-	fleet_parse_filter_params( $filter_params );
+	// Собираем curr_filters из pf_filters (формат плагина Product Filter)
+	$curr_filters = array();
+	if ( ! empty( $_POST['pf_filters'] ) && is_array( $_POST['pf_filters'] ) ) {
+		foreach ( $_POST['pf_filters'] as $v ) {
+			if ( is_array( $v ) ) {
+				$curr_filters = array_merge( $curr_filters, array_unique( $v, SORT_REGULAR ) );
+			}
+		}
+	}
+	$curr_filters['orderby'] = $orderby;
+
+	// Product Filter: разбираем pf_filters средствами плагина (make_global)
+	$used_pf_make_global = false;
+	if ( ! empty( $curr_filters ) && class_exists( 'XforWC_Product_Filters_Frontend' ) ) {
+		XforWC_Product_Filters_Frontend::make_global( $curr_filters, 'AJAX' );
+		$used_pf_make_global = true;
+	}
+
+	// WC_Query::pre_get_posts не срабатывает в admin-ajax — вызываем product_query вручную
+	$wc_product_query_handler = function ( $query ) {
+		if ( $query->get( 'post_type' ) === 'product' && $query->get( 'wc_query' ) !== 'product_query' ) {
+			WC()->query->product_query( $query );
+		}
+	};
+	add_action( 'pre_get_posts', $wc_product_query_handler, 5 );
 
 	$args = array(
 		'post_type'      => 'product',
@@ -76,14 +155,23 @@ function fleet_load_more_products() {
 		'paged'          => $page,
 	);
 
-	if ( $term_id > 0 && ! empty( $taxonomy ) ) {
-		$args['tax_query'] = array(
-			array(
+	// tax_query: при make_global плагин добавит его через woocommerce_product_query
+	if ( ! $used_pf_make_global ) {
+		$tax_query = array();
+		if ( $term_id > 0 && ! empty( $taxonomy ) ) {
+			$tax_query[] = array(
 				'taxonomy' => $taxonomy,
 				'field'    => 'term_id',
 				'terms'    => $term_id,
-			),
-		);
+			);
+		}
+		$filter_tax = fleet_build_filter_tax_query( ! empty( $curr_filters ) ? http_build_query( $curr_filters ) : '' );
+		if ( ! empty( $filter_tax ) ) {
+			$tax_query = array_merge( $tax_query, $filter_tax );
+		}
+		if ( ! empty( $tax_query ) ) {
+			$args['tax_query'] = $tax_query;
+		}
 	}
 
 	// Сортировка: при кастомном meta_key (Currency per Product — _alg_wc_cpp_converted_price)
@@ -102,8 +190,8 @@ function fleet_load_more_products() {
 		}
 	}
 
-	// query_posts, чтобы сработал WC_Query::pre_get_posts (meta_query, tax_query из фильтров)
 	query_posts( $args );
+	remove_action( 'pre_get_posts', $wc_product_query_handler, 5 );
 
 	$max_pages = $GLOBALS['wp_query']->max_num_pages;
 
@@ -139,10 +227,23 @@ function fleet_refresh_pagination() {
 	$term_id  = isset( $_POST['term_id'] ) ? absint( $_POST['term_id'] ) : 0;
 	$taxonomy = isset( $_POST['taxonomy'] ) ? sanitize_text_field( wp_unslash( $_POST['taxonomy'] ) ) : '';
 	$orderby  = isset( $_POST['orderby'] ) ? sanitize_text_field( wp_unslash( $_POST['orderby'] ) ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby', 'menu_order' ) );
-	$filter_params   = isset( $_POST['filter_params'] ) ? sanitize_text_field( wp_unslash( $_POST['filter_params'] ) ) : '';
 	$posts_per_page  = isset( $_POST['posts_per_page'] ) ? absint( $_POST['posts_per_page'] ) : 12;
 
-	fleet_parse_filter_params( $filter_params );
+	$curr_filters = array();
+	if ( ! empty( $_POST['pf_filters'] ) && is_array( $_POST['pf_filters'] ) ) {
+		foreach ( $_POST['pf_filters'] as $v ) {
+			if ( is_array( $v ) ) {
+				$curr_filters = array_merge( $curr_filters, array_unique( $v, SORT_REGULAR ) );
+			}
+		}
+	}
+	$curr_filters['orderby'] = $orderby;
+
+	$used_pf_make_global = false;
+	if ( ! empty( $curr_filters ) && class_exists( 'XforWC_Product_Filters_Frontend' ) ) {
+		XforWC_Product_Filters_Frontend::make_global( $curr_filters, 'AJAX' );
+		$used_pf_make_global = true;
+	}
 
 	// Корректный base URL для ссылок пагинации (get_pagenum_link в AJAX использует admin-ajax.php)
 	$base_url = ( $term_id > 0 && ! empty( $taxonomy ) )
@@ -153,8 +254,9 @@ function fleet_refresh_pagination() {
 	}
 	$base_path = untrailingslashit( wp_parse_url( $base_url, PHP_URL_PATH ) ?: '' );
 	$base_query = wp_parse_url( $base_url, PHP_URL_QUERY );
-	if ( $filter_params ) {
-		$base_query = $base_query ? $base_query . '&' . $filter_params : $filter_params;
+	$filter_query = ! empty( $curr_filters ) ? http_build_query( $curr_filters ) : '';
+	if ( $filter_query ) {
+		$base_query = $base_query ? $base_query . '&' . $filter_query : $filter_query;
 	}
 
 	$pagenum_link_filter = function ( $result, $pagenum ) use ( $base_path, $base_query ) {
@@ -164,6 +266,13 @@ function fleet_refresh_pagination() {
 	};
 	add_filter( 'get_pagenum_link', $pagenum_link_filter, 10, 2 );
 
+	$wc_product_query_handler = function ( $query ) {
+		if ( $query->get( 'post_type' ) === 'product' && $query->get( 'wc_query' ) !== 'product_query' ) {
+			WC()->query->product_query( $query );
+		}
+	};
+	add_action( 'pre_get_posts', $wc_product_query_handler, 5 );
+
 	$args = array(
 		'post_type'      => 'product',
 		'post_status'    => 'publish',
@@ -171,14 +280,22 @@ function fleet_refresh_pagination() {
 		'paged'          => $page,
 	);
 
-	if ( $term_id > 0 && ! empty( $taxonomy ) ) {
-		$args['tax_query'] = array(
-			array(
+	if ( ! $used_pf_make_global ) {
+		$tax_query = array();
+		if ( $term_id > 0 && ! empty( $taxonomy ) ) {
+			$tax_query[] = array(
 				'taxonomy' => $taxonomy,
 				'field'    => 'term_id',
 				'terms'    => $term_id,
-			),
-		);
+			);
+		}
+		$filter_tax = fleet_build_filter_tax_query( ! empty( $curr_filters ) ? http_build_query( $curr_filters ) : '' );
+		if ( ! empty( $filter_tax ) ) {
+			$tax_query = array_merge( $tax_query, $filter_tax );
+		}
+		if ( ! empty( $tax_query ) ) {
+			$args['tax_query'] = $tax_query;
+		}
 	}
 
 	$initial_meta_key = isset( $_POST['initial_meta_key'] ) ? sanitize_text_field( wp_unslash( $_POST['initial_meta_key'] ) ) : '';
@@ -195,9 +312,9 @@ function fleet_refresh_pagination() {
 		}
 	}
 
-	// Отдельный WP_Query — query_posts в admin-ajax может давать неверный paged
 	$pagination_query = new WP_Query( $args );
-	$html             = '';
+	remove_action( 'pre_get_posts', $wc_product_query_handler, 5 );
+	$html = '';
 	if ( function_exists( 'wp_pagenavi' ) ) {
 		$html = wp_pagenavi(
 			array(
