@@ -86,11 +86,16 @@
 						}
 
 						if ($('.woocommerce-result-count').length) {
-							var woocommerce_result_count = $('.woocommerce-result-count').html().split(' ');
-							var upper = woocommerce_result_count[1].split('–');
-							var new_upper = parseInt(upper[1], 10) + parseInt(fleet_loadmore_params.posts_per_page, 10);
-							var result_count_string = $('.woocommerce-result-count').html().replace('–' + upper[1], '–' + new_upper);
-							$('.woocommerce-result-count').html(result_count_string);
+							var $resultCount = $('.woocommerce-result-count');
+							var html = $resultCount.html();
+							var totalMatch = html.match(/из\s*(\d+)/);
+							var total = totalMatch ? parseInt(totalMatch[1], 10) : 0;
+							var page = fleet_loadmore_params.current_page;
+							var perPage = parseInt(fleet_loadmore_params.posts_per_page, 10) || 24;
+							var end = Math.min(page * perPage, total);
+							var newRange = '1–' + end;
+							var result_count_string = html.replace(/\d+–\d+/, newRange);
+							$resultCount.html(result_count_string);
 						}
 
 						var path = location.pathname.replace(/\/+$/, '');
