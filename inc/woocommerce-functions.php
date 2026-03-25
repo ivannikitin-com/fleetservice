@@ -526,11 +526,12 @@ function my_action_javascript() {
 
 			jQuery.post( bocajax.url, data, function(response) {
 				var features = jQuery.parseJSON(response);
-				let minimum2buy = <?php echo get_option( 'fleet_min_cart_total' ); ?>;
+				let minimum2buy = <?php echo json_encode( (float) get_option( 'fleet_min_cart_total', 0 ) ); ?>;
+				let minimum2buyFormatted = <?php echo json_encode( number_format_i18n( (float) get_option( 'fleet_min_cart_total', 0 ), wc_get_price_decimals() ) ); ?>;
 				let price = features['product_price'].split('&')[0];
 				 if (features['product_quantity'] * price < minimum2buy) {
 				 		if (document.querySelector(".woocommerce-error") === null) {
-				 			$('.form_one_click').prepend( '<ul class="woocommerce-error" role="alert"><li>Вам нужно указать товара на сумму минимум 2000.</li></ul>' );
+				 			$('.form_one_click').prepend( '<ul class="woocommerce-error" role="alert"><li>Минимальный заказ – ' + minimum2buyFormatted + ' руб. Пожалуйста, увеличьте количество товара для заказа.</li></ul>' );
 				 		}
 				 } else {
 				 		$('.form_one_click .woocommerce-error').remove();
@@ -795,10 +796,12 @@ function fleet_minimum_order_amount() {
 
     if ( $minimum && WC()->cart->cart_contents_total < $minimum) {
     	wc_clear_notices();
-      wc_print_notice( 
-          sprintf( 'Вам нужно положить в корзину товара на сумму минимум %s.' , 
-              $minimum, 
-          ), 'error' 
+      wc_print_notice(
+          sprintf(
+              'Минимальный заказ – %s руб. Пожалуйста, увеличьте количество товара для заказа.',
+              number_format_i18n( $minimum, wc_get_price_decimals() )
+          ),
+          'error'
       );
     } else {
     	//wc_clear_notices();
