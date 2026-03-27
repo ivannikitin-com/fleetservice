@@ -1179,3 +1179,8 @@ text-align: center;
         right: 15px;
     }
 }
+
+.cart-text {
+    border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    padding: 12px;
+}

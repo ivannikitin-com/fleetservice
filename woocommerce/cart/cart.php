@@ -176,6 +176,12 @@ defined( 'ABSPATH' ) || exit;
 					do_action( 'woocommerce_cart_collaterals' );
 				?>
 			</div>
+			<?php
+			$cart_additional_text = function_exists( 'get_field' ) ? get_field( 'cart_additional_text', wc_get_page_id( 'cart' ) ) : '';
+			if ( '' !== trim( wp_strip_all_tags( (string) $cart_additional_text ) ) ) :
+				?>
+				<div class="cart-text"><?php echo wp_kses_post( wpautop( $cart_additional_text ) ); ?></div>
+			<?php endif; ?>
 		</div><!--/.end col-->
 	</div><!--/.row-->
 

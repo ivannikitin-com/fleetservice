@@ -1221,6 +1221,52 @@ function agogo_woocommerce_custom_address_format( $formats ) {
 * Cart
 ********/
 
+add_action( 'acf/init', 'fleet_register_cart_additional_text_field' );
+function fleet_register_cart_additional_text_field() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
+
+	$cart_page_id = wc_get_page_id( 'cart' );
+	if ( $cart_page_id <= 0 ) {
+		return;
+	}
+
+	acf_add_local_field_group(
+		array(
+			'key'                   => 'group_fleet_cart_additional_text',
+			'title'                 => 'Дополнительные поля корзины',
+			'fields'                => array(
+				array(
+					'key'               => 'field_fleet_cart_additional_text',
+					'label'             => 'Дополнительный текст',
+					'name'              => 'cart_additional_text',
+					'type'              => 'textarea',
+					'instructions'      => 'отображается под итогами',
+					'required'          => 0,
+					'new_lines'         => 'br',
+				),
+			),
+			'location'              => array(
+				array(
+					array(
+						'param'    => 'page',
+						'operator' => '==',
+						'value'    => (string) $cart_page_id,
+					),
+				),
+			),
+			'menu_order'            => 0,
+			'position'              => 'normal',
+			'style'                 => 'default',
+			'label_placement'       => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen'        => '',
+			'active'                => true,
+		)
+	);
+}
+
 remove_action('woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
 
 add_filter( 'woocommerce_cross_sells_columns', 'fleet_change_cross_sells_columns' );
